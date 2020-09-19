@@ -1,0 +1,15 @@
+compile_commands.json
+.clangd
+.env
+/target
+/build
+/CMakeFiles
+cmake_install.cmake
+CMakeCache.txt
+Makefile
+.DS_Store
+.ipynb_checkpoints
+__pycache__/*
+*.pyc
+*.sublime*
+MANIFEST
