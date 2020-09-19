@@ -4,12 +4,32 @@
 #define _GSC_INCLUDE_TOOLS_H
 
 #include <cstdint>
-#include <string>
+#include <fstream>
+#include <iterator>
+#include <optional>
 #include <utility>
 #include <vector>
 
-// using EdgeItem = std::pair<std::uint32_t, std::uint32_t>;
-
-// std::vector<EdgeItem> read_edgelist_txt(const std::string &filename);
+template <class T> struct EdgeItem {
+  T first, second;
+  explicit EdgeItem(T first, T second) : first(first), second(second) {}
+  bool encode(std::ostream &os) {
+    os.write(reinterpret_cast<char *>(&first), sizeof(T));
+    os.write(reinterpret_cast<char *>(&second), sizeof(T));
+    if (os)
+      return true;
+    else
+      return true;
+  }
+  static std::optional<EdgeItem<T>> decode(std::istream &is) {
+    T first, second;
+    is.read(reinterpret_cast<char *>(&first), sizeof(T));
+    is.read(reinterpret_cast<char *>(&second), sizeof(T));
+    if (is)
+      return {EdgeItem<T>{first, second}};
+    else
+      return {};
+  }
+};
 
 #endif // _GSC_INCLUDE_TOOLS_H
