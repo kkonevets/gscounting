@@ -6,8 +6,6 @@
 #include <fstream>
 #include <iostream>
 #include <iterator>
-#include <optional>
-#include <sys/_types/_size_t.h>
 #include <utility>
 #include <vector>
 
@@ -15,7 +13,7 @@ template <class T> struct EdgeItem {
   T first, second;
 
   explicit EdgeItem(T first, T second) : first(first), second(second) {}
-  EdgeItem() : first(0), second(0) {}
+  EdgeItem() {}
 
   bool encode(std::ostream &os) {
     os.write(reinterpret_cast<char *>(&first), sizeof(T));
@@ -23,14 +21,10 @@ template <class T> struct EdgeItem {
     return os.good();
   }
 
-  static std::optional<EdgeItem<T>> decode(std::istream &is) {
-    T first, second;
-    is.read(reinterpret_cast<char *>(&first), sizeof(T));
-    is.read(reinterpret_cast<char *>(&second), sizeof(T));
-    if (is)
-      return EdgeItem<T>{first, second};
-    else
-      return {};
+  static bool decode(std::istream &is, EdgeItem<T> &edge) {
+    is.read(reinterpret_cast<char *>(&edge.first), sizeof(T));
+    is.read(reinterpret_cast<char *>(&edge.second), sizeof(T));
+    return is.good();
   }
 };
 
@@ -43,24 +37,21 @@ template <class T> struct AdjItem {
 
   bool encode(std::ostream &os) {
     T len{static_cast<T>(v.size())};
+
     os.write(reinterpret_cast<char *>(&len), sizeof(T));
     os.write(reinterpret_cast<char *>(&k), sizeof(T));
     os.write(reinterpret_cast<char *>(v.data()), v.size() * sizeof(T));
     return os.good();
   }
 
-  static std::optional<AdjItem<T>> decode(std::istream &is) {
-    T len, k;
+  static bool decode(std::istream &is, AdjItem<T> &row) {
+    T len;
     is.read(reinterpret_cast<char *>(&len), sizeof(T));
-    is.read(reinterpret_cast<char *>(&k), sizeof(T));
+    is.read(reinterpret_cast<char *>(&row.k), sizeof(T));
 
-    std::vector<T> v(len);
-    is.read(reinterpret_cast<char *>(v.data()), len * sizeof(T));
-
-    if (is)
-      return AdjItem<T>{k, std::move(v)};
-    else
-      return {};
+    row.v.resize(len);
+    is.read(reinterpret_cast<char *>(row.v.data()), len * sizeof(T));
+    return is.good();
   }
 };
 

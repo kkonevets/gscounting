@@ -32,10 +32,8 @@ void test_edge() {
 
   {
     std::ifstream fin("../data/edgelist.bin", std::ios::binary);
-    for (auto edge = edge_t::decode(fin); edge.has_value();
-         edge = edge_t::decode(fin)) {
-      auto &val = edge.value();
-      std::cout << val.first << " " << val.second << std::endl;
+    for (edge_t edge; edge_t::decode(fin, edge);) {
+      std::cout << edge.first << " " << edge.second << std::endl;
     }
   }
 }
@@ -57,13 +55,11 @@ int main() {
 
   {
     std::ifstream fin("../data/edjlist.bin", std::ios::binary);
-    for (auto row = adj_t::decode(fin); row.has_value();
-         row = adj_t::decode(fin)) {
-      auto &val = row.value();
-      std::cout << "k: " << val.k << std::endl;
-
-      std::copy(val.v.begin(), val.v.end(),
-                std::ostream_iterator<decltype(adj_t::k)>(std::cout, " "));
+    for (adj_t row; adj_t::decode(fin, row);) {
+      std::cout << "k: " << row.k << std::endl;
+      for (auto &j : row.v) {
+        std::cout << j << " ";
+      }
       std::cout << std::endl;
     }
   }
