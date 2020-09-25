@@ -9,19 +9,7 @@
 
 #include "../include/tools.h"
 
-// using EdgeItem = std::pair<std::uint32_t, std::uint32_t>;
-
-// namespace std {
-
-// std::istream &operator>>(std::istream &stream, EdgeItem &in) {
-//   return stream >> in.first >> in.second;
-// }
-
-// std::ostream &operator<<(std::ostream &stream, const EdgeItem &in) {
-//   return stream << "(" << in.first << ", " << in.second << ")";
-// }
-
-// } // namespace std
+using edge_t = EdgeItem<std::uint32_t>;
 
 int main() {
   // std::ifstream infile("../data/edgelist.txt");
@@ -40,18 +28,19 @@ int main() {
       std::cerr << "could not open file" << std::endl;
       return 1;
     }
-    EdgeItem<std::uint32_t> edge(1, 2);
+    edge_t edge(1, 2);
     if (!edge.encode(ofile)) {
       std::cerr << "could not encode edge" << std::endl;
     }
   }
 
   {
-    std::ifstream infile("../data/edgelist.bin",
-                         std::ios::in | std::ios::binary);
-    auto edge = EdgeItem<std::uint32_t>::decode(infile);
-    auto &val = edge.value();
-    std::cout << val.first << "," << val.second << std::endl;
+    std::ifstream fin("../data/edgelist.bin", std::ios::in | std::ios::binary);
+    for (auto edge = edge_t::decode(fin); edge.has_value();
+         edge = edge_t::decode(fin)) {
+      auto &val = edge.value();
+      std::cout << val.first << "," << val.second << std::endl;
+    }
   }
 
   return 0;
