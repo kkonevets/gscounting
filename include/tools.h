@@ -10,6 +10,7 @@ template <class T> struct EdgeItem {
   T first, second;
 
   explicit EdgeItem(T first, T second) : first(first), second(second) {}
+  EdgeItem() : first(0), second(0) {}
 
   bool encode(std::ostream &os) {
     os.write(reinterpret_cast<char *>(&first), sizeof(T));
@@ -27,5 +28,14 @@ template <class T> struct EdgeItem {
       return {};
   }
 };
+
+namespace std {
+
+template <class T>
+std::istream &operator>>(std::istream &is, EdgeItem<T> &edge) {
+  is >> edge.first >> edge.second;
+  return is;
+}
+} // namespace std
 
 #endif // _GSC_INCLUDE_TOOLS_H
