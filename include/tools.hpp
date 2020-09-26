@@ -17,9 +17,9 @@
 // ----------------------------------------------------------------------------
 
 /** @struct EdgeItem
-
-@brief structure representiong a directed edge "source->target" in a graph
-*/
+ *
+ *  @brief structure representiong a directed edge "source->target" in a graph
+ */
 template <class T> struct EdgeItem {
   T source{0}, target{0};
 
@@ -40,11 +40,11 @@ template <class T> struct EdgeItem {
 };
 
 /** @struct AdjItem
-
-@brief structure representiong a record in adjacency list
-
-k is a source node and v contains a list of target nodes.
-*/
+ *
+ *  @brief structure representiong a record in adjacency list
+ *
+ *  k is a source node and v contains a list of target nodes.
+ */
 template <class T> struct AdjItem {
   T k{0};
   std::vector<T> v;
@@ -99,11 +99,11 @@ public:
 };
 
 /** @class list_range
-
-@brief iteration on edge and adjacency lists
-
-T could be EdgeItem or AdjItem.
-*/
+ *
+ *  @brief iteration on edge and adjacency lists
+ *
+ *  T could be EdgeItem or AdjItem.
+ */
 template <class T> class list_range {
   std::istream &is;
 
