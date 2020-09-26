@@ -12,25 +12,39 @@
 #include <utility>
 #include <vector>
 
-template <class T> struct EdgeItem {
-  T first{0}, second{0};
+// ----------------------------------------------------------------------------
+// Edge and adjacency items definition
+// ----------------------------------------------------------------------------
 
-  explicit EdgeItem(T first, T second) : first(first), second(second) {}
+/** @struct EdgeItem
+
+@brief structure representiong a directed edge "source->target" in a graph
+*/
+template <class T> struct EdgeItem {
+  T source{0}, target{0};
+
+  explicit EdgeItem(T source, T target) : source(source), target(target) {}
   EdgeItem() {}
 
   bool encode(std::ostream &os) {
-    os.write(reinterpret_cast<char *>(&first), sizeof(T));
-    os.write(reinterpret_cast<char *>(&second), sizeof(T));
+    os.write(reinterpret_cast<char *>(&source), sizeof(T));
+    os.write(reinterpret_cast<char *>(&target), sizeof(T));
     return os.good();
   }
 
   static bool decode(std::istream &is, EdgeItem<T> &edge) {
-    is.read(reinterpret_cast<char *>(&edge.first), sizeof(T));
-    is.read(reinterpret_cast<char *>(&edge.second), sizeof(T));
+    is.read(reinterpret_cast<char *>(&edge.source), sizeof(T));
+    is.read(reinterpret_cast<char *>(&edge.target), sizeof(T));
     return is.good();
   }
 };
 
+/** @struct AdjItem
+
+@brief structure representiong a record in adjacency list
+
+k is a source node and v contains a list of target nodes.
+*/
 template <class T> struct AdjItem {
   T k{0};
   std::vector<T> v;
@@ -58,6 +72,10 @@ template <class T> struct AdjItem {
   }
 };
 
+// ----------------------------------------------------------------------------
+// Iteration on edge and adjacency lists
+// ----------------------------------------------------------------------------
+
 class list_iterator_sentinel {};
 
 template <class T> class list_iterator {
@@ -80,6 +98,12 @@ public:
   bool operator!=(const list_iterator_sentinel) const { return finish; }
 };
 
+/** @class list_range
+
+@brief iteration on edge and adjacency lists
+
+T could be EdgeItem or AdjItem.
+*/
 template <class T> class list_range {
   std::istream &is;
 
@@ -90,11 +114,15 @@ public:
   list_iterator_sentinel end() const { return {}; }
 };
 
+// ----------------------------------------------------------------------------
+// Miscellaneous
+// ----------------------------------------------------------------------------
+
 namespace std {
 
 template <class T>
 std::istream &operator>>(std::istream &is, EdgeItem<T> &edge) {
-  is >> edge.first >> edge.second;
+  is >> edge.source >> edge.target;
   return is;
 }
 } // namespace std

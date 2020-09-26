@@ -33,7 +33,7 @@ void test_edge_iterator() {
   {
     std::ifstream fin("../data/edgelist.bin", std::ios::binary);
     for (auto &edge : list_range<edge_t>(fin)) {
-      std::cout << edge.first << " " << edge.second << std::endl;
+      std::cout << edge.source << " " << edge.target << std::endl;
     }
   }
 }
