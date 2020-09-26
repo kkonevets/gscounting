@@ -8,12 +8,12 @@
 #include <iterator>
 #include <vector>
 
-#include "../include/tools.h"
+#include "../include/tools.hpp"
 
 using edge_t = EdgeItem<std::uint32_t>;
 using adj_t = AdjItem<std::uint32_t>;
 
-void test_edge() {
+void test_edge_iterator() {
   {
     std::ifstream ifile("../data/edgelist.txt");
     std::ofstream ofile("../data/edgelist.bin", std::ios::binary);
@@ -32,18 +32,18 @@ void test_edge() {
 
   {
     std::ifstream fin("../data/edgelist.bin", std::ios::binary);
-    for (edge_t edge; edge_t::decode(fin, edge);) {
+    for (auto &edge : list_range<edge_t>(fin)) {
       std::cout << edge.first << " " << edge.second << std::endl;
     }
   }
 }
 
-int main() {
+void test_adj_iterator() {
   {
     std::ofstream ofile("../data/edjlist.bin", std::ios::binary);
     if (!ofile) {
       std::cerr << "could not open file" << std::endl;
-      return 1;
+      return;
     }
 
     ofile.unsetf(std::ios::skipws);
@@ -55,7 +55,7 @@ int main() {
 
   {
     std::ifstream fin("../data/edjlist.bin", std::ios::binary);
-    for (adj_t row; adj_t::decode(fin, row);) {
+    for (auto &row : list_range<adj_t>(fin)) {
       std::cout << "k: " << row.k << std::endl;
       for (auto &j : row.v) {
         std::cout << j << " ";
@@ -63,6 +63,10 @@ int main() {
       std::cout << std::endl;
     }
   }
+}
 
+int main() {
+  test_edge_iterator();
+  test_adj_iterator();
   return 0;
 }
