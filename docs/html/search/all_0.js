@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['graph_5fsage_5fcounting_0',['graph_sage_counting',['../md__r_e_a_d_m_e.html',1,'']]]
+  ['adjitem_0',['AdjItem',['../struct_adj_item.html',1,'']]]
 ];
