@@ -12,6 +12,12 @@
 #include <utility>
 #include <vector>
 
+template <class T> struct EdgeItem;
+template <class T> struct AdjItem;
+
+using edge_t = EdgeItem<std::uint32_t>;
+using adj_t = AdjItem<std::uint32_t>;
+
 // ----------------------------------------------------------------------------
 // Edge and adjacency items definition
 // ----------------------------------------------------------------------------
@@ -21,10 +27,10 @@
  *  @brief structure representiong a directed edge "source->target" in a graph
  */
 template <class T> struct EdgeItem {
-  T source{0}, target{0};
+  T source, target;
 
   explicit EdgeItem(T source, T target) : source(source), target(target) {}
-  EdgeItem() {}
+  EdgeItem() : source{0}, target{0} {}
 
   bool encode(std::ostream &os) {
     os.write(reinterpret_cast<char *>(&source), sizeof(T));
@@ -41,16 +47,16 @@ template <class T> struct EdgeItem {
 
 /** @struct AdjItem
  *
- *  @brief structure representiong a record in adjacency list
+ *  @brief structure representing a record in adjacency list
  *
  *  k is a source node and v contains a list of target nodes.
  */
 template <class T> struct AdjItem {
-  T k{0};
+  T k;
   std::vector<T> v;
 
   explicit AdjItem(T k, std::vector<T> &&v) : k(k), v(v) {}
-  AdjItem() {}
+  AdjItem() : k{0} {}
 
   bool encode(std::ostream &os) {
     T len{static_cast<T>(v.size())};
@@ -76,26 +82,26 @@ template <class T> struct AdjItem {
 // Iteration on edge and adjacency lists
 // ----------------------------------------------------------------------------
 
-class list_iterator_sentinel {};
+class ListIteratorSentinel {};
 
-template <class T> class list_iterator {
+template <class T> class ListIterator {
   std::istream &is;
   T curr;
-  bool finish;
+  bool good;
 
 public:
-  explicit list_iterator(std::istream &is) : is{is} {
-    finish = T::decode(is, curr);
+  explicit ListIterator(std::istream &is) : is{is} {
+    good = T::decode(is, curr);
   }
 
   T &operator*() { return curr; }
 
-  list_iterator &operator++() {
-    finish = T::decode(is, curr);
+  ListIterator &operator++() {
+    good = T::decode(is, curr);
     return *this;
   }
 
-  bool operator!=(const list_iterator_sentinel) const { return finish; }
+  bool operator!=(const ListIteratorSentinel) const { return good; }
 };
 
 /** @class list_range
@@ -110,8 +116,8 @@ template <class T> class list_range {
 public:
   explicit list_range(std::istream &is) : is{is} {}
 
-  list_iterator<T> begin() const { return list_iterator<T>{is}; }
-  list_iterator_sentinel end() const { return {}; }
+  ListIterator<T> begin() const { return ListIterator<T>{is}; }
+  ListIteratorSentinel end() const { return {}; }
 };
 
 // ----------------------------------------------------------------------------
@@ -129,7 +135,7 @@ std::istream &operator>>(std::istream &is, EdgeItem<T> &edge) {
 
 template <class T> std::vector<T> read_vec(const std::string &fname) {
   std::ifstream fin(fname, std::ios::binary | std::ios::ate);
-  fin.exceptions(std::ifstream::badbit);
+  fin.exceptions(std::ifstream::failbit);
   std::streamsize size = fin.tellg();
   if (size % sizeof(T) != 0) {
     throw "file size is not multiple of type size";

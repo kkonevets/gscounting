@@ -13,3 +13,4 @@ __pycache__/*
 *.pyc
 *.sublime*
 MANIFEST
+tests/data/*.bin
