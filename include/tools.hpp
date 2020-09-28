@@ -160,9 +160,8 @@ template <class T> std::istream &operator>>(std::istream &is, AdjItem<T> &row) {
 
 template <class T> std::ostream &operator<<(std::ostream &os, AdjItem<T> &row) {
   os << row.source << ": ";
-  for (auto &i : row.targets) {
-    os << i << " ";
-  }
+  std::copy(row.targets.begin(), row.targets.end(),
+            std::ostream_iterator<T>(os, " "));
   return os;
 }
 
