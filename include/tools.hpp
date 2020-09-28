@@ -26,21 +26,19 @@ using adj_t = AdjItem<std::uint32_t>;
  *
  *  @brief structure representiong a directed edge "source->target" in a graph
  */
-template <class T> struct EdgeItem {
-  T source, target;
-
-  explicit EdgeItem(T source, T target) : source(source), target(target) {}
-  EdgeItem() : source{0}, target{0} {}
+template <class T> struct EdgeItem : std::pair<T, T> {
+  EdgeItem(T source, T target) : std::pair<T, T>(source, target) {}
+  EdgeItem() : std::pair<T, T>(0, 0) {}
 
   bool encode(std::ostream &os) {
-    os.write(reinterpret_cast<char *>(&source), sizeof(T));
-    os.write(reinterpret_cast<char *>(&target), sizeof(T));
+    os.write(reinterpret_cast<char *>(&(this->first)), sizeof(T));
+    os.write(reinterpret_cast<char *>(&(this->second)), sizeof(T));
     return os.good();
   }
 
   static bool decode(std::istream &is, EdgeItem<T> &edge) {
-    is.read(reinterpret_cast<char *>(&edge.source), sizeof(T));
-    is.read(reinterpret_cast<char *>(&edge.target), sizeof(T));
+    is.read(reinterpret_cast<char *>(&edge.first), sizeof(T));
+    is.read(reinterpret_cast<char *>(&edge.second), sizeof(T));
     return is.good();
   }
 };
@@ -52,28 +50,32 @@ template <class T> struct EdgeItem {
  *  k is a source node and v contains a list of target nodes.
  */
 template <class T> struct AdjItem {
-  T k;
-  std::vector<T> v;
+  T source;
+  std::vector<T> targets;
 
-  explicit AdjItem(T k, std::vector<T> &&v) : k(k), v(v) {}
-  AdjItem() : k{0} {}
+  AdjItem(T source, std::vector<T> &&targets)
+      : source(source), targets(std::move(targets)) {}
+  AdjItem(AdjItem<T> &&other)
+      : source(other.source), targets(std::move(other.targets)) {}
+  AdjItem() : source{0} {}
 
-  bool encode(std::ostream &os) {
-    T len{static_cast<T>(v.size())};
+  bool encode(std::ostream &os) const {
+    T len{static_cast<T>(targets.size())};
 
-    os.write(reinterpret_cast<char *>(&len), sizeof(T));
-    os.write(reinterpret_cast<char *>(&k), sizeof(T));
-    os.write(reinterpret_cast<char *>(v.data()), v.size() * sizeof(T));
+    os.write(reinterpret_cast<const char *>(&len), sizeof(T));
+    os.write(reinterpret_cast<const char *>(&source), sizeof(T));
+    os.write(reinterpret_cast<const char *>(targets.data()),
+             targets.size() * sizeof(T));
     return os.good();
   }
 
   static bool decode(std::istream &is, AdjItem<T> &row) {
     T len;
     is.read(reinterpret_cast<char *>(&len), sizeof(T));
-    is.read(reinterpret_cast<char *>(&row.k), sizeof(T));
+    is.read(reinterpret_cast<char *>(&row.source), sizeof(T));
 
-    row.v.resize(len);
-    is.read(reinterpret_cast<char *>(row.v.data()), len * sizeof(T));
+    row.targets.resize(len);
+    is.read(reinterpret_cast<char *>(row.targets.data()), len * sizeof(T));
     return is.good();
   }
 };
@@ -126,9 +128,15 @@ public:
 
 namespace std {
 
+template <class T> struct iterator_traits<list_range<T>> {
+public:
+  using iterator_category = std::input_iterator_tag;
+  using value_type = T;
+};
+
 template <class T>
 std::istream &operator>>(std::istream &is, EdgeItem<T> &edge) {
-  is >> edge.source >> edge.target;
+  is >> edge.first >> edge.second;
   return is;
 }
 } // namespace std

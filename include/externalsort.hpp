@@ -3,35 +3,75 @@
 #ifndef INCLUDE_EXTERNALSORT_HPP_
 #define INCLUDE_EXTERNALSORT_HPP_
 
+#include <math.h>
+
+#include <algorithm>
 #include <bitset>
+#include <cassert>
 #include <cstddef>
 #include <filesystem>
 #include <iostream>
+#include <istream>
 #include <iterator>
-#include <math.h>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "tools.hpp"
 
 namespace fs = std::filesystem;
 
-template <class T> class ExternalSorter {
-  std::size_t max_mem;
-  const fs::path &save_dir;
-  unsigned int file_count;
+template <class InputIt> class ExternalSorter {
+  using T = typename std::iterator_traits<InputIt>::value_type;
 
-  void write_chunk(const std::vector<T> &buf) {
-    std::ofstream ofile(save_dir, std::ios::binary);
-    ofile.write(reinterpret_cast<char *>(buf.data()), buf.size() * sizeof(T));
-    file_count += 1;
+  InputIt iter;
+  const fs::path &save_dir;
+  std::size_t max_mem;
+  unsigned int nChunks;
+
+  void sort_save(std::vector<T> &buf) {
+    std::sort(buf.begin(), buf.end());
+    auto fout = save_dir / (std::to_string(nChunks) + ".bin");
+    std::ofstream ofile(fout, std::ios::binary);
+    assert(ofile);
+
+    // std::cout << save_dir / std::to_string(nChunks) << std::endl;
+    for (auto &item : buf) {
+      item.encode(ofile);
+    }
+    nChunks += 1;
+    return;
   }
 
 public:
-  explicit ExternalSorter(std::iterator<std::input_iterator_tag, T> it,
-                          const fs::path &save_dir,
+  explicit ExternalSorter(InputIt iter, const fs::path &save_dir,
                           std::size_t max_mem = pow(2, 30))
-      : save_dir(save_dir), max_mem(max_mem), file_count(0) {}
+      : iter(iter), save_dir(save_dir), max_mem(std::max(max_mem, sizeof(T))),
+        nChunks(0) {}
+  void sort_unstable() {
+    auto max_size = max_mem / sizeof(T);
+    std::vector<T> buf;
+    buf.reserve(max_size);
+    for (auto &item : iter) {
+      buf.push_back(std::move(item));
+      if (buf.size() == max_size) {
+        sort_save(buf);
+        buf.clear();
+      }
+    }
+    if (!buf.empty()) {
+      sort_save(buf);
+    }
+
+    std::vector<T>().swap(buf); // free memory
+
+    std::vector<InputIt> readers;
+    for (size_t i = 0; i < nChunks; ++i) {
+      std::ifstream is(save_dir, std::ios::binary);
+      assert(is);
+      readers.push_back(list_range<T>(is));
+    }
+  }
 };
 
 #endif // INCLUDE_EXTERNALSORT_HPP_
