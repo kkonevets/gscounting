@@ -3,11 +3,13 @@
 #ifndef INCLUDE_TOOLS_HPP_
 #define INCLUDE_TOOLS_HPP_
 
+#include <algorithm>
 #include <fstream>
 #include <iostream>
 #include <istream>
 #include <iterator>
 #include <memory>
+#include <sstream>
 #include <string>
 #include <utility>
 #include <vector>
@@ -139,6 +141,31 @@ std::istream &operator>>(std::istream &is, EdgeItem<T> &edge) {
   is >> edge.first >> edge.second;
   return is;
 }
+
+template <class T>
+std::ostream &operator<<(std::ostream &os, EdgeItem<T> &edge) {
+  os << edge.first << " " << edge.second << std::endl;
+  return os;
+}
+
+template <class T> std::istream &operator>>(std::istream &is, AdjItem<T> &row) {
+  std::string line;
+  std::getline(is, line);
+  std::istringstream iss(line);
+  iss >> row.source;
+  row.targets.clear();
+  std::copy(std::istream_iterator<T>(iss), {}, std::back_inserter(row.targets));
+  return is;
+}
+
+template <class T> std::ostream &operator<<(std::ostream &os, AdjItem<T> &row) {
+  os << row.source << ": ";
+  for (auto &i : row.targets) {
+    os << i << " ";
+  }
+  return os;
+}
+
 } // namespace std
 
 template <class T> std::vector<T> read_vec(const std::string &fname) {
