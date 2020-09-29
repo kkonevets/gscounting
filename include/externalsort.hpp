@@ -6,15 +6,9 @@
 #include <math.h>
 
 #include <algorithm>
-#include <bitset>
 #include <cassert>
-#include <cstddef>
 #include <filesystem>
 #include <fstream>
-#include <functional>
-#include <iostream>
-#include <istream>
-#include <iterator>
 #include <queue>
 #include <string>
 #include <utility>
@@ -61,7 +55,7 @@ public:
 
   KMergeIterator &operator++() {
     auto &[_, i] = q.top();
-    std::ifstream &is = readers[i];
+    std::ifstream &is = readers.at(i);
     q.pop();
     if (T::decode(is, cur)) {
       q.emplace(cur, i); // COPY
@@ -77,7 +71,8 @@ public:
 
 /** @class KMerge
  *
- *  @brief Iterator that merges multiple sorted iterators
+ *  @brief Iterator that merges multiple sorted iterators. Uses priority queue
+ * for merging
  */
 template <class T> class KMerge {
   std::vector<std::ifstream> readers;
@@ -96,7 +91,14 @@ public:
 
 /** @class ExternalSorter
  *
- *  @brief Sorts file on disk using merge sort
+ *  @brief Sorts file on disk using merge sort.
+ *  First it splits file on parts, then sorts them (consuming `max_mem` at a
+ * time), saves parts on disk to `save_dir` and then merges those parts while
+ * lazy loading. Uses priority queue for merging (memory consumption is
+ * minimal).
+ *
+ *  @param save_dir Name of a directory to save parts in
+ *  @param max_mem Maximum size of a part file in bytes
  */
 template <class T> class ExternalSorter {
   const fs::path &save_dir;
@@ -124,6 +126,12 @@ public:
   explicit ExternalSorter(const fs::path &save_dir,
                           std::size_t max_mem = pow(2, 30))
       : save_dir(save_dir), max_mem(std::max(max_mem, sizeof(T))), nChunks(0) {}
+  /** @fn sort_unstable
+   *
+   *  @brief Sorts input stream
+   *  @param is Input stream (e.g. file)
+   *  @return A merging iterator that lazily loads data from disk
+   */
   KMerge<T> sort_unstable(std::istream &is) {
     auto max_size = max_mem / sizeof(T);
     std::vector<T> buf;

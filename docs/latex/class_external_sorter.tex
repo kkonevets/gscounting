@@ -15,9 +15,8 @@ Sorts file on disk using merge sort.
 \mbox{\Hypertarget{class_external_sorter_a16507212860fe8ed81166a4a0f20b05c}\label{class_external_sorter_a16507212860fe8ed81166a4a0f20b05c}} 
 {\bfseries External\+Sorter} (const fs\+::path \&save\+\_\+dir, std\+::size\+\_\+t max\+\_\+mem=pow(2, 30))
 \item 
-\mbox{\Hypertarget{class_external_sorter_af2aa8f8c1638f88ec8f18196289affba}\label{class_external_sorter_af2aa8f8c1638f88ec8f18196289affba}} 
-\mbox{\hyperlink{class_k_merge}{K\+Merge}}$<$ T $>$ {\bfseries sort\+\_\+unstable} (std\+::istream \&is)
-\end{DoxyCompactItemize}
+\mbox{\hyperlink{class_k_merge}{K\+Merge}}$<$ T $>$ \mbox{\hyperlink{class_external_sorter_af2931c179cf68d14a359d9c347eab0d8}{sort\+\_\+unstable}} (std\+::istream \&is)
+\begin{DoxyCompactList}\small\item\em Sorts input stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -26,7 +25,44 @@ class External\+Sorter$<$ T $>$}
 
 Sorts file on disk using merge sort. 
 
-Definition at line 101 of file externalsort.\+hpp.
+First it splits file on parts, then sorts them (consuming {\ttfamily max\+\_\+mem} at a time), saves parts on disk to {\ttfamily save\+\_\+dir} and then merges those parts while lazy loading. Uses priority queue for merging (memory consumption is minimal).
+
+
+\begin{DoxyParams}{Parameters}
+{\em save\+\_\+dir} & Name of a directory to save parts in \\
+\hline
+{\em max\+\_\+mem} & Maximum size of a part file in bytes \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 103 of file externalsort.\+hpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_external_sorter_af2931c179cf68d14a359d9c347eab0d8}\label{class_external_sorter_af2931c179cf68d14a359d9c347eab0d8}} 
+\index{ExternalSorter$<$ T $>$@{ExternalSorter$<$ T $>$}!sort\_unstable@{sort\_unstable}}
+\index{sort\_unstable@{sort\_unstable}!ExternalSorter$<$ T $>$@{ExternalSorter$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{sort\_unstable()}{sort\_unstable()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{class_external_sorter}{External\+Sorter}}$<$ T $>$\+::sort\+\_\+unstable (\begin{DoxyParamCaption}\item[{std\+::istream \&}]{is }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sorts input stream. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em is} & Input stream (e.\+g. file) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A merging iterator that lazily loads data from disk 
+\end{DoxyReturn}
+
+
+Definition at line 135 of file externalsort.\+hpp.
 
 
 

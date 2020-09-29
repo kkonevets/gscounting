@@ -1,3 +1,8 @@
+//!
+//! @file tools.hpp
+//! @brief Tools for efficient reading/writing of a graph
+//!
+
 // "Copyright 2020 Kirill Konevets"
 
 #ifndef INCLUDE_TOOLS_HPP_
@@ -27,7 +32,9 @@ using adj_type = AdjItem<std::uint32_t>;
 
 /** @struct EdgeItem
  *
- *  @brief structure representiong a directed edge "first->second" in a graph
+ *  @brief Structure representing a directed edge "first->second" of a graph
+ *  @param First Source node id
+ *  @param Second Target node id
  */
 template <class T> struct EdgeItem : std::pair<T, T> {
   EdgeItem(T first, T second) : std::pair<T, T>(first, second) {}
@@ -56,8 +63,8 @@ template <class T> struct EdgeItem : std::pair<T, T> {
 /** @struct AdjItem
  *
  *  @brief structure representing a record in adjacency list
- *
- *  k is a source node and v contains a list of target nodes.
+ *  @param source Source node
+ *  @param target Contains a list of target nodes
  */
 template <class T> struct AdjItem {
   T source;
@@ -137,6 +144,13 @@ template <class T> std::ostream &operator<<(std::ostream &os, AdjItem<T> &row) {
 // Misc
 // ----------------------------------------------------------------------------
 
+/**
+ *  Read a vector from disk
+ *
+ *  @brief Loads vector from disk from binary file
+ *  @param fname File name to load
+ *  @return Vector of T
+ */
 template <class T> std::vector<T> read_vec(const std::string &fname) {
   std::ifstream fin(fname, std::ios::binary | std::ios::ate);
   assert(fin);

@@ -1,0 +1,85 @@
+\hypertarget{tools_8hpp}{}\doxysection{include/tools.hpp File Reference}
+\label{tools_8hpp}\index{include/tools.hpp@{include/tools.hpp}}
+
+
+Tools for efficient reading/writing of a graph.  
+
+
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$cassert$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$istream$>$}\newline
+{\ttfamily \#include $<$iterator$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$utility$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_edge_item}{Edge\+Item$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em Structure representing a directed edge \char`\"{}first-\/$>$second\char`\"{} of a graph. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_adj_item}{Adj\+Item$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em structure representing a record in adjacency list \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{tools_8hpp_a566e713cd0df840ef1bf9c37c5d912c7}\label{tools_8hpp_a566e713cd0df840ef1bf9c37c5d912c7}} 
+using {\bfseries edge\+\_\+type} = \mbox{\hyperlink{struct_edge_item}{Edge\+Item}}$<$ std\+::uint32\+\_\+t $>$
+\item 
+\mbox{\Hypertarget{tools_8hpp_af2ba1e4080eba3c21877a86cfeb6aa80}\label{tools_8hpp_af2ba1e4080eba3c21877a86cfeb6aa80}} 
+using {\bfseries adj\+\_\+type} = \mbox{\hyperlink{struct_adj_item}{Adj\+Item}}$<$ std\+::uint32\+\_\+t $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{tools_8hpp_a61ed301467ddea98a07437faf35c31cc}\label{tools_8hpp_a61ed301467ddea98a07437faf35c31cc}} 
+{\footnotesize template$<$class T $>$ }\\std\+::istream \& {\bfseries std\+::operator$>$$>$} (std\+::istream \&is, \mbox{\hyperlink{struct_edge_item}{Edge\+Item}}$<$ T $>$ \&edge)
+\item 
+\mbox{\Hypertarget{tools_8hpp_aa88566ca1552f915396f00203d3718e3}\label{tools_8hpp_aa88566ca1552f915396f00203d3718e3}} 
+{\footnotesize template$<$class T $>$ }\\std\+::ostream \& {\bfseries std\+::operator$<$$<$} (std\+::ostream \&os, \mbox{\hyperlink{struct_edge_item}{Edge\+Item}}$<$ T $>$ \&edge)
+\item 
+\mbox{\Hypertarget{tools_8hpp_a6e68c3dea3e119ea0d5fb7a449f1da9b}\label{tools_8hpp_a6e68c3dea3e119ea0d5fb7a449f1da9b}} 
+{\footnotesize template$<$class T $>$ }\\std\+::ostream \& {\bfseries std\+::operator$<$$<$} (std\+::ostream \&os, const \mbox{\hyperlink{struct_edge_item}{Edge\+Item}}$<$ T $>$ \&edge)
+\item 
+\mbox{\Hypertarget{tools_8hpp_adba96e5b780fc1ef5f89097d28d88aba}\label{tools_8hpp_adba96e5b780fc1ef5f89097d28d88aba}} 
+{\footnotesize template$<$class T $>$ }\\std\+::istream \& {\bfseries std\+::operator$>$$>$} (std\+::istream \&is, \mbox{\hyperlink{struct_adj_item}{Adj\+Item}}$<$ T $>$ \&row)
+\item 
+\mbox{\Hypertarget{tools_8hpp_a8fb4564e6eec206c9b269bd1b701ee48}\label{tools_8hpp_a8fb4564e6eec206c9b269bd1b701ee48}} 
+{\footnotesize template$<$class T $>$ }\\std\+::ostream \& {\bfseries std\+::operator$<$$<$} (std\+::ostream \&os, \mbox{\hyperlink{struct_adj_item}{Adj\+Item}}$<$ T $>$ \&row)
+\item 
+{\footnotesize template$<$class T $>$ }\\std\+::vector$<$ T $>$ \mbox{\hyperlink{tools_8hpp_a0134b900c2d99b1e92cf58f9ab8b81ef}{read\+\_\+vec}} (const std\+::string \&fname)
+\begin{DoxyCompactList}\small\item\em Read a vector from disk. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Tools for efficient reading/writing of a graph. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{tools_8hpp_a0134b900c2d99b1e92cf58f9ab8b81ef}\label{tools_8hpp_a0134b900c2d99b1e92cf58f9ab8b81ef}} 
+\index{tools.hpp@{tools.hpp}!read\_vec@{read\_vec}}
+\index{read\_vec@{read\_vec}!tools.hpp@{tools.hpp}}
+\doxysubsubsection{\texorpdfstring{read\_vec()}{read\_vec()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+std\+::vector$<$T$>$ read\+\_\+vec (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{fname }\end{DoxyParamCaption})}
+
+
+
+Read a vector from disk. 
+
+Loads vector from disk from binary file 
+\begin{DoxyParams}{Parameters}
+{\em fname} & File name to load \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vector of T 
+\end{DoxyReturn}
+
+
+Definition at line 154 of file tools.\+hpp.
+
