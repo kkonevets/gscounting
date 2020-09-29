@@ -5,13 +5,13 @@
 #include "tools.hpp"
 
 TEST(IteratorTest, Edge) {
-  std::vector<edge_t> edges;
+  std::vector<edge_type> edges;
   {
     std::ifstream ifile("./tests/data/edgelist.txt");
     std::ofstream ofile("./tests/data/edgelist.bin", std::ios::binary);
     ASSERT_TRUE(ifile && ofile);
 
-    for (edge_t edge; ifile >> edge;) {
+    for (edge_type edge; ifile >> edge;) {
       EXPECT_TRUE(edge.encode(ofile));
       edges.push_back(edge);
     }
@@ -22,7 +22,7 @@ TEST(IteratorTest, Edge) {
     ASSERT_TRUE(fin);
 
     size_t i = 0;
-    for (auto &edge : list_range<edge_t>(fin)) {
+    for (edge_type edge; edge_type::decode(fin, edge);) {
       auto &_edge = edges[i];
       EXPECT_EQ(_edge.first, edge.first);
       EXPECT_EQ(_edge.second, edge.second);
@@ -32,7 +32,7 @@ TEST(IteratorTest, Edge) {
 }
 
 TEST(IteratorTest, Adjacency) {
-  adj_t row{3, {1, 2, 3, 4, 5}};
+  adj_type row{3, {1, 2, 3, 4, 5}};
   {
     std::ofstream ofile("./tests/data/edjlist.bin", std::ios::binary);
     ASSERT_TRUE(ofile);
@@ -45,7 +45,7 @@ TEST(IteratorTest, Adjacency) {
     std::ifstream fin("./tests/data/edjlist.bin", std::ios::binary);
     ASSERT_TRUE(fin);
 
-    for (auto &cur_row : list_range<adj_t>(fin)) {
+    for (adj_type cur_row; adj_type::decode(fin, cur_row);) {
       EXPECT_EQ(cur_row.source, row.source);
       for (size_t i = 0; i < cur_row.targets.size(); i++) {
         EXPECT_EQ(cur_row.targets[i], row.targets[i]);

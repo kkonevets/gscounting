@@ -4,6 +4,7 @@
 #define INCLUDE_TOOLS_HPP_
 
 #include <algorithm>
+#include <cassert>
 #include <fstream>
 #include <iostream>
 #include <istream>
@@ -17,8 +18,8 @@
 template <class T> struct EdgeItem;
 template <class T> struct AdjItem;
 
-using edge_t = EdgeItem<std::uint32_t>;
-using adj_t = AdjItem<std::uint32_t>;
+using edge_type = EdgeItem<std::uint32_t>;
+using adj_type = AdjItem<std::uint32_t>;
 
 // ----------------------------------------------------------------------------
 // Edge and adjacency items definition
@@ -26,11 +27,18 @@ using adj_t = AdjItem<std::uint32_t>;
 
 /** @struct EdgeItem
  *
- *  @brief structure representiong a directed edge "source->target" in a graph
+ *  @brief structure representiong a directed edge "first->second" in a graph
  */
 template <class T> struct EdgeItem : std::pair<T, T> {
-  EdgeItem(T source, T target) : std::pair<T, T>(source, target) {}
+  EdgeItem(T first, T second) : std::pair<T, T>(first, second) {}
+  // EdgeItem(const EdgeItem<T> &rhs) : std::pair<T, T>(rhs) {}
   EdgeItem() : std::pair<T, T>(0, 0) {}
+
+  EdgeItem &operator=(const EdgeItem &other) {
+    this->first = other.first;
+    this->second = other.second;
+    return *this;
+  }
 
   bool encode(std::ostream &os) {
     os.write(reinterpret_cast<char *>(&(this->first)), sizeof(T));
@@ -83,58 +91,10 @@ template <class T> struct AdjItem {
 };
 
 // ----------------------------------------------------------------------------
-// Iteration on edge and adjacency lists
-// ----------------------------------------------------------------------------
-
-class ListIteratorSentinel {};
-
-template <class T> class ListIterator {
-  std::istream &is;
-  T curr;
-  bool good;
-
-public:
-  explicit ListIterator(std::istream &is) : is{is} {
-    good = T::decode(is, curr);
-  }
-
-  T &operator*() { return curr; }
-
-  ListIterator &operator++() {
-    good = T::decode(is, curr);
-    return *this;
-  }
-
-  bool operator!=(const ListIteratorSentinel) const { return good; }
-};
-
-/** @class list_range
- *
- *  @brief iteration on edge and adjacency lists
- *
- *  T could be EdgeItem or AdjItem.
- */
-template <class T> class list_range {
-  std::istream &is;
-
-public:
-  explicit list_range(std::istream &is) : is{is} {}
-
-  ListIterator<T> begin() const { return ListIterator<T>{is}; }
-  ListIteratorSentinel end() const { return {}; }
-};
-
-// ----------------------------------------------------------------------------
-// Miscellaneous
+// Namespace std
 // ----------------------------------------------------------------------------
 
 namespace std {
-
-template <class T> struct iterator_traits<list_range<T>> {
-public:
-  using iterator_category = std::input_iterator_tag;
-  using value_type = T;
-};
 
 template <class T>
 std::istream &operator>>(std::istream &is, EdgeItem<T> &edge) {
@@ -144,7 +104,13 @@ std::istream &operator>>(std::istream &is, EdgeItem<T> &edge) {
 
 template <class T>
 std::ostream &operator<<(std::ostream &os, EdgeItem<T> &edge) {
-  os << edge.first << " " << edge.second << std::endl;
+  os << "(" << edge.first << ", " << edge.second << ")";
+  return os;
+}
+
+template <class T>
+std::ostream &operator<<(std::ostream &os, const EdgeItem<T> &edge) {
+  os << "(" << edge.first << ", " << edge.second << ")";
   return os;
 }
 
@@ -167,9 +133,13 @@ template <class T> std::ostream &operator<<(std::ostream &os, AdjItem<T> &row) {
 
 } // namespace std
 
+// ----------------------------------------------------------------------------
+// Misc
+// ----------------------------------------------------------------------------
+
 template <class T> std::vector<T> read_vec(const std::string &fname) {
   std::ifstream fin(fname, std::ios::binary | std::ios::ate);
-  fin.exceptions(std::ifstream::failbit);
+  assert(fin);
   std::streamsize size = fin.tellg();
   if (size % sizeof(T) != 0) {
     throw "file size is not multiple of type size";
