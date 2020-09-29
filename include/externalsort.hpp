@@ -148,12 +148,6 @@ public:
       readers.push_back(std::move(is));
     }
 
-    // for (auto &is : readers) {
-    //   for (T val; T::decode(is, val);) {
-    //     std::cout << val << std::endl;
-    //   }
-    // }
-
     return KMerge<T>(std::move(readers));
   }
 };

@@ -1,10 +1,22 @@
 \hypertarget{class_external_sorter}{}\doxysection{External\+Sorter$<$ T $>$ Class Template Reference}
 \label{class_external_sorter}\index{ExternalSorter$<$ T $>$@{ExternalSorter$<$ T $>$}}
+
+
+Sorts file on disk using merge sort.  
+
+
+
+
+{\ttfamily \#include $<$externalsort.\+hpp$>$}
+
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_external_sorter_a13e3fcf3636a9d2e7eb0534958c6a974}\label{class_external_sorter_a13e3fcf3636a9d2e7eb0534958c6a974}} 
-{\bfseries External\+Sorter} (std\+::iterator$<$ std\+::input\+\_\+iterator\+\_\+tag, T $>$ it, const fs\+::path \&save\+\_\+dir, std\+::size\+\_\+t max\+\_\+mem=pow(2, 30))
+\mbox{\Hypertarget{class_external_sorter_a16507212860fe8ed81166a4a0f20b05c}\label{class_external_sorter_a16507212860fe8ed81166a4a0f20b05c}} 
+{\bfseries External\+Sorter} (const fs\+::path \&save\+\_\+dir, std\+::size\+\_\+t max\+\_\+mem=pow(2, 30))
+\item 
+\mbox{\Hypertarget{class_external_sorter_af2aa8f8c1638f88ec8f18196289affba}\label{class_external_sorter_af2aa8f8c1638f88ec8f18196289affba}} 
+\mbox{\hyperlink{class_k_merge}{K\+Merge}}$<$ T $>$ {\bfseries sort\+\_\+unstable} (std\+::istream \&is)
 \end{DoxyCompactItemize}
 
 
@@ -12,9 +24,9 @@
 \subsubsection*{template$<$class T$>$\newline
 class External\+Sorter$<$ T $>$}
 
+Sorts file on disk using merge sort. 
 
-
-Definition at line 19 of file externalsort.\+hpp.
+Definition at line 101 of file externalsort.\+hpp.
 
 
 

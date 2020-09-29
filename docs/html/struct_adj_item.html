@@ -72,19 +72,22 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>structure representiong a record in adjacency list  
+<p>structure representing a record in adjacency list  
  <a href="struct_adj_item.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="tools_8hpp_source.html">tools.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:acab45d7bf04196765dda27229cfba80f"><td class="memItemLeft" align="right" valign="top"><a id="acab45d7bf04196765dda27229cfba80f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>AdjItem</b> (T k, std::vector&lt; T &gt; &amp;&amp;v)</td></tr>
-<tr class="separator:acab45d7bf04196765dda27229cfba80f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5651431a2b2f1c8e3afccfc91144f95"><td class="memItemLeft" align="right" valign="top"><a id="aa5651431a2b2f1c8e3afccfc91144f95"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>encode</b> (std::ostream &amp;os)</td></tr>
-<tr class="separator:aa5651431a2b2f1c8e3afccfc91144f95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefd9839d5675a15a778d959b731c3ec7"><td class="memItemLeft" align="right" valign="top"><a id="aefd9839d5675a15a778d959b731c3ec7"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>AdjItem</b> (T source, std::vector&lt; T &gt; &amp;&amp;targets)</td></tr>
+<tr class="separator:aefd9839d5675a15a778d959b731c3ec7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a501b0a59f4fc0451a636fcd0f5152df1"><td class="memItemLeft" align="right" valign="top"><a id="a501b0a59f4fc0451a636fcd0f5152df1"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>AdjItem</b> (<a class="el" href="struct_adj_item.html">AdjItem</a>&lt; T &gt; &amp;&amp;other)</td></tr>
+<tr class="separator:a501b0a59f4fc0451a636fcd0f5152df1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9f2cd8e81ec45e55c0b2d56210468a7"><td class="memItemLeft" align="right" valign="top"><a id="af9f2cd8e81ec45e55c0b2d56210468a7"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>encode</b> (std::ostream &amp;os) const</td></tr>
+<tr class="separator:af9f2cd8e81ec45e55c0b2d56210468a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -94,21 +97,21 @@ static bool&#160;</td><td class="memItemRight" valign="bottom"><b>decode</b> (st
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ae2d2f5d765c941a7a7a6f2491d0855b6"><td class="memItemLeft" align="right" valign="top"><a id="ae2d2f5d765c941a7a7a6f2491d0855b6"></a>
-T&#160;</td><td class="memItemRight" valign="bottom"><b>k</b> {0}</td></tr>
-<tr class="separator:ae2d2f5d765c941a7a7a6f2491d0855b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe16ddcf5bf9afcdfc29847cc9e93ee7"><td class="memItemLeft" align="right" valign="top"><a id="abe16ddcf5bf9afcdfc29847cc9e93ee7"></a>
-std::vector&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>v</b></td></tr>
-<tr class="separator:abe16ddcf5bf9afcdfc29847cc9e93ee7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0d1faa39ef0202f1e4aa745d1239a2a"><td class="memItemLeft" align="right" valign="top"><a id="af0d1faa39ef0202f1e4aa745d1239a2a"></a>
+T&#160;</td><td class="memItemRight" valign="bottom"><b>source</b></td></tr>
+<tr class="separator:af0d1faa39ef0202f1e4aa745d1239a2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acac240d2d66950b0db578f602d549f9c"><td class="memItemLeft" align="right" valign="top"><a id="acac240d2d66950b0db578f602d549f9c"></a>
+std::vector&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>targets</b></td></tr>
+<tr class="separator:acac240d2d66950b0db578f602d549f9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class T&gt;<br />
 struct AdjItem&lt; T &gt;</h3>
 
-<p>structure representiong a record in adjacency list </p>
+<p>structure representing a record in adjacency list </p>
 <p>k is a source node and v contains a list of target nodes. </p>
 
-<p class="definition">Definition at line <a class="el" href="tools_8hpp_source.html#l00048">48</a> of file <a class="el" href="tools_8hpp_source.html">tools.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8hpp_source.html#l00062">62</a> of file <a class="el" href="tools_8hpp_source.html">tools.hpp</a>.</p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>include/<a class="el" href="tools_8hpp_source.html">tools.hpp</a></li>
 </ul>

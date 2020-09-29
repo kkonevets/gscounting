@@ -65,23 +65,25 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="struct_edge_item-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">EdgeItem&lt; T &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>structure representiong a directed edge "source-&gt;target" in a graph  
+<p>structure representiong a directed edge "first-&gt;second" in a graph  
  <a href="struct_edge_item.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="tools_8hpp_source.html">tools.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab6816eb99545c07947c2e78e7385140c"><td class="memItemLeft" align="right" valign="top"><a id="ab6816eb99545c07947c2e78e7385140c"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>EdgeItem</b> (T source, T target)</td></tr>
-<tr class="separator:ab6816eb99545c07947c2e78e7385140c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab0e77d8ddba381fa92974704f1c05ba"><td class="memItemLeft" align="right" valign="top"><a id="aab0e77d8ddba381fa92974704f1c05ba"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>EdgeItem</b> (T first, T second)</td></tr>
+<tr class="separator:aab0e77d8ddba381fa92974704f1c05ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53b6dee677b2306f3ace33eb5686c661"><td class="memItemLeft" align="right" valign="top"><a id="a53b6dee677b2306f3ace33eb5686c661"></a>
+<a class="el" href="struct_edge_item.html">EdgeItem</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="struct_edge_item.html">EdgeItem</a> &amp;other)</td></tr>
+<tr class="separator:a53b6dee677b2306f3ace33eb5686c661"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a191022ec81896c68ce4202f3266f77d5"><td class="memItemLeft" align="right" valign="top"><a id="a191022ec81896c68ce4202f3266f77d5"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>encode</b> (std::ostream &amp;os)</td></tr>
 <tr class="separator:a191022ec81896c68ce4202f3266f77d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -91,23 +93,14 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a3795530f258d0b286c7436b6b15fdd9f"><td class="memItemLeft" align="right" valign="top"><a id="a3795530f258d0b286c7436b6b15fdd9f"></a>
 static bool&#160;</td><td class="memItemRight" valign="bottom"><b>decode</b> (std::istream &amp;is, <a class="el" href="struct_edge_item.html">EdgeItem</a>&lt; T &gt; &amp;edge)</td></tr>
 <tr class="separator:a3795530f258d0b286c7436b6b15fdd9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a352a21843df1ffc931d620b94d11e680"><td class="memItemLeft" align="right" valign="top"><a id="a352a21843df1ffc931d620b94d11e680"></a>
-T&#160;</td><td class="memItemRight" valign="bottom"><b>source</b> {0}</td></tr>
-<tr class="separator:a352a21843df1ffc931d620b94d11e680"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1ca655624bc11f969ac1136addfac83"><td class="memItemLeft" align="right" valign="top"><a id="aa1ca655624bc11f969ac1136addfac83"></a>
-T&#160;</td><td class="memItemRight" valign="bottom"><b>target</b> {0}</td></tr>
-<tr class="separator:aa1ca655624bc11f969ac1136addfac83"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class T&gt;<br />
 struct EdgeItem&lt; T &gt;</h3>
 
-<p>structure representiong a directed edge "source-&gt;target" in a graph </p>
+<p>structure representiong a directed edge "first-&gt;second" in a graph </p>
 
-<p class="definition">Definition at line <a class="el" href="tools_8hpp_source.html#l00023">23</a> of file <a class="el" href="tools_8hpp_source.html">tools.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8hpp_source.html#l00032">32</a> of file <a class="el" href="tools_8hpp_source.html">tools.hpp</a>.</p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>include/<a class="el" href="tools_8hpp_source.html">tools.hpp</a></li>
 </ul>

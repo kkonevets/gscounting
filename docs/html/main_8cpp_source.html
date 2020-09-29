@@ -73,79 +73,33 @@ $(function() {
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// &quot;Copyright 2020 Kirill Konevets&quot;</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;algorithm&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;cstddef&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;cstdint&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;fstream&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;iterator&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;../include/tools.hpp&quot;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">using</span> <a class="code" href="struct_edge_item.html">edge_t</a> = <a class="code" href="struct_edge_item.html">EdgeItem&lt;std::uint32_t&gt;</a>;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">using</span> <a class="code" href="struct_adj_item.html">adj_t</a> = <a class="code" href="struct_adj_item.html">AdjItem&lt;std::uint32_t&gt;</a>;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keywordtype">void</span> test_edge_iterator() {</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    std::ifstream ifile(<span class="stringliteral">&quot;../data/edgelist.txt&quot;</span>);</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    std::ofstream ofile(<span class="stringliteral">&quot;../data/edgelist.bin&quot;</span>, std::ios::binary);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordflow">if</span> (!ofile || !ifile) {</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;      std::cerr &lt;&lt; <span class="stringliteral">&quot;could not open file&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;      <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    }</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordflow">for</span> (<a class="code" href="struct_edge_item.html">edge_t</a> edge; ifile &gt;&gt; edge;) {</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;      <span class="keywordflow">if</span> (!edge.encode(ofile)) {</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        std::cerr &lt;&lt; <span class="stringliteral">&quot;could not encode edge&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;      }</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    }</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  }</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    std::ifstream fin(<span class="stringliteral">&quot;../data/edgelist.bin&quot;</span>, std::ios::binary);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;edge : <a class="code" href="classlist__range.html">list_range&lt;edge_t&gt;</a>(fin)) {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;      std::cout &lt;&lt; edge.source &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; edge.target &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  }</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keywordtype">void</span> test_adj_iterator() {</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  {</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    std::ofstream ofile(<span class="stringliteral">&quot;../data/edjlist.bin&quot;</span>, std::ios::binary);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">if</span> (!ofile) {</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;      std::cerr &lt;&lt; <span class="stringliteral">&quot;could not open file&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;      <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    }</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    ofile.unsetf(std::ios::skipws);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="struct_adj_item.html">adj_t</a> row{3, {1, 2, 3, 4, 5}};</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">if</span> (!row.encode(ofile)) {</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;      std::cerr &lt;&lt; <span class="stringliteral">&quot;could not encode row&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    }</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  }</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  {</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    std::ifstream fin(<span class="stringliteral">&quot;../data/edjlist.bin&quot;</span>, std::ios::binary);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;row : <a class="code" href="classlist__range.html">list_range&lt;adj_t&gt;</a>(fin)) {</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;      std::cout &lt;&lt; <span class="stringliteral">&quot;k: &quot;</span> &lt;&lt; row.k &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;      <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;j : row.v) {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        std::cout &lt;&lt; j &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      }</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      std::cout &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    }</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  }</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;}</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keywordtype">int</span> main() {</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  test_edge_iterator();</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  test_adj_iterator();</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;cassert&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;cstddef&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;cstdint&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;fstream&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;iterator&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;externalsort.hpp&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;tools.hpp&quot;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keywordtype">int</span> main() {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  std::ifstream fin(<span class="stringliteral">&quot;tests/data/edgelist.bin&quot;</span>, std::ios::binary);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  assert(fin);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <a class="code" href="class_external_sorter.html">ExternalSorter&lt;edge_type&gt;</a> sorter(<span class="stringliteral">&quot;tests/data&quot;</span>, 4 * 4);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="keyword">auto</span> merged = sorter.sort_unstable(fin);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;item : merged) {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    std::cout &lt;&lt; item &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  }</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="astruct_adj_item_html"><div class="ttname"><a href="struct_adj_item.html">AdjItem</a></div><div class="ttdoc">structure representiong a record in adjacency list</div><div class="ttdef"><b>Definition:</b> <a href="tools_8hpp_source.html#l00048">tools.hpp:48</a></div></div>
-<div class="ttc" id="aclasslist__range_html"><div class="ttname"><a href="classlist__range.html">list_range</a></div><div class="ttdoc">iteration on edge and adjacency lists</div><div class="ttdef"><b>Definition:</b> <a href="tools_8hpp_source.html#l00107">tools.hpp:107</a></div></div>
-<div class="ttc" id="astruct_edge_item_html"><div class="ttname"><a href="struct_edge_item.html">EdgeItem</a></div><div class="ttdoc">structure representiong a directed edge &quot;source-&gt;target&quot; in a graph</div><div class="ttdef"><b>Definition:</b> <a href="tools_8hpp_source.html#l00023">tools.hpp:23</a></div></div>
+<div class="ttc" id="aclass_external_sorter_html"><div class="ttname"><a href="class_external_sorter.html">ExternalSorter</a></div><div class="ttdoc">Sorts file on disk using merge sort.</div><div class="ttdef"><b>Definition:</b> <a href="externalsort_8hpp_source.html#l00101">externalsort.hpp:101</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20

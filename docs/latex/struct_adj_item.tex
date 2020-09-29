@@ -2,7 +2,7 @@
 \label{struct_adj_item}\index{AdjItem$<$ T $>$@{AdjItem$<$ T $>$}}
 
 
-structure representiong a record in adjacency list  
+structure representing a record in adjacency list  
 
 
 
@@ -12,11 +12,14 @@ structure representiong a record in adjacency list
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{struct_adj_item_acab45d7bf04196765dda27229cfba80f}\label{struct_adj_item_acab45d7bf04196765dda27229cfba80f}} 
-{\bfseries Adj\+Item} (T k, std\+::vector$<$ T $>$ \&\&v)
+\mbox{\Hypertarget{struct_adj_item_aefd9839d5675a15a778d959b731c3ec7}\label{struct_adj_item_aefd9839d5675a15a778d959b731c3ec7}} 
+{\bfseries Adj\+Item} (T source, std\+::vector$<$ T $>$ \&\&targets)
 \item 
-\mbox{\Hypertarget{struct_adj_item_aa5651431a2b2f1c8e3afccfc91144f95}\label{struct_adj_item_aa5651431a2b2f1c8e3afccfc91144f95}} 
-bool {\bfseries encode} (std\+::ostream \&os)
+\mbox{\Hypertarget{struct_adj_item_a501b0a59f4fc0451a636fcd0f5152df1}\label{struct_adj_item_a501b0a59f4fc0451a636fcd0f5152df1}} 
+{\bfseries Adj\+Item} (\mbox{\hyperlink{struct_adj_item}{Adj\+Item}}$<$ T $>$ \&\&other)
+\item 
+\mbox{\Hypertarget{struct_adj_item_af9f2cd8e81ec45e55c0b2d56210468a7}\label{struct_adj_item_af9f2cd8e81ec45e55c0b2d56210468a7}} 
+bool {\bfseries encode} (std\+::ostream \&os) const
 \end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -27,11 +30,11 @@ static bool {\bfseries decode} (std\+::istream \&is, \mbox{\hyperlink{struct_adj
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{struct_adj_item_ae2d2f5d765c941a7a7a6f2491d0855b6}\label{struct_adj_item_ae2d2f5d765c941a7a7a6f2491d0855b6}} 
-T {\bfseries k} \{0\}
+\mbox{\Hypertarget{struct_adj_item_af0d1faa39ef0202f1e4aa745d1239a2a}\label{struct_adj_item_af0d1faa39ef0202f1e4aa745d1239a2a}} 
+T {\bfseries source}
 \item 
-\mbox{\Hypertarget{struct_adj_item_abe16ddcf5bf9afcdfc29847cc9e93ee7}\label{struct_adj_item_abe16ddcf5bf9afcdfc29847cc9e93ee7}} 
-std\+::vector$<$ T $>$ {\bfseries v}
+\mbox{\Hypertarget{struct_adj_item_acac240d2d66950b0db578f602d549f9c}\label{struct_adj_item_acac240d2d66950b0db578f602d549f9c}} 
+std\+::vector$<$ T $>$ {\bfseries targets}
 \end{DoxyCompactItemize}
 
 
@@ -39,11 +42,11 @@ std\+::vector$<$ T $>$ {\bfseries v}
 \subsubsection*{template$<$class T$>$\newline
 struct Adj\+Item$<$ T $>$}
 
-structure representiong a record in adjacency list 
+structure representing a record in adjacency list 
 
 k is a source node and v contains a list of target nodes. 
 
-Definition at line 48 of file tools.\+hpp.
+Definition at line 62 of file tools.\+hpp.
 
 
 
