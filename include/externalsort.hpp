@@ -3,20 +3,19 @@
 #ifndef INCLUDE_EXTERNALSORT_HPP_
 #define INCLUDE_EXTERNALSORT_HPP_
 
-#include <cstddef>
-#include <cstdio>
-#include <iostream>
 #include <math.h>
 
 #include <algorithm>
 #include <cassert>
+#include <cstddef>
+#include <cstdio>
 #include <execution>
 #include <filesystem>
 #include <fstream>
+#include <iostream>
 #include <numeric>
 #include <queue>
 #include <string>
-#include <type_traits>
 #include <utility>
 #include <vector>
 
