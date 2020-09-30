@@ -14,7 +14,7 @@ file(GLOB SOURCES
     )
 
 add_executable(gsc ${SOURCES})
-
+target_link_libraries(gsc tbb)
 
 # Download and unpack googletest at configure time
 configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
@@ -46,5 +46,5 @@ file(GLOB TEST_SOURCES
 )
 
 add_executable(test_gsc ${TEST_SOURCES})
-target_link_libraries(test_gsc gtest_main)
+target_link_libraries(test_gsc gtest_main tbb)
 add_test(NAME test_gsc COMMAND test_gsc)

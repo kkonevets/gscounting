@@ -10,6 +10,7 @@
 
 #include <algorithm>
 #include <cassert>
+#include <execution>
 #include <filesystem>
 #include <fstream>
 #include <numeric>
@@ -116,7 +117,7 @@ template <class T> class ExternalSorter {
   }
 
   void sort_save(std::vector<T> &buf) {
-    std::sort(buf.begin(), buf.end());
+    std::sort(std::execution::par_unseq, buf.begin(), buf.end());
     auto fout = file_name(nChunks);
     std::ofstream ofile(fout, std::ios::binary);
     assert(ofile);
