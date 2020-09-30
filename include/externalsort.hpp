@@ -107,7 +107,7 @@ public:
  * default. The more memory is available the faster is the sorting
  */
 template <class T> class ExternalSorter {
-  const fs::path &save_dir;
+  const fs::path save_dir;
   std::size_t max_mem;
   unsigned int nChunks;
 

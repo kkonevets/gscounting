@@ -85,7 +85,7 @@ TEST(ExternalSorterTest, SortUnstableAndSave) {
   ASSERT_TRUE(fin);
 
   size_t max_mem = EDGE_LIST_LENGTH * sizeof(edge_type) / 5;
-  ExternalSorter<edge_type> sorter("tests/data", max_mem);
+  ExternalSorter<edge_type> sorter(pjoin(""), max_mem);
   auto merged = sorter.sort_unstable(fin);
 
   std::ofstream os(pjoin("edgelist_big_sorted.bin"), std::ios::binary);
