@@ -12,8 +12,8 @@ Sorts file on disk using merge sort.
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_external_sorter_a16507212860fe8ed81166a4a0f20b05c}\label{class_external_sorter_a16507212860fe8ed81166a4a0f20b05c}} 
-{\bfseries External\+Sorter} (const fs\+::path \&save\+\_\+dir, std\+::size\+\_\+t max\+\_\+mem=pow(2, 30))
+\mbox{\Hypertarget{class_external_sorter_a33035ea0147249f8331b19797aab6779}\label{class_external_sorter_a33035ea0147249f8331b19797aab6779}} 
+{\bfseries External\+Sorter} (const fs\+::path \&save\+\_\+dir, size\+\_\+t max\+\_\+mem=pow(2, 30))
 \item 
 \mbox{\hyperlink{class_k_merge}{K\+Merge}}$<$ T $>$ \mbox{\hyperlink{class_external_sorter_af2931c179cf68d14a359d9c347eab0d8}{sort\+\_\+unstable}} (std\+::istream \&is)
 \begin{DoxyCompactList}\small\item\em Sorts input stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -31,12 +31,12 @@ First it splits file on parts, then sorts them (consuming {\ttfamily max\+\_\+me
 \begin{DoxyParams}{Parameters}
 {\em save\+\_\+dir} & Name of a directory to save parts in \\
 \hline
-{\em max\+\_\+mem} & Maximum size of a part file in bytes \\
+{\em max\+\_\+mem} & Maximum size of a part file in bytes, 1073741824 (1Gb) by default. The more memory is available the faster is the sorting \\
 \hline
 \end{DoxyParams}
 
 
-Definition at line 103 of file externalsort.\+hpp.
+Definition at line 113 of file externalsort.\+hpp.
 
 
 
@@ -58,11 +58,11 @@ Sorts input stream.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-A merging iterator that lazily loads data from disk 
+A merging iterator that lazily loads data from sorted files 
 \end{DoxyReturn}
 
 
-Definition at line 135 of file externalsort.\+hpp.
+Definition at line 144 of file externalsort.\+hpp.
 
 
 

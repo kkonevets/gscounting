@@ -77,9 +77,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a16507212860fe8ed81166a4a0f20b05c"><td class="memItemLeft" align="right" valign="top"><a id="a16507212860fe8ed81166a4a0f20b05c"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ExternalSorter</b> (const fs::path &amp;save_dir, std::size_t max_mem=pow(2, 30))</td></tr>
-<tr class="separator:a16507212860fe8ed81166a4a0f20b05c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33035ea0147249f8331b19797aab6779"><td class="memItemLeft" align="right" valign="top"><a id="a33035ea0147249f8331b19797aab6779"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>ExternalSorter</b> (const fs::path &amp;save_dir, size_t max_mem=pow(2, 30))</td></tr>
+<tr class="separator:a33035ea0147249f8331b19797aab6779"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2931c179cf68d14a359d9c347eab0d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_k_merge.html">KMerge</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_external_sorter.html#af2931c179cf68d14a359d9c347eab0d8">sort_unstable</a> (std::istream &amp;is)</td></tr>
 <tr class="memdesc:af2931c179cf68d14a359d9c347eab0d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sorts input stream.  <a href="class_external_sorter.html#af2931c179cf68d14a359d9c347eab0d8">More...</a><br /></td></tr>
 <tr class="separator:af2931c179cf68d14a359d9c347eab0d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -93,12 +93,12 @@ class ExternalSorter&lt; T &gt;</h3>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">save_dir</td><td>Name of a directory to save parts in </td></tr>
-    <tr><td class="paramname">max_mem</td><td>Maximum size of a part file in bytes </td></tr>
+    <tr><td class="paramname">max_mem</td><td>Maximum size of a part file in bytes, 1073741824 (1Gb) by default. The more memory is available the faster is the sorting </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="externalsort_8hpp_source.html#l00103">103</a> of file <a class="el" href="externalsort_8hpp_source.html">externalsort.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="externalsort_8hpp_source.html#l00113">113</a> of file <a class="el" href="externalsort_8hpp_source.html">externalsort.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="af2931c179cf68d14a359d9c347eab0d8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af2931c179cf68d14a359d9c347eab0d8">&#9670;&nbsp;</a></span>sort_unstable()</h2>
@@ -133,9 +133,9 @@ template&lt;class T &gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A merging iterator that lazily loads data from disk </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A merging iterator that lazily loads data from sorted files </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="externalsort_8hpp_source.html#l00135">135</a> of file <a class="el" href="externalsort_8hpp_source.html">externalsort.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="externalsort_8hpp_source.html#l00144">144</a> of file <a class="el" href="externalsort_8hpp_source.html">externalsort.hpp</a>.</p>
 
 </div>
 </div>

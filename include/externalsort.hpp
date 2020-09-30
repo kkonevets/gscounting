@@ -3,14 +3,19 @@
 #ifndef INCLUDE_EXTERNALSORT_HPP_
 #define INCLUDE_EXTERNALSORT_HPP_
 
+#include <cstddef>
+#include <cstdio>
+#include <iostream>
 #include <math.h>
 
 #include <algorithm>
 #include <cassert>
 #include <filesystem>
 #include <fstream>
+#include <numeric>
 #include <queue>
 #include <string>
+#include <type_traits>
 #include <utility>
 #include <vector>
 
@@ -32,36 +37,40 @@ template <class T> class KMergeIterator {
     return l.first > r.first;
   };
   std::priority_queue<_t, std::vector<_t>, decltype(cmp)> q{cmp};
-  T cur;
+  T temp;
 
-  void init_queue() {
-    size_t i = 0;
-    for (auto &is : readers) {
-      if (T item; T::decode(is, item)) {
-        q.emplace(item, i);
+  bool init_queue() {
+    for (size_t i = 0; i < readers.size(); ++i) {
+      auto &is = readers.at(i);
+      if (T::decode(is, temp)) {
+        q.emplace(temp, i);
       }
-      i++;
     }
+
+    return q.empty();
   }
 
 public:
   explicit KMergeIterator(std::vector<std::ifstream> &readers)
       : readers{readers} {
-    init_queue();
-    good = !q.empty();
+    good = !init_queue();
   }
 
   const T &operator*() { return q.top().first; }
 
   KMergeIterator &operator++() {
-    auto &[_, i] = q.top();
-    std::ifstream &is = readers.at(i);
+    auto i = q.top().second;
+    auto &is = readers.at(i);
     q.pop();
-    if (T::decode(is, cur)) {
-      q.emplace(cur, i); // COPY
+    if (T::decode(is, temp)) {
+      q.emplace(temp, i); // COPY temp, it's cheap
     }
 
-    good = !q.empty();
+    good = !q.empty() || !init_queue();
+
+    if (!good) {
+      // std::cout << remain.size() << std::endl;
+    }
 
     return *this;
   }
@@ -98,12 +107,17 @@ public:
  * minimal).
  *
  *  @param save_dir Name of a directory to save parts in
- *  @param max_mem Maximum size of a part file in bytes
+ *  @param max_mem Maximum size of a part file in bytes, 1073741824 (1Gb) by
+ * default. The more memory is available the faster is the sorting
  */
 template <class T> class ExternalSorter {
   const fs::path &save_dir;
   std::size_t max_mem;
   unsigned int nChunks;
+
+  fs::path file_name(unsigned int n) {
+    return save_dir / (std::to_string(n) + ".bin");
+  }
 
   void sort_save(std::vector<T> &buf) {
     std::sort(buf.begin(), buf.end());
@@ -118,19 +132,14 @@ template <class T> class ExternalSorter {
     return;
   }
 
-  fs::path file_name(unsigned int n) {
-    return save_dir / (std::to_string(n) + ".bin");
-  }
-
 public:
-  explicit ExternalSorter(const fs::path &save_dir,
-                          std::size_t max_mem = pow(2, 30))
+  explicit ExternalSorter(const fs::path &save_dir, size_t max_mem = pow(2, 30))
       : save_dir(save_dir), max_mem(std::max(max_mem, sizeof(T))), nChunks(0) {}
   /** @fn sort_unstable
    *
    *  @brief Sorts input stream
    *  @param is Input stream (e.g. file)
-   *  @return A merging iterator that lazily loads data from disk
+   *  @return A merging iterator that lazily loads data from sorted files
    */
   KMerge<T> sort_unstable(std::istream &is) {
     auto max_size = max_mem / sizeof(T);
@@ -151,9 +160,8 @@ public:
 
     std::vector<std::ifstream> readers;
     for (size_t i = 0; i < nChunks; ++i) {
-      std::ifstream is(file_name(i), std::ios::binary);
-      assert(is);
-      readers.push_back(std::move(is));
+      readers.emplace_back(file_name(i), std::ios::binary);
+      assert(readers.back()); // check io errors
     }
 
     return KMerge<T>(std::move(readers));

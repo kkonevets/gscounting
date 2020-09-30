@@ -41,15 +41,9 @@ template <class T> struct EdgeItem : std::pair<T, T> {
   // EdgeItem(const EdgeItem<T> &rhs) : std::pair<T, T>(rhs) {}
   EdgeItem() : std::pair<T, T>(0, 0) {}
 
-  EdgeItem &operator=(const EdgeItem &other) {
-    this->first = other.first;
-    this->second = other.second;
-    return *this;
-  }
-
-  bool encode(std::ostream &os) {
-    os.write(reinterpret_cast<char *>(&(this->first)), sizeof(T));
-    os.write(reinterpret_cast<char *>(&(this->second)), sizeof(T));
+  bool encode(std::ostream &os) const {
+    os.write(reinterpret_cast<const char *>(&(this->first)), sizeof(T));
+    os.write(reinterpret_cast<const char *>(&(this->second)), sizeof(T));
     return os.good();
   }
 
@@ -147,9 +141,9 @@ template <class T> std::ostream &operator<<(std::ostream &os, AdjItem<T> &row) {
 /**
  *  Read a vector from disk
  *
- *  @brief Loads vector from disk from binary file
+ *  @brief Loads vector<T> from binary file
  *  @param fname File name to load
- *  @return Vector of T
+ *  @return Vector<T>
  */
 template <class T> std::vector<T> read_vec(const std::string &fname) {
   std::ifstream fin(fname, std::ios::binary | std::ios::ate);

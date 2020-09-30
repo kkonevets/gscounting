@@ -18,7 +18,7 @@ int main() {
   std::ifstream fin("tests/data/edgelist.bin", std::ios::binary);
   assert(fin);
 
-  ExternalSorter<edge_type> sorter("tests/data", 4 * 4);
+  ExternalSorter<edge_type> sorter("tests/data", 2 * sizeof(edge_type));
   auto merged = sorter.sort_unstable(fin);
   for (auto &item : merged) {
     std::cout << item << std::endl;
