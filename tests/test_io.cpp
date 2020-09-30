@@ -1,15 +1,15 @@
 // "Copyright 2020 Kirill Konevets"
 
 #include <cstddef>
+#include <filesystem>
 #include <iostream>
 #include <random>
+#include <string>
+#include <vector>
 
 #include "externalsort.hpp"
 #include "tools.hpp"
 #include "gtest/gtest.h"
-#include <filesystem>
-#include <string>
-#include <vector>
 
 namespace fs = std::filesystem;
 
@@ -97,8 +97,6 @@ TEST(ExternalSorterTest, SortUnstableAndSave) {
 }
 
 TEST(ExternalSorterTest, CheckEqual) {
-  // sort and save
-
   std::ifstream fin(pjoin("edgelist_big.bin"), std::ios::binary);
   ASSERT_TRUE(fin);
 
