@@ -14,7 +14,12 @@ file(GLOB SOURCES
     )
 
 add_executable(gsc ${SOURCES})
-target_link_libraries(gsc tbb)
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+else()
+  target_link_libraries(gsc tbb)
+endif()
+
+# GOOGLETEST BEGIN
 
 # Download and unpack googletest at configure time
 configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
@@ -46,5 +51,13 @@ file(GLOB TEST_SOURCES
 )
 
 add_executable(test_gsc ${TEST_SOURCES})
-target_link_libraries(test_gsc gtest_main tbb)
+
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  target_link_libraries(test_gsc gtest_main)
+else()
+  target_link_libraries(test_gsc gtest_main tbb)
+endif()
+
 add_test(NAME test_gsc COMMAND test_gsc)
+
+# GOOGLETEST END

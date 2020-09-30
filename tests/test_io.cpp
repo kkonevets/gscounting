@@ -13,7 +13,7 @@
 
 namespace fs = std::filesystem;
 
-constexpr size_t EDGE_LIST_LENGTH{100};
+constexpr size_t EDGE_LIST_LENGTH{1000};
 
 fs::path pjoin(std::string fname) { return fs::path("./tests/data/") / fname; }
 

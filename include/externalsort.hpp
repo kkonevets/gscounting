@@ -117,7 +117,12 @@ template <class T> class ExternalSorter {
   }
 
   void sort_save(std::vector<T> &buf) {
+#ifdef __clang__
+    std::sort(buf.begin(), buf.end());
+#else
     std::sort(std::execution::par_unseq, buf.begin(), buf.end());
+#endif
+
     auto fout = file_name(nChunks);
     std::ofstream ofile(fout, std::ios::binary);
     assert(ofile);
