@@ -68,10 +68,6 @@ public:
 
     good = !q.empty() || !init_queue();
 
-    if (!good) {
-      // std::cout << remain.size() << std::endl;
-    }
-
     return *this;
   }
 

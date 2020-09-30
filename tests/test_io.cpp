@@ -9,6 +9,7 @@
 #include "gtest/gtest.h"
 #include <filesystem>
 #include <string>
+#include <vector>
 
 namespace fs = std::filesystem;
 
@@ -79,23 +80,43 @@ TEST(ExternalSorterTest, GenerateEdges) {
   }
 }
 
-TEST(ExternalSorterTest, SortUnstable) {
-  std::ifstream is(pjoin("edgelist_big.bin"), std::ios::binary);
-  ASSERT_TRUE(is);
+TEST(ExternalSorterTest, SortUnstableAndSave) {
+  std::ifstream fin(pjoin("edgelist_big.bin"), std::ios::binary);
+  ASSERT_TRUE(fin);
 
   size_t max_mem = EDGE_LIST_LENGTH * sizeof(edge_type) / 5;
   ExternalSorter<edge_type> sorter("tests/data", max_mem);
-  auto merged = sorter.sort_unstable(is);
+  auto merged = sorter.sort_unstable(fin);
 
   std::ofstream os(pjoin("edgelist_big_sorted.bin"), std::ios::binary);
   ASSERT_TRUE(os);
 
-  size_t i = 0;
   for (auto &item : merged) {
-    ASSERT_TRUE(item.encode(os));
-    i++;
+    item.encode(os);
   }
-  std::cout << i << std::endl;
+}
+
+TEST(ExternalSorterTest, CheckEqual) {
+  // sort and save
+
+  std::ifstream fin(pjoin("edgelist_big.bin"), std::ios::binary);
+  ASSERT_TRUE(fin);
+
+  std::vector<edge_type> v;
+  for (edge_type edge; edge_type::decode(fin, edge);) {
+    v.push_back(edge);
+  }
+  std::sort(v.begin(), v.end());
+
+  std::ifstream fin_sorted(pjoin("edgelist_big_sorted.bin"), std::ios::binary);
+  ASSERT_TRUE(fin_sorted);
+
+  edge_type edge2;
+  for (size_t i = 0; i < v.size(); ++i) {
+    auto &edge1 = v.at(i);
+    ASSERT_TRUE(edge_type::decode(fin_sorted, edge2));
+    ASSERT_EQ(edge1, edge2);
+  }
 }
 
 int main(int argc, char **argv) {
