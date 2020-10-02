@@ -105,23 +105,20 @@ std::optional<CSR> init_csr(const std::string &data_path,
   return m;
 }
 
-void task(const CSR &m, Dense &d, size_t ix, size_t i) {
-  if (ix > m.nrows) {
-    fprintf(stderr, "Index %zu is out of range (0, %zu)\n", ix, m.nrows);
-    return;
-  }
-  for (size_t j = m.indptr[ix]; j < m.indptr[ix + 1]; ++j) {
-    d.data[i * m.ncols + m.indices[j]] = m.data[j];
-  }
-}
-
 Dense slice(const CSR &m, const std::vector<std::uint32_t> &ixs) {
   assert(m.nrows == 0 || m.ncols == 0);
   Dense d(ixs.size(), m.ncols);
 
   auto worker = [&](const tbb::blocked_range<size_t> &r) {
     for (auto i = r.begin(); i != r.end(); ++i) {
-      task(m, d, ixs[i], i);
+      size_t ix = ixs[i];
+      if (ix > m.nrows) {
+        fprintf(stderr, "Index %zu is out of range (0, %zu)\n", ix, m.nrows);
+        return;
+      }
+      for (size_t j = m.indptr[ix]; j < m.indptr[ix + 1]; ++j) {
+        d.data[i * m.ncols + m.indices[j]] = m.data[j];
+      }
     }
   };
 
