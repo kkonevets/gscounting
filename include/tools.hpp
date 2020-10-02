@@ -1,9 +1,9 @@
+// "Copyright 2020 Kirill Konevets"
+
 //!
 //! @file tools.hpp
 //! @brief Tools for efficient reading/writing of a graph
 //!
-
-// "Copyright 2020 Kirill Konevets"
 
 #ifndef INCLUDE_TOOLS_HPP_
 #define INCLUDE_TOOLS_HPP_

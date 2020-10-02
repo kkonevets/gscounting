@@ -30,7 +30,7 @@ int main() {
   std::vector<float> data = {1, 2, 3, 4, 5, 6};
 
   CSR m(std::move(data), std::move(indices), std::move(indptr));
-  auto d{slice(m, {0, 2})};
+  auto d{m.slice({0, 2})};
   std::cout << d << std::endl;
 
   return 0;

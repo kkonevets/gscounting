@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['sort_5funstable_7',['sort_unstable',['../class_external_sorter.html#af2931c179cf68d14a359d9c347eab0d8',1,'ExternalSorter']]]
+  ['kmerge_9',['KMerge',['../class_k_merge.html',1,'']]],
+  ['kmergeiterator_10',['KMergeIterator',['../class_k_merge_iterator.html',1,'']]],
+  ['kmergeiteratorsentinel_11',['KmergeIteratorSentinel',['../class_kmerge_iterator_sentinel.html',1,'']]]
 ];

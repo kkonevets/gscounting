@@ -1,5 +1,10 @@
 // "Copyright 2020 Kirill Konevets"
 
+//!
+//! @file externalsort.hpp
+//! Sorting data that does not fit into memory
+//!
+
 #ifndef INCLUDE_EXTERNALSORT_HPP_
 #define INCLUDE_EXTERNALSORT_HPP_
 
@@ -27,8 +32,17 @@ namespace fs = std::filesystem;
 // KMergeIterator
 // ----------------------------------------------------------------------------
 
+/** @class KmergeIteratorSentinel
+ *
+ * Helper class indicating end of stream
+ */
 class KmergeIteratorSentinel {};
 
+/** @class KMergeIterator
+ *
+ * An iterator doing actual work for merging files using priority queue.
+ * @param readers File streams to merge
+ */
 template <class T> class KMergeIterator {
   std::vector<std::ifstream> &readers;
   bool good;
@@ -76,7 +90,7 @@ public:
 
 /** @class KMerge
  *
- *  @brief Iterator that merges multiple sorted iterators. Uses priority queue
+ * Iterator that merges multiple sorted iterators. Uses priority queue
  * for merging
  */
 template <class T> class KMerge {
@@ -96,11 +110,11 @@ public:
 
 /** @class ExternalSorter
  *
- *  @brief Sorts file on disk using merge sort.
+ *  Sorts file on disk using merge sort.
  *  First it splits file on parts, then sorts them (consuming `max_mem` at a
- * time), saves parts on disk to `save_dir` and then merges those parts while
- * lazy loading. Uses priority queue for merging (memory consumption is
- * minimal).
+ *  time), saves parts on disk to `save_dir` and then merges those parts while
+ *  lazy loading. Uses priority queue for merging (memory consumption is
+ *  minimal).
  *
  *  @param save_dir Name of a directory to save parts in
  *  @param max_mem Maximum size of a part file in bytes, 1073741824 (1Gb) by
