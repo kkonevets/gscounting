@@ -11,18 +11,19 @@
 #include <utility>
 #include <vector>
 
+#include "csr_matrix.hpp"
 #include "externalsort.hpp"
 #include "tools.hpp"
 
 int main() {
-  std::ifstream fin("tests/data/edgelist.bin", std::ios::binary);
-  assert(fin);
+  std::vector<float> a(100);
+  std::iota(a.begin(), a.end(), 0);
 
-  ExternalSorter<edge_type> sorter("tests/data", 2 * sizeof(edge_type));
-  auto merged = sorter.sort_unstable(fin);
-  for (auto &item : merged) {
-    std::cout << item << std::endl;
+  auto v = ParallelApplyFoo(a);
+  for (auto &i : v) {
+    std::cout << i << " ";
   }
+  std::cout << std::endl;
 
   return 0;
 }

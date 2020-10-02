@@ -38,7 +38,6 @@ using adj_type = AdjItem<std::uint32_t>;
  */
 template <class T> struct EdgeItem : std::pair<T, T> {
   EdgeItem(T first, T second) : std::pair<T, T>(first, second) {}
-  // EdgeItem(const EdgeItem<T> &rhs) : std::pair<T, T>(rhs) {}
   EdgeItem() : std::pair<T, T>(0, 0) {}
 
   bool encode(std::ostream &os) const {
