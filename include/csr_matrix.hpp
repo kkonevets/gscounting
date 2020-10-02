@@ -34,13 +34,13 @@ struct CSR {
   size_t nrows;
   size_t ncols;
 
-  explicit CSR(const vec_f &&data, const vec_u &&indices, const vec_u &&indptr)
-      : data{std::move(data)},       //
-        indices{std::move(indices)}, //
-        indptr{std::move(indptr)} {
-    nrows = indptr.size() - 1;
-    auto it = std::max_element(indices.begin(), indices.end());
-    assert(it == indices.end());
+  explicit CSR(vec_f &&data, vec_u &&indices, vec_u &&indptr)
+      : data(std::move(data)),       //
+        indices(std::move(indices)), //
+        indptr(std::move(indptr)) {
+    nrows = this->indptr.size() - 1;
+    assert(!this->indices.empty());
+    auto it = std::max_element(this->indices.begin(), this->indices.end());
     ncols = static_cast<size_t>(*it) + 1;
   }
 };
@@ -106,7 +106,7 @@ std::optional<CSR> init_csr(const std::string &data_path,
 }
 
 Dense slice(const CSR &m, const std::vector<std::uint32_t> &ixs) {
-  assert(m.nrows == 0 || m.ncols == 0);
+  assert(m.nrows != 0 && m.ncols != 0);
   Dense d(ixs.size(), m.ncols);
 
   auto worker = [&](const tbb::blocked_range<size_t> &r) {
@@ -116,8 +116,9 @@ Dense slice(const CSR &m, const std::vector<std::uint32_t> &ixs) {
         fprintf(stderr, "Index %zu is out of range (0, %zu)\n", ix, m.nrows);
         return;
       }
+      auto _i = i * m.ncols;
       for (size_t j = m.indptr[ix]; j < m.indptr[ix + 1]; ++j) {
-        d.data[i * m.ncols + m.indices[j]] = m.data[j];
+        d.data[_i + m.indices[j]] = m.data[j];
       }
     }
   };
@@ -126,11 +127,23 @@ Dense slice(const CSR &m, const std::vector<std::uint32_t> &ixs) {
   return d;
 }
 
-std::vector<float> ParallelApplyFoo(const std::vector<float> &a) {
-  std::vector<float> v;
-  v.resize(a.size());
-  tbb::parallel_for(size_t(0), v.size(), [&](size_t i) { v[i] = 2 * a[i]; });
-  return v;
+// ----------------------------------------------------------------------------
+// Namespace std
+// ----------------------------------------------------------------------------
+
+namespace std {
+
+std::ostream &operator<<(std::ostream &os, Dense &d) {
+  for (size_t i = 0; i < d.nrows; ++i) {
+    auto _i = i * d.ncols;
+    for (size_t j = 0; j < d.ncols; ++j) {
+      os << d.data[_i + j] << " ";
+    }
+    os << std::endl;
+  }
+  return os;
 }
+
+} // namespace std
 
 #endif // INCLUDE_CSR_MATRIX_HPP_

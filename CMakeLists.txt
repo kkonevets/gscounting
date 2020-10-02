@@ -15,17 +15,15 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 project(graph_sage_counting VERSION 0.1.0 LANGUAGES CXX)
 add_compile_options(-Wall -Wextra -pedantic)
-include_directories(include)
+include_directories(include /usr/local/include)
+link_directories(/usr/local/lib)
 
 file(GLOB SOURCES 
     "src/*.cpp"
     )
 
 add_executable(gsc ${SOURCES})
-if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-else()
-  target_link_libraries(gsc tbb)
-endif()
+target_link_libraries(gsc tbb)
 
 # GOOGLETEST BEGIN
 
@@ -60,11 +58,8 @@ file(GLOB TEST_SOURCES
 
 add_executable(test_gsc ${TEST_SOURCES})
 
-if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-  target_link_libraries(test_gsc gtest_main)
-else()
-  target_link_libraries(test_gsc gtest_main tbb)
-endif()
+# if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+target_link_libraries(test_gsc gtest_main tbb)
 
 add_test(NAME test_gsc COMMAND test_gsc)
 
