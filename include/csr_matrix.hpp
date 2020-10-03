@@ -124,7 +124,6 @@ bool CSR::check_csr() {
  *  @param ixs List of ixs to slice on, must not be out of range
  */
 Dense CSR::slice(const std::vector<std::uint32_t> &ixs) {
-  assert(nrows != 0 && ncols != 0);
   Dense d(ixs.size(), ncols);
 
   auto worker = [&](const tbb::blocked_range<size_t> &r) {
@@ -155,7 +154,8 @@ std::ostream &operator<<(std::ostream &os, Dense &d) {
   for (size_t i = 0; i < d.nrows; ++i) {
     auto _i = i * d.ncols;
     for (size_t j = 0; j < d.ncols; ++j) {
-      os << d.data[_i + j] << " ";
+      os << std::setw(10) << std::left << std::setprecision(10)
+         << d.data[_i + j];
     }
     os << std::endl;
   }
