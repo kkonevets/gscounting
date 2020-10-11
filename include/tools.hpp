@@ -40,13 +40,13 @@ template <class T> struct EdgeItem : std::pair<T, T> {
   EdgeItem(T first, T second) : std::pair<T, T>(first, second) {}
   EdgeItem() : std::pair<T, T>(0, 0) {}
 
-  bool encode(std::ostream &os) const {
+  auto encode(std::ostream &os) const -> bool {
     os.write(reinterpret_cast<const char *>(&(this->first)), sizeof(T));
     os.write(reinterpret_cast<const char *>(&(this->second)), sizeof(T));
     return os.good();
   }
 
-  static bool decode(std::istream &is, EdgeItem<T> &edge) {
+  static auto decode(std::istream &is, EdgeItem<T> &edge) -> bool {
     is.read(reinterpret_cast<char *>(&edge.first), sizeof(T));
     is.read(reinterpret_cast<char *>(&edge.second), sizeof(T));
     return is.good();
@@ -60,16 +60,16 @@ template <class T> struct EdgeItem : std::pair<T, T> {
  *  @param target Contains a list of target nodes
  */
 template <class T> struct AdjItem {
-  T source;
+  T source{};
   std::vector<T> targets;
 
   AdjItem(T source, std::vector<T> &&targets)
       : source(source), targets(std::move(targets)) {}
-  AdjItem(AdjItem<T> &&other)
+  AdjItem(AdjItem<T> &&other) noexcept
       : source(other.source), targets(std::move(other.targets)) {}
-  AdjItem() : source{0} {}
+  AdjItem() = default;
 
-  bool encode(std::ostream &os) const {
+  auto encode(std::ostream &os) const -> bool {
     T len{static_cast<T>(targets.size())};
 
     os.write(reinterpret_cast<const char *>(&len), sizeof(T));
@@ -79,7 +79,7 @@ template <class T> struct AdjItem {
     return os.good();
   }
 
-  static bool decode(std::istream &is, AdjItem<T> &row) {
+  static auto decode(std::istream &is, AdjItem<T> &row) -> bool {
     T len;
     is.read(reinterpret_cast<char *>(&len), sizeof(T));
     is.read(reinterpret_cast<char *>(&row.source), sizeof(T));
@@ -97,24 +97,25 @@ template <class T> struct AdjItem {
 namespace std {
 
 template <class T>
-std::istream &operator>>(std::istream &is, EdgeItem<T> &edge) {
+auto operator>>(std::istream &is, EdgeItem<T> &edge) -> std::istream & {
   is >> edge.first >> edge.second;
   return is;
 }
 
 template <class T>
-std::ostream &operator<<(std::ostream &os, EdgeItem<T> &edge) {
+auto operator<<(std::ostream &os, EdgeItem<T> &edge) -> std::ostream & {
   os << "(" << edge.first << ", " << edge.second << ")";
   return os;
 }
 
 template <class T>
-std::ostream &operator<<(std::ostream &os, const EdgeItem<T> &edge) {
+auto operator<<(std::ostream &os, const EdgeItem<T> &edge) -> std::ostream & {
   os << "(" << edge.first << ", " << edge.second << ")";
   return os;
 }
 
-template <class T> std::istream &operator>>(std::istream &is, AdjItem<T> &row) {
+template <class T>
+auto operator>>(std::istream &is, AdjItem<T> &row) -> std::istream & {
   std::string line;
   std::getline(is, line);
   std::istringstream iss(line);
@@ -124,7 +125,8 @@ template <class T> std::istream &operator>>(std::istream &is, AdjItem<T> &row) {
   return is;
 }
 
-template <class T> std::ostream &operator<<(std::ostream &os, AdjItem<T> &row) {
+template <class T>
+auto operator<<(std::ostream &os, AdjItem<T> &row) -> std::ostream & {
   os << row.source << ": ";
   std::copy(row.targets.begin(), row.targets.end(),
             std::ostream_iterator<T>(os, " "));
@@ -144,7 +146,7 @@ template <class T> std::ostream &operator<<(std::ostream &os, AdjItem<T> &row) {
  *  @param fname File name to load
  *  @return Vector<T>
  */
-template <class T> std::vector<T> read_vec(const std::string &fname) {
+template <class T> auto read_vec(const std::string &fname) -> std::vector<T> {
   std::ifstream fin(fname, std::ios::binary | std::ios::ate);
   assert(fin);
   std::streamsize size = fin.tellg();

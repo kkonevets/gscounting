@@ -9,7 +9,9 @@
 #define INCLUDE_CSR_MATRIX_HPP_
 
 #include <algorithm>
+#include <cassert>
 #include <cstddef>
+#include <iomanip>
 #include <iostream>
 #include <string>
 #include <utility>
@@ -34,7 +36,7 @@ struct Dense {
       : nrows{nrows}, ncols{ncols}, data{std::move(data)} {
     assert(nrows * ncols == data.size());
   }
-  Dense(const Dense &&other)
+  Dense(Dense &&other) noexcept
       : nrows{other.nrows}, ncols{other.ncols}, data{std::move(other.data)} {
     assert(nrows * ncols == data.size());
   }
@@ -69,8 +71,9 @@ struct CSR {
     ncols = static_cast<size_t>(*it) + 1;
   }
   ///  Loads 3 binary files and constructs CSR matrix
-  static CSR load(const std::string &data_path, const std::string &indices_path,
-                  const std::string &indptr_path) {
+  static auto load(const std::string &data_path,
+                   const std::string &indices_path,
+                   const std::string &indptr_path) {
     auto data = read_vec<float>(data_path);
     auto indices = read_vec<std::uint32_t>(indices_path);
     auto indptr = read_vec<std::uint32_t>(indptr_path);
@@ -78,15 +81,15 @@ struct CSR {
     return m;
   }
 
-  bool check_csr();
-  Dense slice(const std::vector<std::uint32_t> &ixs);
+  auto check_csr() -> bool;
+  auto slice(const std::vector<std::uint32_t> &ixs) -> Dense;
 };
 
 /**
  *  Validates data format
  *  @return true if valid, false otherwise
  */
-bool CSR::check_csr() {
+auto CSR::check_csr() -> bool {
   if (indices.empty()) {
     std::cerr << "indices array is empty" << std::endl;
     return false;
@@ -123,7 +126,7 @@ bool CSR::check_csr() {
  *  It splits `ixs` on chunks and each chunk is fed to a separate thread
  *  @param ixs List of ixs to slice on, must not be out of range
  */
-Dense CSR::slice(const std::vector<std::uint32_t> &ixs) {
+auto CSR::slice(const std::vector<std::uint32_t> &ixs) -> Dense {
   Dense d(ixs.size(), ncols);
 
   auto worker = [&](const tbb::blocked_range<size_t> &r) {
@@ -150,7 +153,7 @@ Dense CSR::slice(const std::vector<std::uint32_t> &ixs) {
 
 namespace std {
 
-std::ostream &operator<<(std::ostream &os, Dense &d) {
+auto operator<<(std::ostream &os, Dense &d) -> std::ostream & {
   for (size_t i = 0; i < d.nrows; ++i) {
     auto _i = i * d.ncols;
     for (size_t j = 0; j < d.ncols; ++j) {
