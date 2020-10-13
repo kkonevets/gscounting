@@ -147,6 +147,7 @@ template <class T> class ExternalSorter {
     nChunks += 1;
   }
 
+  //
 public:
   explicit ExternalSorter(fs::path save_dir, size_t max_mem = pow(2, 30))
       : save_dir(std::move(save_dir)), max_mem(std::max(max_mem, sizeof(T))),
