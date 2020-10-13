@@ -8,10 +8,9 @@
 #ifndef INCLUDE_EXTERNALSORT_HPP_
 #define INCLUDE_EXTERNALSORT_HPP_
 
-#include <math.h>
-
 #include <algorithm>
 #include <cassert>
+#include <cmath>
 #include <cstddef>
 #include <cstdio>
 #include <execution>
@@ -53,7 +52,7 @@ template <class T> class KMergeIterator {
   std::priority_queue<_t, std::vector<_t>, decltype(cmp)> q{cmp};
   T temp;
 
-  bool init_queue() {
+  auto init_queue() -> bool {
     for (size_t i = 0; i < readers.size(); ++i) {
       auto &is = readers.at(i);
       if (T::decode(is, temp)) {
@@ -70,9 +69,9 @@ public:
     good = !init_queue();
   }
 
-  const T &operator*() { return q.top().first; }
+  auto operator*() -> const T & { return q.top().first; }
 
-  KMergeIterator &operator++() {
+  auto operator++() -> KMergeIterator & {
     auto i = q.top().second;
     auto &is = readers.at(i);
     q.pop();
@@ -85,7 +84,9 @@ public:
     return *this;
   }
 
-  bool operator!=(const KmergeIteratorSentinel) const { return good; }
+  auto operator!=(const KmergeIteratorSentinel /*unused*/) const -> bool {
+    return good;
+  }
 };
 
 /** @class KMerge
@@ -100,8 +101,8 @@ public:
   explicit KMerge(std::vector<std::ifstream> &&readers)
       : readers{std::move(readers)} {}
 
-  KMergeIterator<T> begin() { return KMergeIterator<T>{readers}; }
-  KmergeIteratorSentinel end() { return {}; }
+  auto begin() -> KMergeIterator<T> { return KMergeIterator<T>{readers}; }
+  auto end() -> KmergeIteratorSentinel { return {}; }
 };
 
 // ----------------------------------------------------------------------------
@@ -125,7 +126,7 @@ template <class T> class ExternalSorter {
   std::size_t max_mem;
   unsigned int nChunks;
 
-  fs::path file_name(unsigned int n) {
+  auto file_name(unsigned int n) -> fs::path {
     return save_dir / (std::to_string(n) + ".bin");
   }
 
@@ -144,19 +145,19 @@ template <class T> class ExternalSorter {
       item.encode(ofile);
     }
     nChunks += 1;
-    return;
   }
 
 public:
-  explicit ExternalSorter(const fs::path &save_dir, size_t max_mem = pow(2, 30))
-      : save_dir(save_dir), max_mem(std::max(max_mem, sizeof(T))), nChunks(0) {}
+  explicit ExternalSorter(fs::path save_dir, size_t max_mem = pow(2, 30))
+      : save_dir(std::move(save_dir)), max_mem(std::max(max_mem, sizeof(T))),
+        nChunks(0) {}
   /** @fn sort_unstable
    *
    *  @brief Sorts input stream
    *  @param is Input stream (e.g. file)
    *  @return A merging iterator that lazily loads data from sorted files
    */
-  KMerge<T> sort_unstable(std::istream &is) {
+  auto sort_unstable(std::istream &is) -> KMerge<T> {
     auto max_size = max_mem / sizeof(T);
     std::vector<T> buf;
     buf.reserve(max_size);
