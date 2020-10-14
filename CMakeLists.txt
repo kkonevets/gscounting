@@ -22,6 +22,8 @@ file(GLOB SOURCES
     "src/*.cpp"
     )
 
+# set(CMAKE_CXX_CLANG_TIDY clang-tidy -checks=abseil*,bugbrone*,cppcoreguidelines*,modernize*,performance*,readability*)
+
 add_executable(gsc ${SOURCES})
 target_link_libraries(gsc tbb)
 

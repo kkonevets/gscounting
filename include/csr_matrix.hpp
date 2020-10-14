@@ -8,18 +8,19 @@
 #ifndef INCLUDE_CSR_MATRIX_HPP_
 #define INCLUDE_CSR_MATRIX_HPP_
 
+#include "tbb/tbb.h"
+#include "tools.hpp"
+
 #include <algorithm>
 #include <cassert>
 #include <cstddef>
+#include <ctime>
 #include <iomanip>
 #include <iostream>
+#include <random>
 #include <string>
 #include <utility>
 #include <vector>
-#include <iomanip>
-
-#include "tbb/tbb.h"
-#include "tools.hpp"
 
 /** @struct Dense
  *
@@ -49,7 +50,7 @@ struct Dense {
  *  Data format same as of scipy.sparse.csr_matrix.
  *  Is the standard CSR representation where the column indices
  *  for row `i` are stored in `indices[indptr[i]:indptr[i+1]]` and
- *  their corresponding values are  stored in
+ *  their corresponding values are stored in
  *  `data[indptr[i]:indptr[i+1]]`.
  */
 struct CSR {
@@ -81,7 +82,31 @@ struct CSR {
     auto m = CSR(std::move(data), std::move(indices), std::move(indptr));
     return m;
   }
+  /// Generate random csr matrix with probability of element being zero equal to
+  /// `prob`
+  static auto random(size_t nrows, size_t ncols, float prob) -> CSR {
+    std::vector<float> data;
+    std::vector<std::uint32_t> indices;
+    std::vector<std::uint32_t> indptr{0};
 
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::bernoulli_distribution dist(prob);
+
+    size_t iptr = 0;
+    for (size_t i = 0; i < nrows; ++i) {
+      for (size_t j = 0; j < ncols; ++j) {
+        if (dist(gen)) {
+          data.push_back(1);
+          indices.push_back(j);
+          iptr++;
+        }
+      }
+      indptr.push_back(iptr);
+    }
+    auto m = CSR(std::move(data), std::move(indices), std::move(indptr));
+    return m;
+  }
   auto check_csr() -> bool;
   auto slice(const std::vector<std::uint32_t> &ixs) -> Dense;
 };

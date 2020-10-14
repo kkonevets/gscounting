@@ -16,22 +16,8 @@
 #include "tools.hpp"
 
 int main() {
-  // std::vector<float> a(100);
-  // std::iota(a.begin(), a.end(), 0);
-
-  // auto v = ParallelApplyFoo(a);
-  // for (auto &i : v) {
-  //   std::cout << i << " ";
-  // }
-  // std::cout << std::endl;
-
-  std::vector<std::uint32_t> indptr = {0, 2, 3, 6};
-  std::vector<std::uint32_t> indices = {0, 2, 2, 0, 1, 2};
-  std::vector<float> data = {1, 2, 3, 4, 5, 6};
-
-  CSR m(std::move(data), std::move(indices), std::move(indptr));
-  auto d{m.slice({0, 1, 2})};
-  std::cout << d;
-
+  auto m = CSR::random(5, 5, 0.5);
+  auto d = m.slice({0, 1, 2, 3, 4});
+  std::cout << d << std::endl;
   return 0;
 }
