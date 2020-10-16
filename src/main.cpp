@@ -16,8 +16,16 @@
 #include "tools.hpp"
 
 int main() {
-  auto m = CSR::random(5, 5, 0.5);
-  auto d = m.slice({0, 1, 2, 3, 4});
-  std::cout << d << std::endl;
+  std::vector<std::uint32_t> indptr = {0, 1, 1, 3};
+  std::vector<std::uint32_t> indices = {0, 0, 1};
+  std::vector<float> data = {1, 4, 5};
+
+  CSR m(std::move(data), std::move(indices), std::move(indptr), 3, 3);
+
+  // auto d{m.slice({0, 2})};
+  // std::cout << d << std::endl;
+
+  m.save("/Users/guyos/Documents/data/m.bin");
+
   return 0;
 }
