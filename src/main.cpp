@@ -25,7 +25,11 @@ int main() {
   // auto d{m.slice({0, 2})};
   // std::cout << d << std::endl;
 
-  m.save("/Users/guyos/Documents/data/m.bin");
+  std::string fname("/Users/guyos/Documents/data/m.bin");
+  m.save(fname);
+  auto m_loaded{CSR::load(fname)};
+
+  assert(m == m_loaded);
 
   return 0;
 }

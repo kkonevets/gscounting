@@ -128,7 +128,8 @@ struct CSR {
     auto indices = _read_vector<std::uint32_t>(is);
     auto indptr = _read_vector<std::uint32_t>(is);
 
-    auto m = CSR(std::move(data), std::move(indices), std::move(indptr));
+    auto m = CSR(std::move(data), std::move(indices), std::move(indptr), nrows,
+                 ncols);
     return m;
   }
 
@@ -197,7 +198,15 @@ struct CSR {
     auto m = CSR(std::move(data), std::move(indices), std::move(indptr));
     return m;
   }
+
   auto slice(const std::vector<std::uint32_t> &ixs) -> Dense;
+
+  bool operator==(const CSR &other) {
+    bool equal = _ncols == other._ncols && _nrows == other._nrows &&
+                 _data == other._data && _indices == other._indices &&
+                 _indptr == other._indptr;
+    return equal;
+  }
 };
 
 /**
