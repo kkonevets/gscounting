@@ -88,29 +88,23 @@ $(function() {
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="tools_8hpp.html">tools.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">int</span> main() {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="comment">// std::vector&lt;float&gt; a(100);</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="comment">// std::iota(a.begin(), a.end(), 0);</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="comment">// auto v = ParallelApplyFoo(a);</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="comment">// for (auto &amp;i : v) {</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <span class="comment">//   std::cout &lt;&lt; i &lt;&lt; &quot; &quot;;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="comment">// }</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="comment">// std::cout &lt;&lt; std::endl;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  std::vector&lt;std::uint32_t&gt; indptr = {0, 1, 1, 3};</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  std::vector&lt;std::uint32_t&gt; indices = {0, 0, 1};</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  std::vector&lt;float&gt; data = {1, 4, 5};</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <a class="code" href="struct_c_s_r.html">CSR</a> m(std::move(data), std::move(indices), std::move(indptr), 3, 3);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="comment">// auto d{m.slice({0, 2})};</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="comment">// std::cout &lt;&lt; d &lt;&lt; std::endl;</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  std::vector&lt;std::uint32_t&gt; indptr = {0, 2, 3, 6};</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  std::vector&lt;std::uint32_t&gt; indices = {0, 2, 2, 0, 1, 2};</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  std::vector&lt;float&gt; data = {1, 2, 3, 4, 5, 6};</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <a class="code" href="struct_c_s_r.html">CSR</a> m(std::move(data), std::move(indices), std::move(indptr));</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <span class="keyword">auto</span> d{m.slice({0, 2})};</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  std::cout &lt;&lt; d &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;}</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  m.save(<span class="stringliteral">&quot;/Users/guyos/Documents/data/m.bin&quot;</span>);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="atools_8hpp_html"><div class="ttname"><a href="tools_8hpp.html">tools.hpp</a></div><div class="ttdoc">Tools for efficient reading/writing of a graph.</div></div>
 <div class="ttc" id="acsr__matrix_8hpp_html"><div class="ttname"><a href="csr__matrix_8hpp.html">csr_matrix.hpp</a></div><div class="ttdoc">Compressed Sparse Row matrix parallel slicing implementation.</div></div>
-<div class="ttc" id="astruct_c_s_r_html"><div class="ttname"><a href="struct_c_s_r.html">CSR</a></div><div class="ttdoc">Compressed Sparse Row matrix.</div><div class="ttdef"><b>Definition:</b> <a href="csr__matrix_8hpp_source.html#l00052">csr_matrix.hpp:52</a></div></div>
+<div class="ttc" id="astruct_c_s_r_html"><div class="ttname"><a href="struct_c_s_r.html">CSR</a></div><div class="ttdoc">Compressed Sparse Row matrix.</div><div class="ttdef"><b>Definition:</b> <a href="csr__matrix_8hpp_source.html#l00059">csr_matrix.hpp:59</a></div></div>
 <div class="ttc" id="aexternalsort_8hpp_html"><div class="ttname"><a href="externalsort_8hpp.html">externalsort.hpp</a></div><div class="ttdoc">Sorting data that does not fit into memory.</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

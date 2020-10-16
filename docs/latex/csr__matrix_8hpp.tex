@@ -5,14 +5,21 @@
 Compressed Sparse Row matrix parallel slicing implementation.  
 
 
+{\ttfamily \#include \char`\"{}tbb/tbb.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tools.\+hpp\char`\"{}}\newline
 {\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$cassert$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
 {\ttfamily \#include $<$cstddef$>$}\newline
+{\ttfamily \#include $<$ctime$>$}\newline
+{\ttfamily \#include $<$filesystem$>$}\newline
+{\ttfamily \#include $<$iomanip$>$}\newline
 {\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$random$>$}\newline
+{\ttfamily \#include $<$stdexcept$>$}\newline
 {\ttfamily \#include $<$string$>$}\newline
 {\ttfamily \#include $<$utility$>$}\newline
 {\ttfamily \#include $<$vector$>$}\newline
-{\ttfamily \#include \char`\"{}tbb/tbb.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}tools.\+hpp\char`\"{}}\newline
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
@@ -23,8 +30,8 @@ struct \mbox{\hyperlink{struct_c_s_r}{C\+SR}}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{csr__matrix_8hpp_a8d999ed7d6a2ddad7816f7f03a70f399}\label{csr__matrix_8hpp_a8d999ed7d6a2ddad7816f7f03a70f399}} 
-std\+::ostream \& {\bfseries std\+::operator$<$$<$} (std\+::ostream \&os, \mbox{\hyperlink{struct_dense}{Dense}} \&d)
+\mbox{\Hypertarget{csr__matrix_8hpp_aabb49b1144549d62d914c4c96fa1c000}\label{csr__matrix_8hpp_aabb49b1144549d62d914c4c96fa1c000}} 
+auto {\bfseries std\+::operator$<$$<$} (std\+::ostream \&os, \mbox{\hyperlink{struct_dense}{Dense}} \&d) -\/$>$ std\+::ostream \&
 \end{DoxyCompactItemize}
 
 

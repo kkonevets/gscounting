@@ -76,14 +76,21 @@ $(function() {
 
 <p>Compressed Sparse Row matrix parallel slicing implementation.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;algorithm&gt;</code><br />
+<div class="textblock"><code>#include &quot;tbb/tbb.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="tools_8hpp_source.html">tools.hpp</a>&quot;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;cassert&gt;</code><br />
+<code>#include &lt;chrono&gt;</code><br />
 <code>#include &lt;cstddef&gt;</code><br />
+<code>#include &lt;ctime&gt;</code><br />
+<code>#include &lt;filesystem&gt;</code><br />
+<code>#include &lt;iomanip&gt;</code><br />
 <code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;random&gt;</code><br />
+<code>#include &lt;stdexcept&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
 <code>#include &lt;utility&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
-<code>#include &quot;tbb/tbb.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="tools_8hpp_source.html">tools.hpp</a>&quot;</code><br />
 </div>
 <p><a href="csr__matrix_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -98,9 +105,9 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a8d999ed7d6a2ddad7816f7f03a70f399"><td class="memItemLeft" align="right" valign="top"><a id="a8d999ed7d6a2ddad7816f7f03a70f399"></a>
-std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>std::operator&lt;&lt;</b> (std::ostream &amp;os, <a class="el" href="struct_dense.html">Dense</a> &amp;d)</td></tr>
-<tr class="separator:a8d999ed7d6a2ddad7816f7f03a70f399"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabb49b1144549d62d914c4c96fa1c000"><td class="memItemLeft" align="right" valign="top"><a id="aabb49b1144549d62d914c4c96fa1c000"></a>
+auto&#160;</td><td class="memItemRight" valign="bottom"><b>std::operator&lt;&lt;</b> (std::ostream &amp;os, <a class="el" href="struct_dense.html">Dense</a> &amp;d) -&gt; std::ostream &amp;</td></tr>
+<tr class="separator:aabb49b1144549d62d914c4c96fa1c000"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Compressed Sparse Row matrix parallel slicing implementation. </p>

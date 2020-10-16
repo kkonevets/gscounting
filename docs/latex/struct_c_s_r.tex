@@ -21,36 +21,44 @@ using {\bfseries vec\+\_\+u} = std\+::vector$<$ std\+::uint32\+\_\+t $>$
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{struct_c_s_r_a1b7a9c7f7d4765f8647c3c8625b30630}\label{struct_c_s_r_a1b7a9c7f7d4765f8647c3c8625b30630}} 
-{\bfseries C\+SR} (vec\+\_\+f \&\&data, vec\+\_\+u \&\&indices, vec\+\_\+u \&\&indptr)
+\mbox{\Hypertarget{struct_c_s_r_a529653b071c18d1bc247e45e11c68357}\label{struct_c_s_r_a529653b071c18d1bc247e45e11c68357}} 
+{\bfseries C\+SR} (vec\+\_\+f \&\&data, vec\+\_\+u \&\&indices, vec\+\_\+u \&\&indptr, size\+\_\+t nrows=0, size\+\_\+t ncols=0)
 \item 
-bool \mbox{\hyperlink{struct_c_s_r_aa2fd488a48252886893dbb8f815bcfd6}{check\+\_\+csr}} ()
-\begin{DoxyCompactList}\small\item\em Validates data format. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{struct_dense}{Dense}} \mbox{\hyperlink{struct_c_s_r_ad4547fd8cd6cf882f14e5ce35940769e}{slice}} (const std\+::vector$<$ std\+::uint32\+\_\+t $>$ \&ixs)
+void \mbox{\hyperlink{struct_c_s_r_a3fc79432e775448fdfd28cd45161c473}{save}} (const std\+::string \&fname)
+\begin{DoxyCompactList}\small\item\em Saves matrix in a native endian (little endian mostly) binary format. \end{DoxyCompactList}\item 
+auto \mbox{\hyperlink{struct_c_s_r_a005d9d82601b28f827cafa7952888a6d}{slice}} (const std\+::vector$<$ std\+::uint32\+\_\+t $>$ \&ixs) -\/$>$ \mbox{\hyperlink{struct_dense}{Dense}}
 \begin{DoxyCompactList}\small\item\em Performs parallel slicing on indexes. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{struct_c_s_r_a7e68064cb18956265a6f2c0645bc3896}\label{struct_c_s_r_a7e68064cb18956265a6f2c0645bc3896}} 
-static \mbox{\hyperlink{struct_c_s_r}{C\+SR}} \mbox{\hyperlink{struct_c_s_r_a7e68064cb18956265a6f2c0645bc3896}{load}} (const std\+::string \&data\+\_\+path, const std\+::string \&indices\+\_\+path, const std\+::string \&indptr\+\_\+path)
-\begin{DoxyCompactList}\small\item\em Loads 3 binary files and constructs \mbox{\hyperlink{struct_c_s_r}{C\+SR}} matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+static auto \mbox{\hyperlink{struct_c_s_r_a71edf16bf61b9cfaa1a01ca425797562}{load}} (const std\+::string \&fname)
+\begin{DoxyCompactList}\small\item\em Load matrix from a binary format. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_c_s_r_a7e5aa6ddc2e404b1135935e3f0de6a37}\label{struct_c_s_r_a7e5aa6ddc2e404b1135935e3f0de6a37}} 
+{\footnotesize template$<$class T $>$ }\\static auto \mbox{\hyperlink{struct_c_s_r_a7e5aa6ddc2e404b1135935e3f0de6a37}{\+\_\+read\+\_\+vector}} (std\+::istream \&is) -\/$>$ std\+::vector$<$ T $>$
+\begin{DoxyCompactList}\small\item\em first read vector size and then vector data \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_c_s_r_ac98ff1c3d9d09db2451f0070c63b645e}\label{struct_c_s_r_ac98ff1c3d9d09db2451f0070c63b645e}} 
+{\footnotesize template$<$class T $>$ }\\static void \mbox{\hyperlink{struct_c_s_r_ac98ff1c3d9d09db2451f0070c63b645e}{\+\_\+write\+\_\+vector}} (std\+::ostream \&os, const std\+::vector$<$ T $>$ \&v)
+\begin{DoxyCompactList}\small\item\em first forward write vector size and then vector data \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_c_s_r_aa39008f19cd1c76bf3da84d4a9d66f59}\label{struct_c_s_r_aa39008f19cd1c76bf3da84d4a9d66f59}} 
+static auto \mbox{\hyperlink{struct_c_s_r_aa39008f19cd1c76bf3da84d4a9d66f59}{random}} (size\+\_\+t nrows, size\+\_\+t ncols, float prob) -\/$>$ \mbox{\hyperlink{struct_c_s_r}{C\+SR}}
+\begin{DoxyCompactList}\small\item\em Generate random csr matrix with probability of element being zero equal to {\ttfamily prob} \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{struct_c_s_r_a39f2404b2f5cd0e307aab0281a8e582e}\label{struct_c_s_r_a39f2404b2f5cd0e307aab0281a8e582e}} 
-vec\+\_\+f {\bfseries data}
+\mbox{\Hypertarget{struct_c_s_r_a01e2c018e980f1420d8b7d477e079099}\label{struct_c_s_r_a01e2c018e980f1420d8b7d477e079099}} 
+vec\+\_\+f {\bfseries \+\_\+data}
 \item 
-\mbox{\Hypertarget{struct_c_s_r_a9fbc014e39d39f1cadc383cb536f5d0e}\label{struct_c_s_r_a9fbc014e39d39f1cadc383cb536f5d0e}} 
-vec\+\_\+u {\bfseries indices}
+\mbox{\Hypertarget{struct_c_s_r_a7a763ffa7d8f82d7fa29ae3d4ef17953}\label{struct_c_s_r_a7a763ffa7d8f82d7fa29ae3d4ef17953}} 
+vec\+\_\+u {\bfseries \+\_\+indices}
 \item 
-\mbox{\Hypertarget{struct_c_s_r_a2ec675c92ce9c92ff1f0b2616bba52fb}\label{struct_c_s_r_a2ec675c92ce9c92ff1f0b2616bba52fb}} 
-vec\+\_\+u {\bfseries indptr}
+\mbox{\Hypertarget{struct_c_s_r_a1098d6674ef18a6e3ac85f21bd25014c}\label{struct_c_s_r_a1098d6674ef18a6e3ac85f21bd25014c}} 
+vec\+\_\+u {\bfseries \+\_\+indptr}
 \item 
-\mbox{\Hypertarget{struct_c_s_r_ae8b62c40535f3724105851c9858cee73}\label{struct_c_s_r_ae8b62c40535f3724105851c9858cee73}} 
-size\+\_\+t {\bfseries nrows}
+\mbox{\Hypertarget{struct_c_s_r_a25fc166c4cbe2af98cbddd6bb1dc544a}\label{struct_c_s_r_a25fc166c4cbe2af98cbddd6bb1dc544a}} 
+size\+\_\+t {\bfseries \+\_\+nrows}
 \item 
-\mbox{\Hypertarget{struct_c_s_r_ae6060105866f19f537ad1f8a839db4f6}\label{struct_c_s_r_ae6060105866f19f537ad1f8a839db4f6}} 
-size\+\_\+t {\bfseries ncols}
+\mbox{\Hypertarget{struct_c_s_r_a40b44da5cbc1166ff271d6039805100d}\label{struct_c_s_r_a40b44da5cbc1166ff271d6039805100d}} 
+size\+\_\+t {\bfseries \+\_\+ncols}
 \end{DoxyCompactItemize}
 
 
@@ -59,33 +67,44 @@ Compressed Sparse Row matrix.
 
 Data format same as of scipy.\+sparse.\+csr\+\_\+matrix. Is the standard \mbox{\hyperlink{struct_c_s_r}{C\+SR}} representation where the column indices for row {\ttfamily i} are stored in {\ttfamily indices\mbox{[}indptr\mbox{[}i\mbox{]}\+:indptr\mbox{[}i+1\mbox{]}\mbox{]}} and their corresponding values are stored in {\ttfamily data\mbox{[}indptr\mbox{[}i\mbox{]}\+:indptr\mbox{[}i+1\mbox{]}\mbox{]}}. 
 
-Definition at line 52 of file csr\+\_\+matrix.\+hpp.
+Definition at line 59 of file csr\+\_\+matrix.\+hpp.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{struct_c_s_r_aa2fd488a48252886893dbb8f815bcfd6}\label{struct_c_s_r_aa2fd488a48252886893dbb8f815bcfd6}} 
-\index{CSR@{CSR}!check\_csr@{check\_csr}}
-\index{check\_csr@{check\_csr}!CSR@{CSR}}
-\doxysubsubsection{\texorpdfstring{check\_csr()}{check\_csr()}}
-{\footnotesize\ttfamily bool C\+S\+R\+::check\+\_\+csr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{struct_c_s_r_a71edf16bf61b9cfaa1a01ca425797562}\label{struct_c_s_r_a71edf16bf61b9cfaa1a01ca425797562}} 
+\index{CSR@{CSR}!load@{load}}
+\index{load@{load}!CSR@{CSR}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily static auto C\+S\+R\+::load (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{fname }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
 
 
-Validates data format. 
+Load matrix from a binary format. 
 
-\begin{DoxyReturn}{Returns}
-true if valid, false otherwise 
-\end{DoxyReturn}
+First it reads matrix shape and then each vector with it\textquotesingle{}s forward size. 
+
+Definition at line 116 of file csr\+\_\+matrix.\+hpp.
+
+\mbox{\Hypertarget{struct_c_s_r_a3fc79432e775448fdfd28cd45161c473}\label{struct_c_s_r_a3fc79432e775448fdfd28cd45161c473}} 
+\index{CSR@{CSR}!save@{save}}
+\index{save@{save}!CSR@{CSR}}
+\doxysubsubsection{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily void C\+S\+R\+::save (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{fname }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
-Definition at line 89 of file csr\+\_\+matrix.\+hpp.
 
-\mbox{\Hypertarget{struct_c_s_r_ad4547fd8cd6cf882f14e5ce35940769e}\label{struct_c_s_r_ad4547fd8cd6cf882f14e5ce35940769e}} 
+Saves matrix in a native endian (little endian mostly) binary format. 
+
+First it forward writes matrix shape and then each vector with it\textquotesingle{}s forward size. 
+
+Definition at line 158 of file csr\+\_\+matrix.\+hpp.
+
+\mbox{\Hypertarget{struct_c_s_r_a005d9d82601b28f827cafa7952888a6d}\label{struct_c_s_r_a005d9d82601b28f827cafa7952888a6d}} 
 \index{CSR@{CSR}!slice@{slice}}
 \index{slice@{slice}!CSR@{CSR}}
 \doxysubsubsection{\texorpdfstring{slice()}{slice()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{struct_dense}{Dense}} C\+S\+R\+::slice (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::uint32\+\_\+t $>$ \&}]{ixs }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily auto C\+S\+R\+::slice (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::uint32\+\_\+t $>$ \&}]{ixs }\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{struct_dense}{Dense}}}
 
 
 
@@ -98,7 +117,7 @@ It splits {\ttfamily ixs} on chunks and each chunk is fed to a separate thread
 \end{DoxyParams}
 
 
-Definition at line 126 of file csr\+\_\+matrix.\+hpp.
+Definition at line 208 of file csr\+\_\+matrix.\+hpp.
 
 
 

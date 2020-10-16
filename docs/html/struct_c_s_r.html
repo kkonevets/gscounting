@@ -89,81 +89,134 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>vec_u</b> = std::vec
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1b7a9c7f7d4765f8647c3c8625b30630"><td class="memItemLeft" align="right" valign="top"><a id="a1b7a9c7f7d4765f8647c3c8625b30630"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>CSR</b> (vec_f &amp;&amp;data, vec_u &amp;&amp;indices, vec_u &amp;&amp;indptr)</td></tr>
-<tr class="separator:a1b7a9c7f7d4765f8647c3c8625b30630"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2fd488a48252886893dbb8f815bcfd6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_c_s_r.html#aa2fd488a48252886893dbb8f815bcfd6">check_csr</a> ()</td></tr>
-<tr class="memdesc:aa2fd488a48252886893dbb8f815bcfd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validates data format.  <a href="struct_c_s_r.html#aa2fd488a48252886893dbb8f815bcfd6">More...</a><br /></td></tr>
-<tr class="separator:aa2fd488a48252886893dbb8f815bcfd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4547fd8cd6cf882f14e5ce35940769e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_dense.html">Dense</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_c_s_r.html#ad4547fd8cd6cf882f14e5ce35940769e">slice</a> (const std::vector&lt; std::uint32_t &gt; &amp;ixs)</td></tr>
-<tr class="memdesc:ad4547fd8cd6cf882f14e5ce35940769e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs parallel slicing on indexes.  <a href="struct_c_s_r.html#ad4547fd8cd6cf882f14e5ce35940769e">More...</a><br /></td></tr>
-<tr class="separator:ad4547fd8cd6cf882f14e5ce35940769e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a529653b071c18d1bc247e45e11c68357"><td class="memItemLeft" align="right" valign="top"><a id="a529653b071c18d1bc247e45e11c68357"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CSR</b> (vec_f &amp;&amp;data, vec_u &amp;&amp;indices, vec_u &amp;&amp;indptr, size_t nrows=0, size_t ncols=0)</td></tr>
+<tr class="separator:a529653b071c18d1bc247e45e11c68357"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fc79432e775448fdfd28cd45161c473"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_c_s_r.html#a3fc79432e775448fdfd28cd45161c473">save</a> (const std::string &amp;fname)</td></tr>
+<tr class="memdesc:a3fc79432e775448fdfd28cd45161c473"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves matrix in a native endian (little endian mostly) binary format.  <a href="struct_c_s_r.html#a3fc79432e775448fdfd28cd45161c473">More...</a><br /></td></tr>
+<tr class="separator:a3fc79432e775448fdfd28cd45161c473"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a005d9d82601b28f827cafa7952888a6d"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_c_s_r.html#a005d9d82601b28f827cafa7952888a6d">slice</a> (const std::vector&lt; std::uint32_t &gt; &amp;ixs) -&gt; <a class="el" href="struct_dense.html">Dense</a></td></tr>
+<tr class="memdesc:a005d9d82601b28f827cafa7952888a6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs parallel slicing on indexes.  <a href="struct_c_s_r.html#a005d9d82601b28f827cafa7952888a6d">More...</a><br /></td></tr>
+<tr class="separator:a005d9d82601b28f827cafa7952888a6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a7e68064cb18956265a6f2c0645bc3896"><td class="memItemLeft" align="right" valign="top"><a id="a7e68064cb18956265a6f2c0645bc3896"></a>
-static <a class="el" href="struct_c_s_r.html">CSR</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_c_s_r.html#a7e68064cb18956265a6f2c0645bc3896">load</a> (const std::string &amp;data_path, const std::string &amp;indices_path, const std::string &amp;indptr_path)</td></tr>
-<tr class="memdesc:a7e68064cb18956265a6f2c0645bc3896"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads 3 binary files and constructs <a class="el" href="struct_c_s_r.html" title="Compressed Sparse Row matrix.">CSR</a> matrix. <br /></td></tr>
-<tr class="separator:a7e68064cb18956265a6f2c0645bc3896"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71edf16bf61b9cfaa1a01ca425797562"><td class="memItemLeft" align="right" valign="top">static auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_c_s_r.html#a71edf16bf61b9cfaa1a01ca425797562">load</a> (const std::string &amp;fname)</td></tr>
+<tr class="memdesc:a71edf16bf61b9cfaa1a01ca425797562"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load matrix from a binary format.  <a href="struct_c_s_r.html#a71edf16bf61b9cfaa1a01ca425797562">More...</a><br /></td></tr>
+<tr class="separator:a71edf16bf61b9cfaa1a01ca425797562"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e5aa6ddc2e404b1135935e3f0de6a37"><td class="memTemplParams" colspan="2"><a id="a7e5aa6ddc2e404b1135935e3f0de6a37"></a>
+template&lt;class T &gt; </td></tr>
+<tr class="memitem:a7e5aa6ddc2e404b1135935e3f0de6a37"><td class="memTemplItemLeft" align="right" valign="top">static auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_c_s_r.html#a7e5aa6ddc2e404b1135935e3f0de6a37">_read_vector</a> (std::istream &amp;is) -&gt; std::vector&lt; T &gt;</td></tr>
+<tr class="memdesc:a7e5aa6ddc2e404b1135935e3f0de6a37"><td class="mdescLeft">&#160;</td><td class="mdescRight">first read vector size and then vector data <br /></td></tr>
+<tr class="separator:a7e5aa6ddc2e404b1135935e3f0de6a37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac98ff1c3d9d09db2451f0070c63b645e"><td class="memTemplParams" colspan="2"><a id="ac98ff1c3d9d09db2451f0070c63b645e"></a>
+template&lt;class T &gt; </td></tr>
+<tr class="memitem:ac98ff1c3d9d09db2451f0070c63b645e"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_c_s_r.html#ac98ff1c3d9d09db2451f0070c63b645e">_write_vector</a> (std::ostream &amp;os, const std::vector&lt; T &gt; &amp;v)</td></tr>
+<tr class="memdesc:ac98ff1c3d9d09db2451f0070c63b645e"><td class="mdescLeft">&#160;</td><td class="mdescRight">first forward write vector size and then vector data <br /></td></tr>
+<tr class="separator:ac98ff1c3d9d09db2451f0070c63b645e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa39008f19cd1c76bf3da84d4a9d66f59"><td class="memItemLeft" align="right" valign="top"><a id="aa39008f19cd1c76bf3da84d4a9d66f59"></a>
+static auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_c_s_r.html#aa39008f19cd1c76bf3da84d4a9d66f59">random</a> (size_t nrows, size_t ncols, float prob) -&gt; <a class="el" href="struct_c_s_r.html">CSR</a></td></tr>
+<tr class="memdesc:aa39008f19cd1c76bf3da84d4a9d66f59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate random csr matrix with probability of element being zero equal to <code>prob</code> <br /></td></tr>
+<tr class="separator:aa39008f19cd1c76bf3da84d4a9d66f59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a39f2404b2f5cd0e307aab0281a8e582e"><td class="memItemLeft" align="right" valign="top"><a id="a39f2404b2f5cd0e307aab0281a8e582e"></a>
-vec_f&#160;</td><td class="memItemRight" valign="bottom"><b>data</b></td></tr>
-<tr class="separator:a39f2404b2f5cd0e307aab0281a8e582e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9fbc014e39d39f1cadc383cb536f5d0e"><td class="memItemLeft" align="right" valign="top"><a id="a9fbc014e39d39f1cadc383cb536f5d0e"></a>
-vec_u&#160;</td><td class="memItemRight" valign="bottom"><b>indices</b></td></tr>
-<tr class="separator:a9fbc014e39d39f1cadc383cb536f5d0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ec675c92ce9c92ff1f0b2616bba52fb"><td class="memItemLeft" align="right" valign="top"><a id="a2ec675c92ce9c92ff1f0b2616bba52fb"></a>
-vec_u&#160;</td><td class="memItemRight" valign="bottom"><b>indptr</b></td></tr>
-<tr class="separator:a2ec675c92ce9c92ff1f0b2616bba52fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8b62c40535f3724105851c9858cee73"><td class="memItemLeft" align="right" valign="top"><a id="ae8b62c40535f3724105851c9858cee73"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>nrows</b></td></tr>
-<tr class="separator:ae8b62c40535f3724105851c9858cee73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6060105866f19f537ad1f8a839db4f6"><td class="memItemLeft" align="right" valign="top"><a id="ae6060105866f19f537ad1f8a839db4f6"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>ncols</b></td></tr>
-<tr class="separator:ae6060105866f19f537ad1f8a839db4f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01e2c018e980f1420d8b7d477e079099"><td class="memItemLeft" align="right" valign="top"><a id="a01e2c018e980f1420d8b7d477e079099"></a>
+vec_f&#160;</td><td class="memItemRight" valign="bottom"><b>_data</b></td></tr>
+<tr class="separator:a01e2c018e980f1420d8b7d477e079099"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a763ffa7d8f82d7fa29ae3d4ef17953"><td class="memItemLeft" align="right" valign="top"><a id="a7a763ffa7d8f82d7fa29ae3d4ef17953"></a>
+vec_u&#160;</td><td class="memItemRight" valign="bottom"><b>_indices</b></td></tr>
+<tr class="separator:a7a763ffa7d8f82d7fa29ae3d4ef17953"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1098d6674ef18a6e3ac85f21bd25014c"><td class="memItemLeft" align="right" valign="top"><a id="a1098d6674ef18a6e3ac85f21bd25014c"></a>
+vec_u&#160;</td><td class="memItemRight" valign="bottom"><b>_indptr</b></td></tr>
+<tr class="separator:a1098d6674ef18a6e3ac85f21bd25014c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25fc166c4cbe2af98cbddd6bb1dc544a"><td class="memItemLeft" align="right" valign="top"><a id="a25fc166c4cbe2af98cbddd6bb1dc544a"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>_nrows</b></td></tr>
+<tr class="separator:a25fc166c4cbe2af98cbddd6bb1dc544a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40b44da5cbc1166ff271d6039805100d"><td class="memItemLeft" align="right" valign="top"><a id="a40b44da5cbc1166ff271d6039805100d"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>_ncols</b></td></tr>
+<tr class="separator:a40b44da5cbc1166ff271d6039805100d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Compressed Sparse Row matrix. </p>
 <p>Data format same as of scipy.sparse.csr_matrix. Is the standard <a class="el" href="struct_c_s_r.html" title="Compressed Sparse Row matrix.">CSR</a> representation where the column indices for row <code>i</code> are stored in <code>indices[indptr[i]:indptr[i+1]]</code> and their corresponding values are stored in <code>data[indptr[i]:indptr[i+1]]</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="csr__matrix_8hpp_source.html#l00052">52</a> of file <a class="el" href="csr__matrix_8hpp_source.html">csr_matrix.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="csr__matrix_8hpp_source.html#l00059">59</a> of file <a class="el" href="csr__matrix_8hpp_source.html">csr_matrix.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="aa2fd488a48252886893dbb8f815bcfd6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa2fd488a48252886893dbb8f815bcfd6">&#9670;&nbsp;</a></span>check_csr()</h2>
+<a id="a71edf16bf61b9cfaa1a01ca425797562"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71edf16bf61b9cfaa1a01ca425797562">&#9670;&nbsp;</a></span>load()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool CSR::check_csr </td>
+          <td class="memname">static auto CSR::load </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>fname</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Validates data format. </p>
-<dl class="section return"><dt>Returns</dt><dd>true if valid, false otherwise </dd></dl>
+<p>Load matrix from a binary format. </p>
+<p>First it reads matrix shape and then each vector with it's forward size. </p>
 
-<p class="definition">Definition at line <a class="el" href="csr__matrix_8hpp_source.html#l00089">89</a> of file <a class="el" href="csr__matrix_8hpp_source.html">csr_matrix.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="csr__matrix_8hpp_source.html#l00116">116</a> of file <a class="el" href="csr__matrix_8hpp_source.html">csr_matrix.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ad4547fd8cd6cf882f14e5ce35940769e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad4547fd8cd6cf882f14e5ce35940769e">&#9670;&nbsp;</a></span>slice()</h2>
+<a id="a3fc79432e775448fdfd28cd45161c473"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fc79432e775448fdfd28cd45161c473">&#9670;&nbsp;</a></span>save()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CSR::save </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>fname</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Saves matrix in a native endian (little endian mostly) binary format. </p>
+<p>First it forward writes matrix shape and then each vector with it's forward size. </p>
+
+<p class="definition">Definition at line <a class="el" href="csr__matrix_8hpp_source.html#l00158">158</a> of file <a class="el" href="csr__matrix_8hpp_source.html">csr_matrix.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a005d9d82601b28f827cafa7952888a6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a005d9d82601b28f827cafa7952888a6d">&#9670;&nbsp;</a></span>slice()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_dense.html">Dense</a> CSR::slice </td>
+          <td class="memname">auto CSR::slice </td>
           <td>(</td>
           <td class="paramtype">const std::vector&lt; std::uint32_t &gt; &amp;&#160;</td>
           <td class="paramname"><em>ixs</em></td><td>)</td>
-          <td></td>
+          <td> -&gt; <a class="el" href="struct_dense.html">Dense</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -176,7 +229,7 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>ncols</b></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="csr__matrix_8hpp_source.html#l00126">126</a> of file <a class="el" href="csr__matrix_8hpp_source.html">csr_matrix.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="csr__matrix_8hpp_source.html#l00208">208</a> of file <a class="el" href="csr__matrix_8hpp_source.html">csr_matrix.hpp</a>.</p>
 
 </div>
 </div>

@@ -15,23 +15,23 @@ structure representing a record in adjacency list
 \mbox{\Hypertarget{struct_adj_item_aefd9839d5675a15a778d959b731c3ec7}\label{struct_adj_item_aefd9839d5675a15a778d959b731c3ec7}} 
 {\bfseries Adj\+Item} (T source, std\+::vector$<$ T $>$ \&\&targets)
 \item 
-\mbox{\Hypertarget{struct_adj_item_a501b0a59f4fc0451a636fcd0f5152df1}\label{struct_adj_item_a501b0a59f4fc0451a636fcd0f5152df1}} 
-{\bfseries Adj\+Item} (\mbox{\hyperlink{struct_adj_item}{Adj\+Item}}$<$ T $>$ \&\&other)
+\mbox{\Hypertarget{struct_adj_item_a5f3c04f07a13d287f7e82e116344cd5d}\label{struct_adj_item_a5f3c04f07a13d287f7e82e116344cd5d}} 
+{\bfseries Adj\+Item} (\mbox{\hyperlink{struct_adj_item}{Adj\+Item}}$<$ T $>$ \&\&other) noexcept
 \item 
-\mbox{\Hypertarget{struct_adj_item_af9f2cd8e81ec45e55c0b2d56210468a7}\label{struct_adj_item_af9f2cd8e81ec45e55c0b2d56210468a7}} 
-bool {\bfseries encode} (std\+::ostream \&os) const
+\mbox{\Hypertarget{struct_adj_item_a2c860eb71571594504df2eef773b0d58}\label{struct_adj_item_a2c860eb71571594504df2eef773b0d58}} 
+auto {\bfseries encode} (std\+::ostream \&os) const -\/$>$ bool
 \end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{struct_adj_item_a68a0c77f6870005912567fca8a4a1365}\label{struct_adj_item_a68a0c77f6870005912567fca8a4a1365}} 
-static bool {\bfseries decode} (std\+::istream \&is, \mbox{\hyperlink{struct_adj_item}{Adj\+Item}}$<$ T $>$ \&row)
+\mbox{\Hypertarget{struct_adj_item_a0c7dccbf45eea69daa29a410d25f5580}\label{struct_adj_item_a0c7dccbf45eea69daa29a410d25f5580}} 
+static auto {\bfseries decode} (std\+::istream \&is, \mbox{\hyperlink{struct_adj_item}{Adj\+Item}}$<$ T $>$ \&row) -\/$>$ bool
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{struct_adj_item_af0d1faa39ef0202f1e4aa745d1239a2a}\label{struct_adj_item_af0d1faa39ef0202f1e4aa745d1239a2a}} 
-T {\bfseries source}
+T {\bfseries source} \{\}
 \item 
 \mbox{\Hypertarget{struct_adj_item_acac240d2d66950b0db578f602d549f9c}\label{struct_adj_item_acac240d2d66950b0db578f602d549f9c}} 
 std\+::vector$<$ T $>$ {\bfseries targets}

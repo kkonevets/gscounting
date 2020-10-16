@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['edgeitem_6',['EdgeItem',['../struct_edge_item.html',1,'']]],
-  ['externalsort_2ehpp_7',['externalsort.hpp',['../externalsort_8hpp.html',1,'']]],
-  ['externalsorter_8',['ExternalSorter',['../class_external_sorter.html',1,'']]]
+  ['data_5',['data',['../struct_dense.html#a6016b5ed78e22478655bc8dea7f8f9a5',1,'Dense']]],
+  ['dense_6',['Dense',['../struct_dense.html',1,'']]]
 ];

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['kmerge_9',['KMerge',['../class_k_merge.html',1,'']]],
-  ['kmergeiterator_10',['KMergeIterator',['../class_k_merge_iterator.html',1,'']]],
-  ['kmergeiteratorsentinel_11',['KmergeIteratorSentinel',['../class_kmerge_iterator_sentinel.html',1,'']]]
+  ['edgeitem_7',['EdgeItem',['../struct_edge_item.html',1,'']]],
+  ['externalsort_2ehpp_8',['externalsort.hpp',['../externalsort_8hpp.html',1,'']]],
+  ['externalsorter_9',['ExternalSorter',['../class_external_sorter.html',1,'']]]
 ];

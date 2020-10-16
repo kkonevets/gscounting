@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['data_4',['data',['../struct_dense.html#a6016b5ed78e22478655bc8dea7f8f9a5',1,'Dense']]],
-  ['dense_5',['Dense',['../struct_dense.html',1,'']]]
+  ['csr_3',['CSR',['../struct_c_s_r.html',1,'']]],
+  ['csr_5fmatrix_2ehpp_4',['csr_matrix.hpp',['../csr__matrix_8hpp.html',1,'']]]
 ];

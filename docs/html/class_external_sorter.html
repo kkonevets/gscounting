@@ -77,12 +77,12 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a33035ea0147249f8331b19797aab6779"><td class="memItemLeft" align="right" valign="top"><a id="a33035ea0147249f8331b19797aab6779"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ExternalSorter</b> (const fs::path &amp;save_dir, size_t max_mem=pow(2, 30))</td></tr>
-<tr class="separator:a33035ea0147249f8331b19797aab6779"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2931c179cf68d14a359d9c347eab0d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_k_merge.html">KMerge</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_external_sorter.html#af2931c179cf68d14a359d9c347eab0d8">sort_unstable</a> (std::istream &amp;is)</td></tr>
-<tr class="memdesc:af2931c179cf68d14a359d9c347eab0d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sorts input stream.  <a href="class_external_sorter.html#af2931c179cf68d14a359d9c347eab0d8">More...</a><br /></td></tr>
-<tr class="separator:af2931c179cf68d14a359d9c347eab0d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf6fe55fa4a3a924451731dd04e25749"><td class="memItemLeft" align="right" valign="top"><a id="acf6fe55fa4a3a924451731dd04e25749"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>ExternalSorter</b> (fs::path save_dir, size_t max_mem=pow(2, 30))</td></tr>
+<tr class="separator:acf6fe55fa4a3a924451731dd04e25749"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7964922346d8b2ae7c435667181aa4d9"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_external_sorter.html#a7964922346d8b2ae7c435667181aa4d9">sort_unstable</a> (std::istream &amp;is) -&gt; <a class="el" href="class_k_merge.html">KMerge</a>&lt; T &gt;</td></tr>
+<tr class="memdesc:a7964922346d8b2ae7c435667181aa4d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sorts input stream.  <a href="class_external_sorter.html#a7964922346d8b2ae7c435667181aa4d9">More...</a><br /></td></tr>
+<tr class="separator:a7964922346d8b2ae7c435667181aa4d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class T&gt;<br />
@@ -98,10 +98,10 @@ class ExternalSorter&lt; T &gt;</h3>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="externalsort_8hpp_source.html#l00123">123</a> of file <a class="el" href="externalsort_8hpp_source.html">externalsort.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="externalsort_8hpp_source.html#l00124">124</a> of file <a class="el" href="externalsort_8hpp_source.html">externalsort.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="af2931c179cf68d14a359d9c347eab0d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af2931c179cf68d14a359d9c347eab0d8">&#9670;&nbsp;</a></span>sort_unstable()</h2>
+<a id="a7964922346d8b2ae7c435667181aa4d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7964922346d8b2ae7c435667181aa4d9">&#9670;&nbsp;</a></span>sort_unstable()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -116,7 +116,7 @@ template&lt;class T &gt; </div>
           <td>(</td>
           <td class="paramtype">std::istream &amp;&#160;</td>
           <td class="paramname"><em>is</em></td><td>)</td>
-          <td></td>
+          <td> -&gt; <a class="el" href="class_k_merge.html">KMerge</a>&lt;T&gt; </td>
         </tr>
       </table>
   </td>
@@ -135,7 +135,7 @@ template&lt;class T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A merging iterator that lazily loads data from sorted files </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="externalsort_8hpp_source.html#l00159">159</a> of file <a class="el" href="externalsort_8hpp_source.html">externalsort.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="externalsort_8hpp_source.html#l00161">161</a> of file <a class="el" href="externalsort_8hpp_source.html">externalsort.hpp</a>.</p>
 
 </div>
 </div>
