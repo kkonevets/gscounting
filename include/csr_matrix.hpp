@@ -111,8 +111,7 @@ struct CSR {
   }
 
   /// Load matrix from a binary format.
-  /// First it reads matrix shape and then each vector with it's
-  /// forward size.
+  /// First read matrix shape and then each vector with it's forward size.
   static auto load(const std::string &fname) {
     std::ifstream is(fname);
     if (!is) {
@@ -154,8 +153,8 @@ struct CSR {
   }
 
   /// Saves matrix in a native endian (little endian mostly) binary format.
-  /// First it forward writes matrix shape and then each vector with it's
-  /// forward size.
+  /// First forward write matrix shape and then each vector with it's forward
+  /// size.
   void save(const std::string &fname) {
     std::ofstream os(fname, std::ios::binary);
     if (!os) {
@@ -178,8 +177,8 @@ struct CSR {
     std::vector<std::uint32_t> indices;
     std::vector<std::uint32_t> indptr{0};
 
-    std::mt19937 rng(
-        std::chrono::steady_clock::now().time_since_epoch().count());
+    auto seed(std::chrono::steady_clock::now().time_since_epoch().count());
+    std::mt19937 rng(seed);
 
     auto threshold = static_cast<unsigned int>(prob * 100);
     size_t iptr = 0;
@@ -201,10 +200,9 @@ struct CSR {
 
   auto slice(const std::vector<std::uint32_t> &ixs) -> Dense;
 
-  bool operator==(const CSR &other) {
-    bool equal = _ncols == other._ncols && _nrows == other._nrows &&
-                 _data == other._data && _indices == other._indices &&
-                 _indptr == other._indptr;
+  bool operator==(const CSR &o) {
+    bool equal = _ncols == o._ncols && _nrows == o._nrows && _data == o._data &&
+                 _indices == o._indices && _indptr == o._indptr;
     return equal;
   }
 };
