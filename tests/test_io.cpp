@@ -7,6 +7,7 @@
 #include <string>
 #include <vector>
 
+#include "csr_matrix.hpp"
 #include "externalsort.hpp"
 #include "tools.hpp"
 #include "gtest/gtest.h"
@@ -114,6 +115,46 @@ TEST(ExternalSorterTest, CheckEqual) {
     auto &edge1 = v.at(i);
     ASSERT_TRUE(edge_type::decode(fin_sorted, edge2));
     ASSERT_EQ(edge1, edge2);
+  }
+}
+
+TEST(CSRCheck, Slice) {
+  std::vector<std::uint32_t> indptr = {0, 1, 1, 3};
+  std::vector<std::uint32_t> indices = {0, 0, 1};
+  std::vector<float> data = {1, 4, 5};
+
+  CSR m(std::move(data), std::move(indices), std::move(indptr), 3, 3);
+
+  auto d{m.slice({0, 2})};
+  std::vector<float> res{1, 0, 0, 4, 5, 0};
+  ASSERT_EQ(d.data, res);
+}
+
+TEST(CSRCheck, SaveLoad) {
+  std::vector<std::uint32_t> indptr = {0, 1, 1, 3};
+  std::vector<std::uint32_t> indices = {0, 0, 1};
+  std::vector<float> data = {1, 4, 5};
+
+  CSR m(std::move(data), std::move(indices), std::move(indptr), 3, 3);
+
+  std::string fname(pjoin("m.bin"));
+  m.save(fname);
+  auto m_loaded{CSR::load(fname)};
+
+  ASSERT_TRUE(m == m_loaded);
+}
+
+TEST(CSRCheck, DISABLED_Performance) {
+  size_t dim = 10000;
+  auto m(CSR::random(dim, dim, 0.5));
+
+  std::vector<std::uint32_t> ixs;
+  for (std::uint32_t i = 0; i < dim; i += 10) {
+    ixs.push_back(i);
+  }
+
+  for (auto i = 0; i < 1000; i++) {
+    m.slice(ixs);
   }
 }
 

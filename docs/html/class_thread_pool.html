@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>gscounting: Class Members</title>
+<title>gscounting: ThreadPool Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -46,7 +46,6 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
-</div><!-- top -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -61,32 +60,31 @@ $(function() {
 </iframe>
 </div>
 
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="class_thread_pool-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">ThreadPool Class Reference</div>  </div>
+</div><!--header-->
 <div class="contents">
-<div class="textblock">Here is a list of all documented class members with links to the class documentation for each member:</div><ul>
-<li>_read_vector()
-: <a class="el" href="struct_c_s_r.html#a7e5aa6ddc2e404b1135935e3f0de6a37">CSR</a>
-</li>
-<li>_write_vector()
-: <a class="el" href="struct_c_s_r.html#ac98ff1c3d9d09db2451f0070c63b645e">CSR</a>
-</li>
-<li>data
-: <a class="el" href="struct_dense.html#a6016b5ed78e22478655bc8dea7f8f9a5">Dense</a>
-</li>
-<li>load()
-: <a class="el" href="struct_c_s_r.html#a6baa0a288504bf32caa7612643a441b7">CSR</a>
-</li>
-<li>random()
-: <a class="el" href="struct_c_s_r.html#a72eba52f8004ecf5927bf3d14f9d9600">CSR</a>
-</li>
-<li>save()
-: <a class="el" href="struct_c_s_r.html#a3fc79432e775448fdfd28cd45161c473">CSR</a>
-</li>
-<li>slice()
-: <a class="el" href="struct_c_s_r.html#a005d9d82601b28f827cafa7952888a6d">CSR</a>
-</li>
-<li>sort_unstable()
-: <a class="el" href="class_external_sorter.html#a7964922346d8b2ae7c435667181aa4d9">ExternalSorter&lt; T &gt;</a>
-</li>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ac291710e33dbbed96ee20711080d506d"><td class="memItemLeft" align="right" valign="top"><a id="ac291710e33dbbed96ee20711080d506d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>ThreadPool</b> (size_t)</td></tr>
+<tr class="separator:ac291710e33dbbed96ee20711080d506d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f628893c030552d9714c25f68656adc"><td class="memTemplParams" colspan="2"><a id="a8f628893c030552d9714c25f68656adc"></a>
+template&lt;class F , class... Args&gt; </td></tr>
+<tr class="memitem:a8f628893c030552d9714c25f68656adc"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>enqueue</b> (F &amp;&amp;f, Args &amp;&amp;... args) -&gt; std::future&lt; typename std::result_of&lt; F(Args...)&gt;::type &gt;</td></tr>
+<tr class="separator:a8f628893c030552d9714c25f68656adc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="_thread_pool_8h_source.html#l00014">14</a> of file <a class="el" href="_thread_pool_8h_source.html">ThreadPool.h</a>.</p>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
+<li>include/<a class="el" href="_thread_pool_8h_source.html">ThreadPool.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -57,11 +57,11 @@ file(GLOB TEST_SOURCES
     "tests/*.cpp"
 )
 
-add_executable(test_gsc ${TEST_SOURCES})
+add_executable(test ${TEST_SOURCES})
 
 # if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-target_link_libraries(test_gsc gtest_main tbb)
+target_link_libraries(test gtest_main tbb)
 
-add_test(NAME test_gsc COMMAND test_gsc)
+add_test(NAME test COMMAND test)
 
 # GOOGLETEST END

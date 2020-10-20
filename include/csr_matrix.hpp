@@ -39,12 +39,12 @@ struct Dense {
       : nrows{nrows}, ncols{ncols}, data(nrows * ncols, 0) {}
   Dense(size_t nrows, size_t ncols, std::vector<float> &&init_data)
       : nrows{nrows}, ncols{ncols}, data{std::move(init_data)} {
-    assert(nrows * ncols == data.size());
+    if (nrows * ncols != data.size()) {
+      throw std::runtime_error("indices array is empty");
+    }
   }
   Dense(Dense &&other) noexcept
-      : nrows{other.nrows}, ncols{other.ncols}, data{std::move(other.data)} {
-    assert(nrows * ncols == data.size());
-  }
+      : nrows{other.nrows}, ncols{other.ncols}, data{std::move(other.data)} {}
 };
 
 /** @struct CSR
@@ -110,32 +110,12 @@ struct CSR {
     }
   }
 
-  /// Load matrix from a binary format.
-  /// First read matrix shape and then each vector with it's forward size.
-  static auto load(const std::string &fname) {
-    std::ifstream is(fname);
-    if (!is) {
-      throw std::runtime_error(fname);
-    }
-
-    std::uint32_t nrows;
-    std::uint32_t ncols;
-    is.read(reinterpret_cast<char *>(&nrows), sizeof(std::uint32_t));
-    is.read(reinterpret_cast<char *>(&ncols), sizeof(std::uint32_t));
-
-    auto data = _read_vector<float>(is);
-    auto indices = _read_vector<std::uint32_t>(is);
-    auto indptr = _read_vector<std::uint32_t>(is);
-
-    auto m = CSR(std::move(data), std::move(indices), std::move(indptr), nrows,
-                 ncols);
-    return m;
-  }
+  static auto load(const std::string &fname) -> CSR;
 
   /// first read vector size and then vector data
   template <class T>
   static auto _read_vector(std::istream &is) -> std::vector<T> {
-    std::uint32_t _v_size;
+    std::uint32_t _v_size(0);
     is.read(reinterpret_cast<char *>(&_v_size), sizeof(std::uint32_t));
 
     std::vector<T> v;
@@ -152,60 +132,82 @@ struct CSR {
     os.write(reinterpret_cast<const char *>(v.data()), v.size() * sizeof(T));
   }
 
-  /// Saves matrix in a native endian (little endian mostly) binary format.
-  /// First forward write matrix shape and then each vector with it's forward
-  /// size.
-  void save(const std::string &fname) {
-    std::ofstream os(fname, std::ios::binary);
-    if (!os) {
-      throw std::runtime_error(fname);
-    }
-
-    // forward write matrix shape
-    os.write(reinterpret_cast<const char *>(&_nrows), sizeof(std::uint32_t));
-    os.write(reinterpret_cast<const char *>(&_ncols), sizeof(std::uint32_t));
-
-    _write_vector(os, _data);
-    _write_vector(os, _indices);
-    _write_vector(os, _indptr);
-  }
-
-  /// Generate random csr matrix with probability of element being zero equal to
-  /// `prob`
-  static auto random(size_t nrows, size_t ncols, float prob) -> CSR {
-    std::vector<float> data;
-    std::vector<std::uint32_t> indices;
-    std::vector<std::uint32_t> indptr{0};
-
-    auto seed(std::chrono::steady_clock::now().time_since_epoch().count());
-    std::mt19937 rng(seed);
-
-    auto threshold = static_cast<unsigned int>(prob * 100);
-    size_t iptr = 0;
-    for (size_t _i = 0; _i < nrows; ++_i) {
-      for (size_t j = 0; j < ncols; ++j) {
-        auto r = rng();
-        if (r % 100 < threshold) {
-          float v = static_cast<float>(r) / static_cast<float>(rng.max());
-          data.push_back(v);
-          indices.push_back(j);
-          iptr++;
-        }
-      }
-      indptr.push_back(iptr);
-    }
-    auto m = CSR(std::move(data), std::move(indices), std::move(indptr));
-    return m;
-  }
-
+  void save(const std::string &fname);
+  static auto random(size_t nrows, size_t ncols, float prob) -> CSR;
   auto slice(const std::vector<std::uint32_t> &ixs) -> Dense;
 
-  bool operator==(const CSR &o) {
+  auto operator==(const CSR &o) -> bool {
     bool equal = _ncols == o._ncols && _nrows == o._nrows && _data == o._data &&
                  _indices == o._indices && _indptr == o._indptr;
     return equal;
   }
 };
+
+/// Load matrix from a binary format.
+/// First read matrix shape and then each vector with it's forward size.
+auto CSR::load(const std::string &fname) -> CSR {
+  std::ifstream is(fname);
+  if (!is) {
+    throw std::runtime_error(fname);
+  }
+
+  std::uint32_t nrows(0);
+  std::uint32_t ncols(0);
+  is.read(reinterpret_cast<char *>(&nrows), sizeof(std::uint32_t));
+  is.read(reinterpret_cast<char *>(&ncols), sizeof(std::uint32_t));
+
+  auto data = CSR::_read_vector<float>(is);
+  auto indices = CSR::_read_vector<std::uint32_t>(is);
+  auto indptr = CSR::_read_vector<std::uint32_t>(is);
+
+  return CSR(std::move(data), std::move(indices), std::move(indptr), nrows,
+             ncols);
+}
+
+/// Saves matrix in a native endian (little endian mostly) binary format.
+/// First forward write matrix shape and then each vector with it's forward
+/// size.
+void CSR::save(const std::string &fname) {
+  std::ofstream os(fname, std::ios::binary);
+  if (!os) {
+    throw std::runtime_error(fname);
+  }
+
+  // forward write matrix shape
+  os.write(reinterpret_cast<const char *>(&_nrows), sizeof(std::uint32_t));
+  os.write(reinterpret_cast<const char *>(&_ncols), sizeof(std::uint32_t));
+
+  _write_vector(os, _data);
+  _write_vector(os, _indices);
+  _write_vector(os, _indptr);
+}
+
+/// Generate random csr matrix with probability of element being zero equal to
+/// `prob`
+auto CSR::random(size_t nrows, size_t ncols, float prob) -> CSR {
+  std::vector<float> data;
+  std::vector<std::uint32_t> indices;
+  std::vector<std::uint32_t> indptr{0};
+
+  auto seed(std::chrono::steady_clock::now().time_since_epoch().count());
+  std::mt19937 rng(seed);
+
+  auto threshold = static_cast<unsigned int>(prob * 100);
+  size_t iptr = 0;
+  for (size_t _i = 0; _i < nrows; ++_i) {
+    for (size_t j = 0; j < ncols; ++j) {
+      auto r = rng();
+      if (r % 100 < threshold) {
+        auto v = static_cast<float>(r) / static_cast<float>(rng.max());
+        data.push_back(v);
+        indices.push_back(j);
+        iptr++;
+      }
+    }
+    indptr.push_back(iptr);
+  }
+  return CSR(std::move(data), std::move(indices), std::move(indptr));
+}
 
 /**
  *  Performs parallel slicing on indexes.
@@ -230,6 +232,7 @@ auto CSR::slice(const std::vector<std::uint32_t> &ixs) -> Dense {
   };
 
   parallel_for(tbb::blocked_range<size_t>(0, ixs.size()), worker);
+
   return d;
 }
 

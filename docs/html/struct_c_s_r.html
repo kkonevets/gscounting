@@ -98,12 +98,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a005d9d82601b28f827cafa7952888a6d"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_c_s_r.html#a005d9d82601b28f827cafa7952888a6d">slice</a> (const std::vector&lt; std::uint32_t &gt; &amp;ixs) -&gt; <a class="el" href="struct_dense.html">Dense</a></td></tr>
 <tr class="memdesc:a005d9d82601b28f827cafa7952888a6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs parallel slicing on indexes.  <a href="struct_c_s_r.html#a005d9d82601b28f827cafa7952888a6d">More...</a><br /></td></tr>
 <tr class="separator:a005d9d82601b28f827cafa7952888a6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2aed34e422bc0e031443c0085de86a15"><td class="memItemLeft" align="right" valign="top"><a id="a2aed34e422bc0e031443c0085de86a15"></a>
+auto&#160;</td><td class="memItemRight" valign="bottom"><b>operator==</b> (const <a class="el" href="struct_c_s_r.html">CSR</a> &amp;o) -&gt; bool</td></tr>
+<tr class="separator:a2aed34e422bc0e031443c0085de86a15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a71edf16bf61b9cfaa1a01ca425797562"><td class="memItemLeft" align="right" valign="top">static auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_c_s_r.html#a71edf16bf61b9cfaa1a01ca425797562">load</a> (const std::string &amp;fname)</td></tr>
-<tr class="memdesc:a71edf16bf61b9cfaa1a01ca425797562"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load matrix from a binary format.  <a href="struct_c_s_r.html#a71edf16bf61b9cfaa1a01ca425797562">More...</a><br /></td></tr>
-<tr class="separator:a71edf16bf61b9cfaa1a01ca425797562"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6baa0a288504bf32caa7612643a441b7"><td class="memItemLeft" align="right" valign="top">static auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_c_s_r.html#a6baa0a288504bf32caa7612643a441b7">load</a> (const std::string &amp;fname) -&gt; <a class="el" href="struct_c_s_r.html">CSR</a></td></tr>
+<tr class="memdesc:a6baa0a288504bf32caa7612643a441b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load matrix from a binary format.  <a href="struct_c_s_r.html#a6baa0a288504bf32caa7612643a441b7">More...</a><br /></td></tr>
+<tr class="separator:a6baa0a288504bf32caa7612643a441b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e5aa6ddc2e404b1135935e3f0de6a37"><td class="memTemplParams" colspan="2"><a id="a7e5aa6ddc2e404b1135935e3f0de6a37"></a>
 template&lt;class T &gt; </td></tr>
 <tr class="memitem:a7e5aa6ddc2e404b1135935e3f0de6a37"><td class="memTemplItemLeft" align="right" valign="top">static auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_c_s_r.html#a7e5aa6ddc2e404b1135935e3f0de6a37">_read_vector</a> (std::istream &amp;is) -&gt; std::vector&lt; T &gt;</td></tr>
@@ -114,10 +117,10 @@ template&lt;class T &gt; </td></tr>
 <tr class="memitem:ac98ff1c3d9d09db2451f0070c63b645e"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_c_s_r.html#ac98ff1c3d9d09db2451f0070c63b645e">_write_vector</a> (std::ostream &amp;os, const std::vector&lt; T &gt; &amp;v)</td></tr>
 <tr class="memdesc:ac98ff1c3d9d09db2451f0070c63b645e"><td class="mdescLeft">&#160;</td><td class="mdescRight">first forward write vector size and then vector data <br /></td></tr>
 <tr class="separator:ac98ff1c3d9d09db2451f0070c63b645e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa39008f19cd1c76bf3da84d4a9d66f59"><td class="memItemLeft" align="right" valign="top"><a id="aa39008f19cd1c76bf3da84d4a9d66f59"></a>
-static auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_c_s_r.html#aa39008f19cd1c76bf3da84d4a9d66f59">random</a> (size_t nrows, size_t ncols, float prob) -&gt; <a class="el" href="struct_c_s_r.html">CSR</a></td></tr>
-<tr class="memdesc:aa39008f19cd1c76bf3da84d4a9d66f59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate random csr matrix with probability of element being zero equal to <code>prob</code> <br /></td></tr>
-<tr class="separator:aa39008f19cd1c76bf3da84d4a9d66f59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72eba52f8004ecf5927bf3d14f9d9600"><td class="memItemLeft" align="right" valign="top"><a id="a72eba52f8004ecf5927bf3d14f9d9600"></a>
+static auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_c_s_r.html#a72eba52f8004ecf5927bf3d14f9d9600">random</a> (size_t nrows, size_t ncols, float prob) -&gt; <a class="el" href="struct_c_s_r.html">CSR</a></td></tr>
+<tr class="memdesc:a72eba52f8004ecf5927bf3d14f9d9600"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate random csr matrix with probability of element being zero equal to <code>prob</code> <br /></td></tr>
+<tr class="separator:a72eba52f8004ecf5927bf3d14f9d9600"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -143,8 +146,8 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>_ncols</b></td></tr
 
 <p class="definition">Definition at line <a class="el" href="csr__matrix_8hpp_source.html#l00059">59</a> of file <a class="el" href="csr__matrix_8hpp_source.html">csr_matrix.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a71edf16bf61b9cfaa1a01ca425797562"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a71edf16bf61b9cfaa1a01ca425797562">&#9670;&nbsp;</a></span>load()</h2>
+<a id="a6baa0a288504bf32caa7612643a441b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6baa0a288504bf32caa7612643a441b7">&#9670;&nbsp;</a></span>load()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -153,24 +156,24 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>_ncols</b></td></tr
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static auto CSR::load </td>
+          <td class="memname">auto CSR::load </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>fname</em></td><td>)</td>
-          <td></td>
+          <td> -&gt; <a class="el" href="struct_c_s_r.html">CSR</a></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Load matrix from a binary format. </p>
-<p>First it reads matrix shape and then each vector with it's forward size. </p>
+<p>First read matrix shape and then each vector with it's forward size. </p>
 
-<p class="definition">Definition at line <a class="el" href="csr__matrix_8hpp_source.html#l00116">116</a> of file <a class="el" href="csr__matrix_8hpp_source.html">csr_matrix.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="csr__matrix_8hpp_source.html#l00148">148</a> of file <a class="el" href="csr__matrix_8hpp_source.html">csr_matrix.hpp</a>.</p>
 
 </div>
 </div>
@@ -179,9 +182,6 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>_ncols</b></td></tr
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void CSR::save </td>
@@ -191,17 +191,12 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>_ncols</b></td></tr
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Saves matrix in a native endian (little endian mostly) binary format. </p>
-<p>First it forward writes matrix shape and then each vector with it's forward size. </p>
+<p>First forward write matrix shape and then each vector with it's forward size. </p>
 
-<p class="definition">Definition at line <a class="el" href="csr__matrix_8hpp_source.html#l00158">158</a> of file <a class="el" href="csr__matrix_8hpp_source.html">csr_matrix.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="csr__matrix_8hpp_source.html#l00170">170</a> of file <a class="el" href="csr__matrix_8hpp_source.html">csr_matrix.hpp</a>.</p>
 
 </div>
 </div>
@@ -229,7 +224,7 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>_ncols</b></td></tr
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="csr__matrix_8hpp_source.html#l00208">208</a> of file <a class="el" href="csr__matrix_8hpp_source.html">csr_matrix.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="csr__matrix_8hpp_source.html#l00217">217</a> of file <a class="el" href="csr__matrix_8hpp_source.html">csr_matrix.hpp</a>.</p>
 
 </div>
 </div>

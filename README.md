@@ -13,4 +13,8 @@ Need to install TBB (Threading Building Blocks) library for using `std::executio
 
 ##### Build:  
 
-`mkdir build && cd build && cmake .. && cmake --build . && cd ..`  
+`mkdir build && cd build && cmake .. && cmake --build . && cd ..`
+
+##### Test:
+
+`./build/test`
