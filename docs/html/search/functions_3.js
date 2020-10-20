@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['save_36',['save',['../struct_c_s_r.html#a3fc79432e775448fdfd28cd45161c473',1,'CSR']]],
-  ['slice_37',['slice',['../struct_c_s_r.html#a005d9d82601b28f827cafa7952888a6d',1,'CSR']]],
-  ['sort_5funstable_38',['sort_unstable',['../class_external_sorter.html#a7964922346d8b2ae7c435667181aa4d9',1,'ExternalSorter']]]
+  ['save_37',['save',['../struct_c_s_r.html#a3fc79432e775448fdfd28cd45161c473',1,'CSR']]],
+  ['slice_38',['slice',['../struct_c_s_r.html#a005d9d82601b28f827cafa7952888a6d',1,'CSR']]],
+  ['sort_5funstable_39',['sort_unstable',['../class_external_sorter.html#a7964922346d8b2ae7c435667181aa4d9',1,'ExternalSorter']]]
 ];

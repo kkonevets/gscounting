@@ -1,5 +1,16 @@
 // "Copyright 2020 Kirill Konevets"
 
+/*! \mainpage gscounting (GraphSage Counting)
+ *
+ * \section intro Introduction
+ *
+ * Multiple label propagation on graphs with GraphSage. Classical algorithms,
+ * like Label Propagation, solve this task in a deterministic way. This is a
+ * probabilistic aproach using GraphSage algorithm with neighbor
+ * label counts as node features.
+ *
+ */
+
 #include <algorithm>
 #include <cassert>
 #include <chrono>
