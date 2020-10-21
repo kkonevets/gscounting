@@ -18,13 +18,12 @@ include_directories(include /usr/local/include)
 link_directories(/usr/local/lib)
 
 file(GLOB SOURCES 
-    "src/*.cpp"
+    "src/csr_matrix.cpp"
     )
 
-# set(CMAKE_CXX_CLANG_TIDY clang-tidy -checks=abseil*,bugbrone*,cppcoreguidelines*,modernize*,performance*,readability*)
-
-add_executable(gsc ${SOURCES})
-target_link_libraries(gsc tbb)
+add_library(gsc STATIC ${SOURCES})
+add_executable(main "src/main.cpp")
+target_link_libraries(main gsc tbb)
 
 # GOOGLETEST BEGIN
 
@@ -55,13 +54,12 @@ add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googletest-src
 
 file(GLOB TEST_SOURCES
   "tests/test_io.cpp"
-  "src/csr_matrix.cpp"
 )
 
 add_executable(test ${TEST_SOURCES})
 
 # if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-target_link_libraries(test gtest_main tbb)
+target_link_libraries(test gsc gtest_main tbb)
 
 add_test(NAME test COMMAND test)
 
