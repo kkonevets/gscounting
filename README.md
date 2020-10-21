@@ -4,6 +4,9 @@ Multiple label propagation on graphs with GraphSage. Classical algorithms, like 
 ## Install
 Need to install TBB (Threading Building Blocks) library to use `parallel_for` with job stealing and `std::execution` parallel policy (`clang` does not support the policy yet).
 
+###### Apple:
+`brew install tbb`
+
 ###### Debian:  
 `sudo apt install libtbb-dev`
 
