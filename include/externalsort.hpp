@@ -13,7 +13,6 @@
 #include <cmath>
 #include <cstddef>
 #include <cstdio>
-#include <execution>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
@@ -22,6 +21,10 @@
 #include <string>
 #include <utility>
 #include <vector>
+
+#ifndef __clang__
+#include <execution>
+#endif
 
 #include "tools.hpp"
 
