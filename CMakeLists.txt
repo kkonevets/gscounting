@@ -54,7 +54,8 @@ add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googletest-src
                  EXCLUDE_FROM_ALL)
 
 file(GLOB TEST_SOURCES
-    "tests/*.cpp"
+  "tests/test_io.cpp"
+  "src/csr_matrix.cpp"
 )
 
 add_executable(test ${TEST_SOURCES})
