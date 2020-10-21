@@ -1,6 +1,7 @@
 .#*
 .clangd
 .env
+.cache
 /target
 /build
 /CMakeFiles
