@@ -6,11 +6,17 @@ Need to install TBB (Threading Building Blocks) library to use `parallel_for` wi
 
 ###### Apple:
 `brew install tbb`
+
 ###### Debian:  
 `sudo apt install libtbb-dev`
+
 ###### CentOS:  
 `yum install tbb-devel`  
+
 ##### Build:  
+
 `mkdir build && cd build && cmake .. && cmake --build . && cd ..`
+
 ##### Test:
+
 `./build/test`
