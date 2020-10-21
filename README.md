@@ -2,7 +2,7 @@
 Multiple label propagation on graphs with GraphSage. Classical algorithms, like Label Propagation, solve this task in a deterministic way. This is a probabilistic aproach using GraphSage algorithm with neighbor label counts as node features.
 
 ## Install
-Need to install TBB (Threading Building Blocks) library for using `std::execution` parallel policy, `clang` does not support TBB.
+Need to install TBB (Threading Building Blocks) library to use `parallel_for` with job stealing and `std::execution` parallel policy (`clang` does not support the policy yet).
 
 ###### Debian:  
 `sudo apt install libtbb-dev`
