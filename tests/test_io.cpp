@@ -118,30 +118,28 @@ TEST(ExternalSorterTest, CheckEqual) {
   }
 }
 
-TEST(CSRCheck, Slice) {
+CSR get_simple_csr() {
   std::vector<std::uint32_t> indptr = {0, 1, 1, 3};
   std::vector<std::uint32_t> indices = {0, 0, 1};
   std::vector<float> data = {1, 4, 5};
 
-  CSR m(std::move(data), std::move(indices), std::move(indptr), 3, 3);
+  return CSR(std::move(data), std::move(indices), std::move(indptr), 3, 3);
+}
 
+TEST(CSRCheck, Slice) {
+  auto m = get_simple_csr();
   auto d{m.slice({0, 2})};
   std::vector<float> res{1, 0, 0, 4, 5, 0};
   ASSERT_EQ(d.data, res);
 }
 
 TEST(CSRCheck, SaveLoad) {
-  std::vector<std::uint32_t> indptr = {0, 1, 1, 3};
-  std::vector<std::uint32_t> indices = {0, 0, 1};
-  std::vector<float> data = {1, 4, 5};
-
-  CSR m(std::move(data), std::move(indices), std::move(indptr), 3, 3);
-
+  auto m = get_simple_csr();
   std::string fname(pjoin("m.bin"));
   m.save(fname);
   auto m_loaded{CSR::load(fname)};
 
-  ASSERT_TRUE(m == m_loaded);
+  ASSERT_EQ(m, m_loaded);
 }
 
 TEST(CSRCheck, DISABLED_Performance) {

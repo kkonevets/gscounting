@@ -76,7 +76,7 @@ struct CSR {
 
   auto slice(const std::vector<std::uint32_t> &ixs) -> Dense;
 
-  auto operator==(const CSR &o) -> bool {
+  auto operator==(const CSR &o) const -> bool {
     bool equal = _ncols == o._ncols && _nrows == o._nrows && _data == o._data &&
                  _indices == o._indices && _indptr == o._indptr;
     return equal;
