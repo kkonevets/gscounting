@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['random_35',['random',['../struct_c_s_r.html#a72eba52f8004ecf5927bf3d14f9d9600',1,'CSR']]],
-  ['read_5fvec_36',['read_vec',['../tools_8hpp.html#ae6b1c134b0e59b73058b808dec2b4719',1,'tools.hpp']]]
+  ['densematrixfree_48',['DenseMatrixFree',['../c__api_8h.html#a66b7b08fc482ba23318ab26877c7d26a',1,'c_api.cpp']]],
+  ['densematrixslicecsrmatrix_49',['DenseMatrixSliceCSRMatrix',['../c__api_8h.html#a601720f8fbf72df12491180ecbc8a3e4',1,'c_api.cpp']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['gscounting_20_28graphsage_20counting_29_41',['gscounting (GraphSage Counting)',['../index.html',1,'']]]
+  ['gscounting_20_28graphsage_20counting_29_57',['gscounting (GraphSage Counting)',['../index.html',1,'']]]
 ];

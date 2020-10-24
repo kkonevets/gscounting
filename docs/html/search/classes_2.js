@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['dense_23',['Dense',['../struct_dense.html',1,'']]]
+  ['dense_31',['Dense',['../struct_dense.html',1,'']]]
 ];

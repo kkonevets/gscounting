@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['load_34',['load',['../struct_c_s_r.html#a6baa0a288504bf32caa7612643a441b7',1,'CSR']]]
+  ['csrmatrixfree_45',['CSRMatrixFree',['../c__api_8h.html#a4bff4a19115d463105c9c8c7bd0f839b',1,'c_api.cpp']]],
+  ['csrmatrixloadfromfile_46',['CSRMatrixLoadFromFile',['../c__api_8h.html#aba7721e81eac175f9a36228536d763d7',1,'c_api.cpp']]],
+  ['csrmatrixsavebinary_47',['CSRMatrixSaveBinary',['../c__api_8h.html#a05450218cd017b47d12b204c67938965',1,'c_api.cpp']]]
 ];
