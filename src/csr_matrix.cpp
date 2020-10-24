@@ -77,7 +77,7 @@ void CSR::_write_vector(std::ostream &os, const std::vector<T> &v) {
 
 /// Load matrix from a binary format.
 /// First read matrix shape and then each vector with it's forward size.
-auto CSR::load(const std::string &fname) -> CSR {
+auto CSR::load(const std::string &fname) -> CSR * {
   std::ifstream is(fname);
   if (!is) {
     throw std::runtime_error(fname);
@@ -92,8 +92,8 @@ auto CSR::load(const std::string &fname) -> CSR {
   auto indices = CSR::_read_vector<std::uint32_t>(is);
   auto indptr = CSR::_read_vector<std::uint32_t>(is);
 
-  return CSR(std::move(data), std::move(indices), std::move(indptr), nrows,
-             ncols);
+  return new CSR(std::move(data), std::move(indices), std::move(indptr), nrows,
+                 ncols);
 }
 
 /// Saves matrix in a native endian (little endian mostly) binary format.
@@ -146,25 +146,29 @@ auto CSR::random(size_t nrows, size_t ncols, float prob) -> CSR {
  *  It splits `ixs` on chunks and each chunk is fed to a separate thread
  *  @param ixs List of ixs to slice on, must not be out of range
  */
-auto CSR::slice(const std::vector<std::uint32_t> &ixs) -> Dense {
-  Dense d(ixs.size(), _ncols);
+auto CSR::slice(const int *ixs, size_t size) -> Dense * {
+  auto d = new Dense(size, _ncols);
 
   auto worker = [&](const tbb::blocked_range<size_t> &r) {
     for (auto i = r.begin(); i != r.end(); ++i) {
-      size_t ix = ixs[i];
-      if (ix > _nrows) {
-        std::cerr << "Index " << ix << " is out of range (0, " << _nrows << ")"
-                  << std::endl;
-        return;
+      auto ixi{ixs[i]};
+      if (ixi < 0) {
+        ixi += _nrows;
+      }
+      size_t ix = static_cast<size_t>(ixi);
+      if (ix >= _nrows) {
+        std::ostringstream ss;
+        ss << "Index " << ix << " is out of range (0, " << _nrows << ")";
+        throw std::runtime_error(ss.str());
       }
       auto _i = i * _ncols;
       for (size_t j = _indptr[ix]; j < _indptr[ix + 1]; ++j) {
-        d.data[_i + _indices[j]] = _data[j];
+        d->data[_i + _indices[j]] = _data[j];
       }
     }
   };
 
-  parallel_for(tbb::blocked_range<size_t>(0, ixs.size()), worker);
+  parallel_for(tbb::blocked_range<size_t>(0, size), worker);
 
   return d;
 }

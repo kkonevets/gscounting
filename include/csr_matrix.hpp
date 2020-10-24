@@ -8,6 +8,8 @@
 #ifndef INCLUDE_CSR_MATRIX_HPP_
 #define INCLUDE_CSR_MATRIX_HPP_
 
+#define TBB_SUPPRESS_DEPRECATED_MESSAGES 1
+
 #include "tbb/tbb.h"
 #include "tools.hpp"
 
@@ -68,13 +70,13 @@ struct CSR {
   template <class T>
   static void _write_vector(std::ostream &os, const std::vector<T> &v);
 
-  static auto load(const std::string &fname) -> CSR;
+  static auto load(const std::string &fname) -> CSR *;
 
   void save(const std::string &fname);
 
   static auto random(size_t nrows, size_t ncols, float prob) -> CSR;
 
-  auto slice(const std::vector<std::uint32_t> &ixs) -> Dense;
+  auto slice(const int *ixs, size_t size) -> Dense *;
 
   auto operator==(const CSR &o) const -> bool {
     return _ncols == o._ncols && _nrows == o._nrows && _data == o._data &&

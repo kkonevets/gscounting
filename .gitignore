@@ -10,7 +10,7 @@ CMakeCache.txt
 Makefile
 .DS_Store
 .ipynb_checkpoints
-__pycache__/*
+*/__pycache__/*
 *.pyc
 *.sublime*
 MANIFEST

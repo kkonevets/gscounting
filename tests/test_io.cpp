@@ -1,8 +1,10 @@
 // "Copyright 2020 Kirill Konevets"
 
+#include <array>
 #include <cstddef>
 #include <filesystem>
 #include <iostream>
+#include <memory>
 #include <random>
 #include <string>
 #include <vector>
@@ -128,9 +130,10 @@ CSR get_simple_csr() {
 
 TEST(CSRCheck, Slice) {
   auto m = get_simple_csr();
-  auto d{m.slice({0, 2})};
-  std::vector<float> res{1, 0, 0, 4, 5, 0};
-  ASSERT_EQ(d.data, res);
+  std::array<int, 3> ixs{0, 2, -3};
+  std::unique_ptr<Dense> d{m.slice(ixs.data(), ixs.size())};
+  std::vector<float> res{1, 0, 0, 4, 5, 0, 1, 0, 0};
+  ASSERT_EQ(d->data, res);
 }
 
 TEST(CSRCheck, SaveLoad) {
@@ -139,22 +142,24 @@ TEST(CSRCheck, SaveLoad) {
   m.save(fname);
   auto m_loaded{CSR::load(fname)};
 
-  ASSERT_EQ(m, m_loaded);
+  ASSERT_EQ(m, *m_loaded);
 }
 
 TEST(CSRCheck, DISABLED_Performance) {
   size_t dim = 10000;
   auto m(CSR::random(dim, dim, 0.5));
 
-  std::vector<std::uint32_t> ixs;
+  std::vector<int> ixs;
   for (std::uint32_t i = 0; i < dim; i += 10) {
     ixs.push_back(i);
   }
 
   for (auto i = 0; i < 1000; i++) {
-    m.slice(ixs);
+    std::unique_ptr<Dense>(m.slice(ixs.data(), ixs.size()));
   }
 }
+
+TEST(C_API, SliceCSRMatrix) {}
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
