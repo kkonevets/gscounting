@@ -1,0 +1,171 @@
+\hypertarget{c__api_8h}{}\doxysection{include/c\+\_\+api.h File Reference}
+\label{c__api_8h}\index{include/c\_api.h@{include/c\_api.h}}
+
+
+C A\+PI of G\+S\+Counting, used for interfacing to other languages.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_slice_args}{Slice\+Args}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{c__api_8h_a3828e2f2214555ca75d07f69224251c1}\label{c__api_8h_a3828e2f2214555ca75d07f69224251c1}} 
+\#define {\bfseries G\+S\+C\+\_\+\+E\+X\+T\+E\+R\+N\+\_\+C}
+\item 
+\mbox{\Hypertarget{c__api_8h_a2fb612b801de536942933e4496d3ae15}\label{c__api_8h_a2fb612b801de536942933e4496d3ae15}} 
+\#define {\bfseries G\+S\+C\+\_\+\+D\+LL}~G\+S\+C\+\_\+\+E\+X\+T\+E\+R\+N\+\_\+C \+\_\+\+\_\+attribute\+\_\+\+\_\+((visibility(\char`\"{}default\char`\"{})))
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{c__api_8h_ae0f1496d08d60a6269898443cd38216d}\label{c__api_8h_ae0f1496d08d60a6269898443cd38216d}} 
+typedef void $\ast$ {\bfseries C\+S\+R\+Matrix\+Handle}
+\item 
+\mbox{\Hypertarget{c__api_8h_a72e96cae62bb8f69bf7bc8230ffab8fa}\label{c__api_8h_a72e96cae62bb8f69bf7bc8230ffab8fa}} 
+typedef void $\ast$ {\bfseries Dense\+Matrix\+Handle}
+\item 
+\mbox{\Hypertarget{c__api_8h_a29311be91bf9e12379320e85e0646260}\label{c__api_8h_a29311be91bf9e12379320e85e0646260}} 
+typedef struct \mbox{\hyperlink{struct_slice_args}{Slice\+Args}} {\bfseries Slice\+Args}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+G\+S\+C\+\_\+\+D\+LL int \mbox{\hyperlink{c__api_8h_aba7721e81eac175f9a36228536d763d7}{C\+S\+R\+Matrix\+Load\+From\+File}} (const char $\ast$fname, C\+S\+R\+Matrix\+Handle $\ast$out)
+\begin{DoxyCompactList}\small\item\em load a \mbox{\hyperlink{struct_c_s_r}{C\+SR}} matrix \end{DoxyCompactList}\item 
+G\+S\+C\+\_\+\+D\+LL int \mbox{\hyperlink{c__api_8h_a05450218cd017b47d12b204c67938965}{C\+S\+R\+Matrix\+Save\+Binary}} (C\+S\+R\+Matrix\+Handle handle, const char $\ast$fname)
+\begin{DoxyCompactList}\small\item\em save a \mbox{\hyperlink{struct_c_s_r}{C\+SR}} matrix into binary file \end{DoxyCompactList}\item 
+G\+S\+C\+\_\+\+D\+LL int \mbox{\hyperlink{c__api_8h_a601720f8fbf72df12491180ecbc8a3e4}{Dense\+Matrix\+Slice\+C\+S\+R\+Matrix}} (\mbox{\hyperlink{struct_slice_args}{Slice\+Args}} $\ast$args)
+\begin{DoxyCompactList}\small\item\em create a new dense matrix from sliced content of existing \mbox{\hyperlink{struct_c_s_r}{C\+SR}} matrix \end{DoxyCompactList}\item 
+G\+S\+C\+\_\+\+D\+LL int \mbox{\hyperlink{c__api_8h_a4bff4a19115d463105c9c8c7bd0f839b}{C\+S\+R\+Matrix\+Free}} (C\+S\+R\+Matrix\+Handle handle)
+\begin{DoxyCompactList}\small\item\em free space in \mbox{\hyperlink{struct_c_s_r}{C\+SR}} matrix \end{DoxyCompactList}\item 
+G\+S\+C\+\_\+\+D\+LL int \mbox{\hyperlink{c__api_8h_a66b7b08fc482ba23318ab26877c7d26a}{Dense\+Matrix\+Free}} (Dense\+Matrix\+Handle handle)
+\begin{DoxyCompactList}\small\item\em free space in dense matrix \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+C A\+PI of G\+S\+Counting, used for interfacing to other languages. 
+
+Copyright (c) 2020 by Contributors
+
+\begin{DoxyAuthor}{Author}
+Kirill Konevets 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{c__api_8h_a4bff4a19115d463105c9c8c7bd0f839b}\label{c__api_8h_a4bff4a19115d463105c9c8c7bd0f839b}} 
+\index{c\_api.h@{c\_api.h}!CSRMatrixFree@{CSRMatrixFree}}
+\index{CSRMatrixFree@{CSRMatrixFree}!c\_api.h@{c\_api.h}}
+\doxysubsubsection{\texorpdfstring{CSRMatrixFree()}{CSRMatrixFree()}}
+{\footnotesize\ttfamily G\+S\+C\+\_\+\+D\+LL int C\+S\+R\+Matrix\+Free (\begin{DoxyParamCaption}\item[{C\+S\+R\+Matrix\+Handle}]{handle }\end{DoxyParamCaption})}
+
+
+
+free space in \mbox{\hyperlink{struct_c_s_r}{C\+SR}} matrix 
+
+\begin{DoxyReturn}{Returns}
+0 when success, -\/1 when failure happens 
+\end{DoxyReturn}
+
+
+Definition at line 40 of file c\+\_\+api.\+cpp.
+
+\mbox{\Hypertarget{c__api_8h_aba7721e81eac175f9a36228536d763d7}\label{c__api_8h_aba7721e81eac175f9a36228536d763d7}} 
+\index{c\_api.h@{c\_api.h}!CSRMatrixLoadFromFile@{CSRMatrixLoadFromFile}}
+\index{CSRMatrixLoadFromFile@{CSRMatrixLoadFromFile}!c\_api.h@{c\_api.h}}
+\doxysubsubsection{\texorpdfstring{CSRMatrixLoadFromFile()}{CSRMatrixLoadFromFile()}}
+{\footnotesize\ttfamily G\+S\+C\+\_\+\+D\+LL int C\+S\+R\+Matrix\+Load\+From\+File (\begin{DoxyParamCaption}\item[{const char $\ast$}]{fname,  }\item[{C\+S\+R\+Matrix\+Handle $\ast$}]{out }\end{DoxyParamCaption})}
+
+
+
+load a \mbox{\hyperlink{struct_c_s_r}{C\+SR}} matrix 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fname} & the name of the file \\
+\hline
+{\em out} & a loaded \mbox{\hyperlink{struct_c_s_r}{C\+SR}} matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 when success, -\/1 when failure happens 
+\end{DoxyReturn}
+
+
+Definition at line 9 of file c\+\_\+api.\+cpp.
+
+\mbox{\Hypertarget{c__api_8h_a05450218cd017b47d12b204c67938965}\label{c__api_8h_a05450218cd017b47d12b204c67938965}} 
+\index{c\_api.h@{c\_api.h}!CSRMatrixSaveBinary@{CSRMatrixSaveBinary}}
+\index{CSRMatrixSaveBinary@{CSRMatrixSaveBinary}!c\_api.h@{c\_api.h}}
+\doxysubsubsection{\texorpdfstring{CSRMatrixSaveBinary()}{CSRMatrixSaveBinary()}}
+{\footnotesize\ttfamily G\+S\+C\+\_\+\+D\+LL int C\+S\+R\+Matrix\+Save\+Binary (\begin{DoxyParamCaption}\item[{C\+S\+R\+Matrix\+Handle}]{handle,  }\item[{const char $\ast$}]{fname }\end{DoxyParamCaption})}
+
+
+
+save a \mbox{\hyperlink{struct_c_s_r}{C\+SR}} matrix into binary file 
+
+
+\begin{DoxyParams}{Parameters}
+{\em handle} & an instance of \mbox{\hyperlink{struct_c_s_r}{C\+SR}} matrix \\
+\hline
+{\em fname} & file name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 when success, -\/1 when failure happens 
+\end{DoxyReturn}
+
+
+Definition at line 16 of file c\+\_\+api.\+cpp.
+
+\mbox{\Hypertarget{c__api_8h_a66b7b08fc482ba23318ab26877c7d26a}\label{c__api_8h_a66b7b08fc482ba23318ab26877c7d26a}} 
+\index{c\_api.h@{c\_api.h}!DenseMatrixFree@{DenseMatrixFree}}
+\index{DenseMatrixFree@{DenseMatrixFree}!c\_api.h@{c\_api.h}}
+\doxysubsubsection{\texorpdfstring{DenseMatrixFree()}{DenseMatrixFree()}}
+{\footnotesize\ttfamily G\+S\+C\+\_\+\+D\+LL int Dense\+Matrix\+Free (\begin{DoxyParamCaption}\item[{Dense\+Matrix\+Handle}]{handle }\end{DoxyParamCaption})}
+
+
+
+free space in dense matrix 
+
+\begin{DoxyReturn}{Returns}
+0 when success, -\/1 when failure happens 
+\end{DoxyReturn}
+
+
+Definition at line 47 of file c\+\_\+api.\+cpp.
+
+\mbox{\Hypertarget{c__api_8h_a601720f8fbf72df12491180ecbc8a3e4}\label{c__api_8h_a601720f8fbf72df12491180ecbc8a3e4}} 
+\index{c\_api.h@{c\_api.h}!DenseMatrixSliceCSRMatrix@{DenseMatrixSliceCSRMatrix}}
+\index{DenseMatrixSliceCSRMatrix@{DenseMatrixSliceCSRMatrix}!c\_api.h@{c\_api.h}}
+\doxysubsubsection{\texorpdfstring{DenseMatrixSliceCSRMatrix()}{DenseMatrixSliceCSRMatrix()}}
+{\footnotesize\ttfamily G\+S\+C\+\_\+\+D\+LL int Dense\+Matrix\+Slice\+C\+S\+R\+Matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_slice_args}{Slice\+Args}} $\ast$}]{args }\end{DoxyParamCaption})}
+
+
+
+create a new dense matrix from sliced content of existing \mbox{\hyperlink{struct_c_s_r}{C\+SR}} matrix 
+
+
+\begin{DoxyParams}{Parameters}
+{\em handle} & instance of \mbox{\hyperlink{struct_c_s_r}{C\+SR}} matrix to be sliced \\
+\hline
+{\em idxset} & index set \\
+\hline
+{\em len} & length of index set \\
+\hline
+{\em out} & a sliced new matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 when success, -\/1 when failure happens 
+\end{DoxyReturn}
+
+
+Definition at line 25 of file c\+\_\+api.\+cpp.
+

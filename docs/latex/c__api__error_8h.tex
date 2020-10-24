@@ -1,0 +1,68 @@
+\hypertarget{c__api__error_8h}{}\doxysection{include/c\+\_\+api\+\_\+error.h File Reference}
+\label{c__api__error_8h}\index{include/c\_api\_error.h@{include/c\_api\_error.h}}
+
+
+Error handling for C A\+PI.  
+
+
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{c__api__error_8h_af2749c030db95badb50ed554fa970aa2}\label{c__api__error_8h_af2749c030db95badb50ed554fa970aa2}} 
+\#define {\bfseries A\+P\+I\+\_\+\+B\+E\+G\+IN}()~try \{
+\item 
+\#define {\bfseries A\+P\+I\+\_\+\+E\+ND}()
+\item 
+\#define {\bfseries C\+H\+E\+C\+K\+\_\+\+H\+A\+N\+D\+LE}()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Error handling for C A\+PI. 
+
+Copyright (c) 2020 by Contributors
+
+\begin{DoxyAuthor}{Author}
+Kirill Konevets 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{c__api__error_8h_a815924af9c30c750c92e112678f1b7f3}\label{c__api__error_8h_a815924af9c30c750c92e112678f1b7f3}} 
+\index{c\_api\_error.h@{c\_api\_error.h}!API\_END@{API\_END}}
+\index{API\_END@{API\_END}!c\_api\_error.h@{c\_api\_error.h}}
+\doxysubsubsection{\texorpdfstring{API\_END}{API\_END}}
+{\footnotesize\ttfamily \#define A\+P\+I\+\_\+\+E\+ND(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{  \}                                                                            \(\backslash\)}
+\DoxyCodeLine{  catch (std::exception \textcolor{keyword}{const} \&\_except\_) \{                                     \(\backslash\)}
+\DoxyCodeLine{    std::cerr << \_except\_.what();                                              \(\backslash\)}
+\DoxyCodeLine{    return -\/1;                                                                 \(\backslash\)}
+\DoxyCodeLine{  \}                                                                            \(\backslash\)}
+\DoxyCodeLine{  return 0;}
+
+\end{DoxyCode}
+
+
+Definition at line 13 of file c\+\_\+api\+\_\+error.\+h.
+
+\mbox{\Hypertarget{c__api__error_8h_ac55a6bc9170c141ad628db8395d0e42f}\label{c__api__error_8h_ac55a6bc9170c141ad628db8395d0e42f}} 
+\index{c\_api\_error.h@{c\_api\_error.h}!CHECK\_HANDLE@{CHECK\_HANDLE}}
+\index{CHECK\_HANDLE@{CHECK\_HANDLE}!c\_api\_error.h@{c\_api\_error.h}}
+\doxysubsubsection{\texorpdfstring{CHECK\_HANDLE}{CHECK\_HANDLE}}
+{\footnotesize\ttfamily \#define C\+H\+E\+C\+K\+\_\+\+H\+A\+N\+D\+LE(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{  \textcolor{keywordflow}{if} (handle == \textcolor{keyword}{nullptr})                                                       \(\backslash\)}
+\DoxyCodeLine{    std::cerr                                                                  \(\backslash\)}
+\DoxyCodeLine{        << \textcolor{stringliteral}{"{}CSRMatrix/DenseMatrix has not been intialized or has already "{}}     \(\backslash\)}
+\DoxyCodeLine{           \textcolor{stringliteral}{"{}been disposed."{}};}
+
+\end{DoxyCode}
+
+
+Definition at line 21 of file c\+\_\+api\+\_\+error.\+h.
+
