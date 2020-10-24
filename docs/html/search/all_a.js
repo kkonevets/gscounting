@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['tools_2ehpp_32',['tools.hpp',['../tools_8hpp.html',1,'']]]
+  ['ncols_5fout_31',['ncols_out',['../struct_slice_args.html#afcb42e2b7da64dca2496b838cbbf8a48',1,'SliceArgs']]],
+  ['nrows_5fout_32',['nrows_out',['../struct_slice_args.html#aa04eb7324594117465471da8a8714814',1,'SliceArgs']]]
 ];

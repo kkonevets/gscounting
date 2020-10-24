@@ -86,6 +86,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_slice_args.html">SliceArgs</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents set of arguments to call <code><a class="el" href="c__api_8h.html#a601720f8fbf72df12491180ecbc8a3e4" title="create a new Dense matrix as a slice of existing CSR matrix">DenseMatrixSliceCSRMatrix()</a></code>  <a href="struct_slice_args.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
@@ -106,7 +107,8 @@ typedef void *&#160;</td><td class="memItemRight" valign="bottom"><b>CSRMatrixHa
 typedef void *&#160;</td><td class="memItemRight" valign="bottom"><b>DenseMatrixHandle</b></td></tr>
 <tr class="separator:a72e96cae62bb8f69bf7bc8230ffab8fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29311be91bf9e12379320e85e0646260"><td class="memItemLeft" align="right" valign="top"><a id="a29311be91bf9e12379320e85e0646260"></a>
-typedef struct <a class="el" href="struct_slice_args.html">SliceArgs</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SliceArgs</b></td></tr>
+typedef struct <a class="el" href="struct_slice_args.html">SliceArgs</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c__api_8h.html#a29311be91bf9e12379320e85e0646260">SliceArgs</a></td></tr>
+<tr class="memdesc:a29311be91bf9e12379320e85e0646260"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents set of arguments to call <code><a class="el" href="c__api_8h.html#a601720f8fbf72df12491180ecbc8a3e4" title="create a new Dense matrix as a slice of existing CSR matrix">DenseMatrixSliceCSRMatrix()</a></code> <br /></td></tr>
 <tr class="separator:a29311be91bf9e12379320e85e0646260"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -118,7 +120,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:a05450218cd017b47d12b204c67938965"><td class="mdescLeft">&#160;</td><td class="mdescRight">save a <a class="el" href="struct_c_s_r.html" title="Compressed Sparse Row matrix.">CSR</a> matrix into binary file  <a href="c__api_8h.html#a05450218cd017b47d12b204c67938965">More...</a><br /></td></tr>
 <tr class="separator:a05450218cd017b47d12b204c67938965"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a601720f8fbf72df12491180ecbc8a3e4"><td class="memItemLeft" align="right" valign="top">GSC_DLL int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c__api_8h.html#a601720f8fbf72df12491180ecbc8a3e4">DenseMatrixSliceCSRMatrix</a> (<a class="el" href="struct_slice_args.html">SliceArgs</a> *args)</td></tr>
-<tr class="memdesc:a601720f8fbf72df12491180ecbc8a3e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">create a new dense matrix from sliced content of existing <a class="el" href="struct_c_s_r.html" title="Compressed Sparse Row matrix.">CSR</a> matrix  <a href="c__api_8h.html#a601720f8fbf72df12491180ecbc8a3e4">More...</a><br /></td></tr>
+<tr class="memdesc:a601720f8fbf72df12491180ecbc8a3e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">create a new <a class="el" href="struct_dense.html" title="Dense matrix representation.">Dense</a> matrix as a slice of existing <a class="el" href="struct_c_s_r.html" title="Compressed Sparse Row matrix.">CSR</a> matrix  <a href="c__api_8h.html#a601720f8fbf72df12491180ecbc8a3e4">More...</a><br /></td></tr>
 <tr class="separator:a601720f8fbf72df12491180ecbc8a3e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4bff4a19115d463105c9c8c7bd0f839b"><td class="memItemLeft" align="right" valign="top">GSC_DLL int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c__api_8h.html#a4bff4a19115d463105c9c8c7bd0f839b">CSRMatrixFree</a> (CSRMatrixHandle handle)</td></tr>
 <tr class="memdesc:a4bff4a19115d463105c9c8c7bd0f839b"><td class="mdescLeft">&#160;</td><td class="mdescRight">free space in <a class="el" href="struct_c_s_r.html" title="Compressed Sparse Row matrix.">CSR</a> matrix  <a href="c__api_8h.html#a4bff4a19115d463105c9c8c7bd0f839b">More...</a><br /></td></tr>
@@ -276,13 +278,10 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>create a new dense matrix from sliced content of existing <a class="el" href="struct_c_s_r.html" title="Compressed Sparse Row matrix.">CSR</a> matrix </p>
+<p>create a new <a class="el" href="struct_dense.html" title="Dense matrix representation.">Dense</a> matrix as a slice of existing <a class="el" href="struct_c_s_r.html" title="Compressed Sparse Row matrix.">CSR</a> matrix </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">handle</td><td>instance of <a class="el" href="struct_c_s_r.html" title="Compressed Sparse Row matrix.">CSR</a> matrix to be sliced </td></tr>
-    <tr><td class="paramname">idxset</td><td>index set </td></tr>
-    <tr><td class="paramname">len</td><td>length of index set </td></tr>
-    <tr><td class="paramname">out</td><td>a sliced new matrix </td></tr>
+    <tr><td class="paramname">args</td><td>pointer to <a class="el" href="struct_slice_args.html" title="Represents set of arguments to call DenseMatrixSliceCSRMatrix()">SliceArgs</a>, output is written back to <code>args</code> </td></tr>
   </table>
   </dd>
 </dl>

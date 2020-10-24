@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['load_25',['load',['../struct_c_s_r.html#af6cba77fc889ed607fcf207f9439a2dc',1,'CSR']]]
+  ['idxset_25',['idxset',['../struct_slice_args.html#a50d99cbc68821370386066f3908cf50c',1,'SliceArgs']]]
 ];

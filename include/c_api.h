@@ -26,13 +26,21 @@
 typedef void *CSRMatrixHandle;
 typedef void *DenseMatrixHandle;
 
+/// Represents set of arguments to call `DenseMatrixSliceCSRMatrix()`
 typedef struct SliceArgs {
+  /// handle to CSR matrix
   CSRMatrixHandle csr_handle;
+  /// indices to slice with
   const int *idxset;
+  /// length of `idxset`
   uint64_t len;
+  /// handle to resulting Dense matrix
   DenseMatrixHandle handle_out;
+  /// poiner to a contiguous data array of Dense matrix
   float *data_out;
+  /// number of rows in Dense matrix
   uint64_t nrows_out;
+  /// number of columns in Dense matrix
   uint64_t ncols_out;
 } SliceArgs;
 
@@ -53,11 +61,8 @@ GSC_DLL int CSRMatrixLoadFromFile(const char *fname, CSRMatrixHandle *out);
 GSC_DLL int CSRMatrixSaveBinary(CSRMatrixHandle handle, const char *fname);
 
 /*!
- * \brief create a new dense matrix from sliced content of existing CSR matrix
- * \param handle instance of CSR matrix to be sliced
- * \param idxset index set
- * \param len length of index set
- * \param out a sliced new matrix
+ * \brief create a new Dense matrix as a slice of existing CSR matrix
+ * \param args pointer to SliceArgs, output is written back to `args`
  * \return 0 when success, -1 when failure happens
  */
 GSC_DLL int DenseMatrixSliceCSRMatrix(SliceArgs *args);
