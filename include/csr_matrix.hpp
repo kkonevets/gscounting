@@ -64,18 +64,32 @@ struct CSR {
   explicit CSR(vec_f &&data, vec_u &&indices, vec_u &&indptr, size_t nrows,
                size_t ncols);
 
+  /// first read vector size and then vector data
   template <class T>
   static auto _read_vector(std::istream &is) -> std::vector<T>;
 
+  /// first forward write vector size and then vector data
   template <class T>
   static void _write_vector(std::ostream &os, const std::vector<T> &v);
 
+  /// Load matrix from a binary format.
+  /// First read matrix shape and then each vector with it's forward size.
   static auto load(const std::string &fname) -> CSR *;
 
+  /// Saves matrix in a native endian (little endian mostly) binary format.
+  /// First forward write matrix shape and then each vector with it's forward
+  /// size.
   void save(const std::string &fname);
 
+  /// Generate random csr matrix with probability of element being zero equal to
+  /// `prob`
   static auto random(size_t nrows, size_t ncols, float prob) -> CSR;
 
+  /**
+   *  Performs parallel slicing on indexes.
+   *  It splits `ixs` on chunks and each chunk is fed to a separate thread
+   *  @param ixs List of ixs to slice on, must not be out of range
+   */
   auto slice(const int *ixs, size_t size) -> Dense *;
 
   auto operator==(const CSR &o) const -> bool {

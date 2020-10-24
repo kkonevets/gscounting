@@ -56,7 +56,6 @@ CSR::CSR(vec_f &&data, vec_u &&indices, vec_u &&indptr, size_t nrows = 0,
   }
 }
 
-/// first read vector size and then vector data
 template <class T> auto CSR::_read_vector(std::istream &is) -> std::vector<T> {
   std::uint32_t _v_size(0);
   is.read(reinterpret_cast<char *>(&_v_size), sizeof(std::uint32_t));
@@ -67,7 +66,6 @@ template <class T> auto CSR::_read_vector(std::istream &is) -> std::vector<T> {
   return v;
 }
 
-/// first forward write vector size and then vector data
 template <class T>
 void CSR::_write_vector(std::ostream &os, const std::vector<T> &v) {
   auto _v_size(static_cast<std::uint32_t>(v.size()));
@@ -75,8 +73,6 @@ void CSR::_write_vector(std::ostream &os, const std::vector<T> &v) {
   os.write(reinterpret_cast<const char *>(v.data()), v.size() * sizeof(T));
 }
 
-/// Load matrix from a binary format.
-/// First read matrix shape and then each vector with it's forward size.
 auto CSR::load(const std::string &fname) -> CSR * {
   std::ifstream is(fname);
   if (!is) {
@@ -96,9 +92,6 @@ auto CSR::load(const std::string &fname) -> CSR * {
                  ncols);
 }
 
-/// Saves matrix in a native endian (little endian mostly) binary format.
-/// First forward write matrix shape and then each vector with it's forward
-/// size.
 void CSR::save(const std::string &fname) {
   std::ofstream os(fname, std::ios::binary);
   if (!os) {
@@ -114,8 +107,6 @@ void CSR::save(const std::string &fname) {
   _write_vector(os, _indptr);
 }
 
-/// Generate random csr matrix with probability of element being zero equal to
-/// `prob`
 auto CSR::random(size_t nrows, size_t ncols, float prob) -> CSR {
   std::vector<float> data;
   std::vector<std::uint32_t> indices;
@@ -141,11 +132,6 @@ auto CSR::random(size_t nrows, size_t ncols, float prob) -> CSR {
   return CSR(std::move(data), std::move(indices), std::move(indptr));
 }
 
-/**
- *  Performs parallel slicing on indexes.
- *  It splits `ixs` on chunks and each chunk is fed to a separate thread
- *  @param ixs List of ixs to slice on, must not be out of range
- */
 auto CSR::slice(const int *ixs, size_t size) -> Dense * {
   auto d = new Dense(size, _ncols);
 
