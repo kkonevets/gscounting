@@ -8,12 +8,16 @@ class DenseMatrix:
     def __init__(self, handle, data, shape):
         self.handle = ctypes.c_void_p(handle)
         self.data = data
-        self.shape = shape
+        self._shape = shape
 
     @property
     def numpy(self):
         if hasattr(self, "handle") and self.handle:
             return ctypes2numpy(self.data, self.shape)
+
+    @property
+    def shape(self):
+        return self._shape
 
     def __del__(self):
         if hasattr(self, "handle") and self.handle:

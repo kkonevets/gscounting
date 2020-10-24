@@ -9,6 +9,7 @@
 #include <string>
 #include <vector>
 
+#include "c_api.h"
 #include "csr_matrix.hpp"
 #include "externalsort.hpp"
 #include "tools.hpp"
@@ -140,9 +141,9 @@ TEST(CSRCheck, SaveLoad) {
   auto m = get_simple_csr();
   std::string fname(pjoin("m.bin"));
   m.save(fname);
-  auto m_loaded{CSR::load(fname)};
+  std::unique_ptr<CSR> ml{CSR::load(fname)};
 
-  ASSERT_EQ(m, *m_loaded);
+  ASSERT_EQ(m, *ml);
 }
 
 TEST(CSRCheck, DISABLED_Performance) {
@@ -159,7 +160,25 @@ TEST(CSRCheck, DISABLED_Performance) {
   }
 }
 
-TEST(C_API, SliceCSRMatrix) {}
+TEST(C_API, CSRMatrix) {
+  CSRMatrixHandle csr_handle;
+  CSRMatrixLoadFromFile(pjoin("m.bin").c_str(), &csr_handle);
+
+  std::array<int, 3> ixs{0, 2, -3};
+  SliceArgs args = {csr_handle, ixs.data(), ixs.size(), nullptr, nullptr, 0, 0};
+
+  DenseMatrixSliceCSRMatrix(&args);
+
+  std::vector<float> res{1, 0, 0, 4, 5, 0, 1, 0, 0};
+  for (size_t i = 0; i < res.size(); ++i) {
+    EXPECT_EQ(res[i], args.data_out[i]);
+  }
+  EXPECT_EQ(args.nrows_out, 3);
+  EXPECT_EQ(args.ncols_out, 3);
+
+  CSRMatrixFree(csr_handle);
+  DenseMatrixFree(args.handle_out);
+}
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
