@@ -5,14 +5,13 @@ from core import _LIB, _check_call, c_str, c_array, ctypes2numpy, SliceArgs
 
 
 class DenseMatrix:
-    def __init__(self, handle, data, shape):
-        self.handle = ctypes.c_void_p(handle)
+    def __init__(self, data, shape):
         self.data = data
         self._shape = shape
 
     @property
     def numpy(self):
-        if hasattr(self, "handle") and self.handle:
+        if hasattr(self, "data") and self.data:
             return ctypes2numpy(self.data, self.shape)
 
     @property
@@ -41,8 +40,7 @@ class CSRMatrix:
 
         _check_call(_LIB.DenseMatrixSliceCSRMatrix(ctypes.byref(args)))
 
-        return DenseMatrix(args.handle_out, args.data_out,
-                           (args.nrows_out, args.ncols_out))
+        return DenseMatrix(args.data_out, (len(ixs), args.ncols_out))
 
     def __del__(self):
         if hasattr(self, "handle") and self.handle:

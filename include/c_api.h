@@ -34,12 +34,8 @@ typedef struct SliceArgs {
   const int *idxset;
   /// length of `idxset`
   uint64_t len;
-  /// handle to resulting Dense matrix
-  DenseMatrixHandle handle_out;
   /// poiner to a contiguous data array of Dense matrix
   float *data_out;
-  /// number of rows in Dense matrix
-  uint64_t nrows_out;
   /// number of columns in Dense matrix
   uint64_t ncols_out;
 } SliceArgs;
@@ -72,11 +68,5 @@ GSC_DLL int DenseMatrixSliceCSRMatrix(SliceArgs *args);
  * \return 0 when success, -1 when failure happens
  */
 GSC_DLL int CSRMatrixFree(CSRMatrixHandle handle);
-
-/*!
- * \brief free space in dense matrix
- * \return 0 when success, -1 when failure happens
- */
-GSC_DLL int DenseMatrixFree(DenseMatrixHandle handle);
 
 #endif // GSCOUNTING_C_API_H_

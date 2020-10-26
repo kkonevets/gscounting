@@ -132,9 +132,9 @@ CSR get_simple_csr() {
 TEST(CSRCheck, Slice) {
   auto m = get_simple_csr();
   std::array<int, 3> ixs{0, 2, -3};
-  std::unique_ptr<Dense> d{m.slice(ixs.data(), ixs.size())};
+  auto d{m.slice(ixs.data(), ixs.size())};
   std::vector<float> res{1, 0, 0, 4, 5, 0, 1, 0, 0};
-  ASSERT_EQ(d->data, res);
+  ASSERT_EQ(d, res);
 }
 
 TEST(CSRCheck, SaveLoad) {
@@ -156,7 +156,7 @@ TEST(CSRCheck, DISABLED_Performance) {
   }
 
   for (auto i = 0; i < 1000; i++) {
-    std::unique_ptr<Dense>(m.slice(ixs.data(), ixs.size()));
+    m.slice(ixs.data(), ixs.size());
   }
 }
 
@@ -165,7 +165,7 @@ TEST(C_API, CSRMatrix) {
   CSRMatrixLoadFromFile(pjoin("m.bin").c_str(), &csr_handle);
 
   std::array<int, 3> ixs{0, 2, -3};
-  SliceArgs args = {csr_handle, ixs.data(), ixs.size(), nullptr, nullptr, 0, 0};
+  SliceArgs args = {csr_handle, ixs.data(), ixs.size(), nullptr, 0};
 
   DenseMatrixSliceCSRMatrix(&args);
 
@@ -173,11 +173,9 @@ TEST(C_API, CSRMatrix) {
   for (size_t i = 0; i < res.size(); ++i) {
     EXPECT_EQ(res[i], args.data_out[i]);
   }
-  EXPECT_EQ(args.nrows_out, 3);
   EXPECT_EQ(args.ncols_out, 3);
 
   CSRMatrixFree(csr_handle);
-  DenseMatrixFree(args.handle_out);
 }
 
 int main(int argc, char **argv) {

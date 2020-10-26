@@ -14,6 +14,10 @@
 #include <utility>
 #include <vector>
 
+#ifndef __clang__
+#include <execution>
+#endif
+
 CSR::CSR(vec_f &&data, vec_u &&indices, vec_u &&indptr, size_t nrows = 0,
          size_t ncols = 0)
     : _data(std::move(data)), _indices(std::move(indices)),
@@ -132,8 +136,19 @@ auto CSR::random(size_t nrows, size_t ncols, float prob) -> CSR {
   return CSR(std::move(data), std::move(indices), std::move(indptr));
 }
 
-auto CSR::slice(const int *ixs, size_t size) -> Dense * {
-  auto d = new Dense(size, _ncols);
+auto CSR::slice(const int *ixs, size_t size) -> std::vector<float> & {
+  auto prev_size = _slice_data.size();
+  auto new_size = size * _ncols;
+  _slice_data.resize(new_size, 0);
+
+  auto begin = _slice_data.begin();
+  auto end = begin + std::min(prev_size, new_size);
+
+#ifdef __clang__
+  std::fill(begin, end, 0);
+#else
+  std::fill(std::execution::par_unseq, begin, end, 0);
+#endif
 
   auto worker = [&](const tbb::blocked_range<size_t> &r) {
     for (auto i = r.begin(); i != r.end(); ++i) {
@@ -149,32 +164,12 @@ auto CSR::slice(const int *ixs, size_t size) -> Dense * {
       }
       auto _i = i * _ncols;
       for (size_t j = _indptr[ix]; j < _indptr[ix + 1]; ++j) {
-        d->data[_i + _indices[j]] = _data[j];
+        _slice_data[_i + _indices[j]] = _data[j];
       }
     }
   };
 
   parallel_for(tbb::blocked_range<size_t>(0, size), worker);
 
-  return d;
+  return _slice_data;
 }
-
-// ----------------------------------------------------------------------------
-// Namespace std
-// ----------------------------------------------------------------------------
-
-namespace std {
-
-auto operator<<(std::ostream &os, Dense &d) -> std::ostream & {
-  for (size_t i = 0; i < d.nrows; ++i) {
-    auto _i = i * d.ncols;
-    for (size_t j = 0; j < d.ncols; ++j) {
-      os << std::setw(11) << std::left << std::setprecision(5)
-         << d.data[_i + j];
-    }
-    os << std::endl;
-  }
-  return os;
-}
-
-} // namespace std

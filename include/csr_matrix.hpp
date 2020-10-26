@@ -20,28 +20,6 @@
 #include <string>
 #include <vector>
 
-/** @struct Dense
- *
- *  Dense matrix representation.
- */
-struct Dense {
-  size_t nrows;
-  size_t ncols;
-  /// matrix data as contiguous array of concatenated rows
-  std::vector<float> data;
-
-  Dense(size_t nrows, size_t ncols)
-      : nrows{nrows}, ncols{ncols}, data(nrows * ncols, 0) {}
-  Dense(size_t nrows, size_t ncols, std::vector<float> &&init_data)
-      : nrows{nrows}, ncols{ncols}, data{std::move(init_data)} {
-    if (nrows * ncols != data.size()) {
-      throw std::runtime_error("indices array is empty");
-    }
-  }
-  Dense(Dense &&other) noexcept
-      : nrows{other.nrows}, ncols{other.ncols}, data{std::move(other.data)} {}
-};
-
 /** @struct CSR
  *
  *  Compressed Sparse Row matrix.
@@ -60,6 +38,8 @@ struct CSR {
   vec_u _indptr;
   size_t _nrows;
   size_t _ncols;
+
+  vec_f _slice_data;
 
   explicit CSR(vec_f &&data, vec_u &&indices, vec_u &&indptr, size_t nrows,
                size_t ncols);
@@ -90,7 +70,7 @@ struct CSR {
    *  It splits `ixs` on chunks and each chunk is fed to a separate thread
    *  @param ixs List of ixs to slice on, must not be out of range
    */
-  auto slice(const int *ixs, size_t size) -> Dense *;
+  auto slice(const int *ixs, size_t size) -> std::vector<float> &;
 
   auto operator==(const CSR &o) const -> bool {
     return _ncols == o._ncols && _nrows == o._nrows && _data == o._data &&

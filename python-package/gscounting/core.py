@@ -13,9 +13,7 @@ class SliceArgs(ctypes.Structure):
         ('csr_handle', ctypes.c_void_p),
         ('idxset', ctypes.POINTER(ctypes.c_int)),
         ('len', ctypes.c_uint64),
-        ('handle_out', ctypes.c_void_p),
         ('data_out', ctypes.POINTER(ctypes.c_float)),
-        ('nrows_out', ctypes.c_uint64),
         ('ncols_out', ctypes.c_uint64),
     ]
 
@@ -44,7 +42,12 @@ def ctypes2numpy(cptr, shape):
     if not isinstance(cptr, ctypes.POINTER(ctype)):
         raise RuntimeError('expected {} pointer'.format(ctype))
 
-    return np.ctypeslib.as_array(cptr, shape)
+    # return np.ctypeslib.as_array(cptr, shape)
+    length = shape[0] * shape[1]
+    res = np.zeros(length, 'f')
+    if not ctypes.memmove(res.ctypes.data, cptr, length * res.strides[0]):
+        raise RuntimeError('memmove failed')
+    return res.reshape(shape)
 
 
 def _load_lib():

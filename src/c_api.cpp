@@ -27,13 +27,9 @@ GSC_DLL auto DenseMatrixSliceCSRMatrix(SliceArgs *args) -> int {
   API_BEGIN();
   CHECK_HANDLE();
   CSR *m = static_cast<std::shared_ptr<CSR> *>(handle)->get();
-  auto dptr = new std::shared_ptr<Dense>(
-      m->slice(args->idxset, static_cast<std::size_t>(args->len)));
-  args->handle_out = dptr;
-  auto dptr_inner = dptr->get();
-  args->data_out = dptr_inner->data.data();
-  args->nrows_out = dptr_inner->nrows;
-  args->ncols_out = dptr_inner->ncols;
+  auto d = m->slice(args->idxset, static_cast<std::size_t>(args->len));
+  args->data_out = m->_slice_data.data();
+  args->ncols_out = m->_ncols;
   API_END();
 }
 
@@ -41,12 +37,5 @@ GSC_DLL auto CSRMatrixFree(CSRMatrixHandle handle) -> int {
   API_BEGIN();
   CHECK_HANDLE();
   delete static_cast<std::shared_ptr<CSR> *>(handle);
-  API_END();
-}
-
-GSC_DLL auto DenseMatrixFree(DenseMatrixHandle handle) -> int {
-  API_BEGIN();
-  CHECK_HANDLE();
-  delete static_cast<std::shared_ptr<Dense> *>(handle);
   API_END();
 }
