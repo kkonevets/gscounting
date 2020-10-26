@@ -132,9 +132,9 @@ CSR get_simple_csr() {
 TEST(CSRCheck, Slice) {
   auto m = get_simple_csr();
   std::array<int, 3> ixs{0, 2, -3};
-  auto d{m.slice(ixs.data(), ixs.size())};
+  m.slice(ixs.data(), ixs.size());
   std::vector<float> res{1, 0, 0, 4, 5, 0, 1, 0, 0};
-  ASSERT_EQ(d, res);
+  ASSERT_EQ(m._slice_data, res);
 }
 
 TEST(CSRCheck, SaveLoad) {

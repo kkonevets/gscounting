@@ -27,8 +27,8 @@ GSC_DLL auto DenseMatrixSliceCSRMatrix(SliceArgs *args) -> int {
   API_BEGIN();
   CHECK_HANDLE();
   CSR *m = static_cast<std::shared_ptr<CSR> *>(handle)->get();
-  auto d = m->slice(args->idxset, static_cast<std::size_t>(args->len));
-  args->data_out = m->_slice_data.data();
+  auto dptr = m->slice(args->idxset, static_cast<std::size_t>(args->len));
+  args->data_out = dptr;
   args->ncols_out = m->_ncols;
   API_END();
 }

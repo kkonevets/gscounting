@@ -70,7 +70,7 @@ struct CSR {
    *  It splits `ixs` on chunks and each chunk is fed to a separate thread
    *  @param ixs List of ixs to slice on, must not be out of range
    */
-  auto slice(const int *ixs, size_t size) -> std::vector<float> &;
+  auto slice(const int *ixs, size_t size) -> float *;
 
   auto operator==(const CSR &o) const -> bool {
     return _ncols == o._ncols && _nrows == o._nrows && _data == o._data &&

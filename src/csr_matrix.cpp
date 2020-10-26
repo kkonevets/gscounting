@@ -136,7 +136,7 @@ auto CSR::random(size_t nrows, size_t ncols, float prob) -> CSR {
   return CSR(std::move(data), std::move(indices), std::move(indptr));
 }
 
-auto CSR::slice(const int *ixs, size_t size) -> std::vector<float> & {
+auto CSR::slice(const int *ixs, size_t size) -> float * {
   auto prev_size = _slice_data.size();
   auto new_size = size * _ncols;
   _slice_data.resize(new_size, 0);
@@ -171,5 +171,5 @@ auto CSR::slice(const int *ixs, size_t size) -> std::vector<float> & {
 
   parallel_for(tbb::blocked_range<size_t>(0, size), worker);
 
-  return _slice_data;
+  return _slice_data.data();
 }
