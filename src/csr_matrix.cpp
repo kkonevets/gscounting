@@ -14,10 +14,6 @@
 #include <utility>
 #include <vector>
 
-#ifndef __clang__
-#include <execution>
-#endif
-
 CSR::CSR(vec_f &&data, vec_u &&indices, vec_u &&indptr, size_t nrows = 0,
          size_t ncols = 0)
     : _data(std::move(data)), _indices(std::move(indices)),
@@ -46,7 +42,7 @@ CSR::CSR(vec_f &&data, vec_u &&indices, vec_u &&indptr, size_t nrows = 0,
   auto infered_nrows = _indptr.size() - 1;
   auto it = std::max_element(_indices.begin(), _indices.end());
   auto infered_ncols = static_cast<size_t>(*it) + 1;
-  if ((_ncols ^ _nrows) != 0) {
+  if ((!_ncols != !_nrows) != 0) { // logical XOR
     throw std::runtime_error("both nrows and ncols should be provided or none");
   }
   if (_ncols != 0 && _nrows != 0) {
@@ -143,33 +139,24 @@ auto CSR::slice(const int *ixs, size_t size) -> float * {
 
   auto begin = _slice_data.begin();
   auto end = begin + std::min(prev_size, new_size);
-
-#ifdef __clang__
   std::fill(begin, end, 0);
-#else
-  std::fill(std::execution::par_unseq, begin, end, 0);
-#endif
 
-  auto worker = [&](const tbb::blocked_range<size_t> &r) {
-    for (auto i = r.begin(); i != r.end(); ++i) {
-      auto ixi{ixs[i]};
-      if (ixi < 0) {
-        ixi += _nrows;
-      }
-      size_t ix = static_cast<size_t>(ixi);
-      if (ix >= _nrows) {
-        std::ostringstream ss;
-        ss << "Index " << ix << " is out of range (0, " << _nrows << ")";
-        throw std::runtime_error(ss.str());
-      }
-      auto _i = i * _ncols;
-      for (size_t j = _indptr[ix]; j < _indptr[ix + 1]; ++j) {
-        _slice_data[_i + _indices[j]] = _data[j];
-      }
+  for (size_t i = 0; i < size; ++i) {
+    auto ixi{ixs[i]};
+    if (ixi < 0) {
+      ixi += _nrows;
     }
-  };
-
-  parallel_for(tbb::blocked_range<size_t>(0, size), worker);
+    size_t ix = static_cast<size_t>(ixi);
+    if (ix >= _nrows) {
+      std::ostringstream ss;
+      ss << "Index " << ix << " is out of range (0, " << _nrows << ")";
+      throw std::runtime_error(ss.str());
+    }
+    auto _i = i * _ncols;
+    for (size_t j = _indptr[ix]; j < _indptr[ix + 1]; ++j) {
+      _slice_data[_i + _indices[j]] = _data[j];
+    }
+  }
 
   return _slice_data.data();
 }

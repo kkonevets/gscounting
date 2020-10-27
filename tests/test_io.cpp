@@ -147,16 +147,20 @@ TEST(CSRCheck, SaveLoad) {
 }
 
 TEST(CSRCheck, DISABLED_Performance) {
-  size_t dim = 10000;
-  auto m(CSR::random(dim, dim, 0.5));
+  size_t nrows = 1600000;
+  // auto m(CSR::random(nrows, 1000, 0.5));
+
+  std::string fname(pjoin("m_big.bin"));
+  // m.save(fname);
+  std::unique_ptr<CSR> m{CSR::load(fname)};
 
   std::vector<int> ixs;
-  for (std::uint32_t i = 0; i < dim; i += 10) {
+  for (std::uint32_t i = 0; i < nrows; i += 10) {
     ixs.push_back(i);
   }
 
-  for (auto i = 0; i < 1000; i++) {
-    m.slice(ixs.data(), ixs.size());
+  for (auto i = 0; i < 100; i++) {
+    m->slice(ixs.data(), ixs.size());
   }
 }
 
