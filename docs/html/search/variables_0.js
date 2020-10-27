@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['csr_5fhandle_71',['csr_handle',['../struct_slice_args.html#a21dd541741e423e12bdf1b283677ea9d',1,'SliceArgs']]]
+  ['data_5fout_69',['data_out',['../struct_slice_args.html#a6ce16ea3d3d6a9333fac62fe9db45e1b',1,'SliceArgs']]]
 ];

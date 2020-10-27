@@ -95,9 +95,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3fc79432e775448fdfd28cd45161c473"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_c_s_r.html#a3fc79432e775448fdfd28cd45161c473">save</a> (const std::string &amp;fname)</td></tr>
 <tr class="memdesc:a3fc79432e775448fdfd28cd45161c473"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves matrix in a native endian (little endian mostly) binary format.  <a href="struct_c_s_r.html#a3fc79432e775448fdfd28cd45161c473">More...</a><br /></td></tr>
 <tr class="separator:a3fc79432e775448fdfd28cd45161c473"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8cb5a157f3652d090bf11cbec164b978"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_c_s_r.html#a8cb5a157f3652d090bf11cbec164b978">slice</a> (const int *ixs, size_t size) -&gt; <a class="el" href="struct_dense.html">Dense</a> *</td></tr>
-<tr class="memdesc:a8cb5a157f3652d090bf11cbec164b978"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs parallel slicing on indexes.  <a href="struct_c_s_r.html#a8cb5a157f3652d090bf11cbec164b978">More...</a><br /></td></tr>
-<tr class="separator:a8cb5a157f3652d090bf11cbec164b978"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a251d5dabc81bdd1093171bf76839bc41"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_c_s_r.html#a251d5dabc81bdd1093171bf76839bc41">slice</a> (const int *ixs, size_t size) -&gt; float *</td></tr>
+<tr class="memdesc:a251d5dabc81bdd1093171bf76839bc41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs parallel slicing on indexes.  <a href="struct_c_s_r.html#a251d5dabc81bdd1093171bf76839bc41">More...</a><br /></td></tr>
+<tr class="separator:a251d5dabc81bdd1093171bf76839bc41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7667ca6ebf12ae9146150905482e48d"><td class="memItemLeft" align="right" valign="top"><a id="ab7667ca6ebf12ae9146150905482e48d"></a>
 auto&#160;</td><td class="memItemRight" valign="bottom"><b>operator==</b> (const <a class="el" href="struct_c_s_r.html">CSR</a> &amp;o) const -&gt; bool</td></tr>
 <tr class="separator:ab7667ca6ebf12ae9146150905482e48d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -139,12 +139,15 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>_nrows</b></td></tr
 <tr class="memitem:a40b44da5cbc1166ff271d6039805100d"><td class="memItemLeft" align="right" valign="top"><a id="a40b44da5cbc1166ff271d6039805100d"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>_ncols</b></td></tr>
 <tr class="separator:a40b44da5cbc1166ff271d6039805100d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9286c0c56ff9d897fef3732ff75caf8e"><td class="memItemLeft" align="right" valign="top"><a id="a9286c0c56ff9d897fef3732ff75caf8e"></a>
+vec_f&#160;</td><td class="memItemRight" valign="bottom"><b>slice_data</b></td></tr>
+<tr class="separator:a9286c0c56ff9d897fef3732ff75caf8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Compressed Sparse Row matrix. </p>
 <p>Data format same as of scipy.sparse.csr_matrix. Is the standard <a class="el" href="struct_c_s_r.html" title="Compressed Sparse Row matrix.">CSR</a> representation where the column indices for row <code>i</code> are stored in <code>indices[indptr[i]:indptr[i+1]]</code> and their corresponding values are stored in <code>data[indptr[i]:indptr[i+1]]</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="csr__matrix_8hpp_source.html#l00054">54</a> of file <a class="el" href="csr__matrix_8hpp_source.html">csr_matrix.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="csr__matrix_8hpp_source.html#l00032">32</a> of file <a class="el" href="csr__matrix_8hpp_source.html">csr_matrix.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="af6cba77fc889ed607fcf207f9439a2dc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af6cba77fc889ed607fcf207f9439a2dc">&#9670;&nbsp;</a></span>load()</h2>
@@ -196,12 +199,12 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>_ncols</b></td></tr
 <p>Saves matrix in a native endian (little endian mostly) binary format. </p>
 <p>First forward write matrix shape and then each vector with it's forward size. </p>
 
-<p class="definition">Definition at line <a class="el" href="csr__matrix_8cpp_source.html#l00095">95</a> of file <a class="el" href="csr__matrix_8cpp_source.html">csr_matrix.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="csr__matrix_8cpp_source.html#l00097">97</a> of file <a class="el" href="csr__matrix_8cpp_source.html">csr_matrix.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a8cb5a157f3652d090bf11cbec164b978"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8cb5a157f3652d090bf11cbec164b978">&#9670;&nbsp;</a></span>slice()</h2>
+<a id="a251d5dabc81bdd1093171bf76839bc41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a251d5dabc81bdd1093171bf76839bc41">&#9670;&nbsp;</a></span>slice()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -221,7 +224,7 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>_ncols</b></td></tr
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td> -&gt; <a class="el" href="struct_dense.html">Dense</a> *</td>
+          <td></td><td> -&gt; float *</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -233,8 +236,9 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>_ncols</b></td></tr
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>pointer to a sliced Dense matrix contiguous array </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="csr__matrix_8cpp_source.html#l00135">135</a> of file <a class="el" href="csr__matrix_8cpp_source.html">csr_matrix.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="csr__matrix_8cpp_source.html#l00139">139</a> of file <a class="el" href="csr__matrix_8cpp_source.html">csr_matrix.cpp</a>.</p>
 
 </div>
 </div>

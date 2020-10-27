@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['ncols_5fout_77',['ncols_out',['../struct_slice_args.html#afcb42e2b7da64dca2496b838cbbf8a48',1,'SliceArgs']]],
-  ['nrows_5fout_78',['nrows_out',['../struct_slice_args.html#aa04eb7324594117465471da8a8714814',1,'SliceArgs']]]
+  ['ncols_5fout_75',['ncols_out',['../struct_load_args.html#aa7d173ac82a538fcee76f3977804cdd0',1,'LoadArgs']]],
+  ['nrows_5fout_76',['nrows_out',['../struct_load_args.html#a5ee8cfe1e524a3dd88ebe02ea1aad681',1,'LoadArgs']]]
 ];

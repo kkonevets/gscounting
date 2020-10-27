@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['idxset_25',['idxset',['../struct_slice_args.html#a50d99cbc68821370386066f3908cf50c',1,'SliceArgs']]]
+  ['handle_21',['handle',['../struct_slice_args.html#a47460fae22c0fb83d9ff9da06037a211',1,'SliceArgs']]],
+  ['handle_5fout_22',['handle_out',['../struct_load_args.html#a7025056af1ba946f4fa0857095d515fc',1,'LoadArgs']]]
 ];

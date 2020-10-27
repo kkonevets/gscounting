@@ -26,7 +26,7 @@ using {\bfseries vec\+\_\+u} = std\+::vector$<$ std\+::uint32\+\_\+t $>$
 \item 
 void \mbox{\hyperlink{struct_c_s_r_a3fc79432e775448fdfd28cd45161c473}{save}} (const std\+::string \&fname)
 \begin{DoxyCompactList}\small\item\em Saves matrix in a native endian (little endian mostly) binary format. \end{DoxyCompactList}\item 
-auto \mbox{\hyperlink{struct_c_s_r_a8cb5a157f3652d090bf11cbec164b978}{slice}} (const int $\ast$ixs, size\+\_\+t size) -\/$>$ \mbox{\hyperlink{struct_dense}{Dense}} $\ast$
+auto \mbox{\hyperlink{struct_c_s_r_a251d5dabc81bdd1093171bf76839bc41}{slice}} (const int $\ast$ixs, size\+\_\+t size) -\/$>$ float $\ast$
 \begin{DoxyCompactList}\small\item\em Performs parallel slicing on indexes. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{struct_c_s_r_ab7667ca6ebf12ae9146150905482e48d}\label{struct_c_s_r_ab7667ca6ebf12ae9146150905482e48d}} 
 auto {\bfseries operator==} (const \mbox{\hyperlink{struct_c_s_r}{C\+SR}} \&o) const -\/$>$ bool
@@ -62,6 +62,9 @@ size\+\_\+t {\bfseries \+\_\+nrows}
 \item 
 \mbox{\Hypertarget{struct_c_s_r_a40b44da5cbc1166ff271d6039805100d}\label{struct_c_s_r_a40b44da5cbc1166ff271d6039805100d}} 
 size\+\_\+t {\bfseries \+\_\+ncols}
+\item 
+\mbox{\Hypertarget{struct_c_s_r_a9286c0c56ff9d897fef3732ff75caf8e}\label{struct_c_s_r_a9286c0c56ff9d897fef3732ff75caf8e}} 
+vec\+\_\+f {\bfseries slice\+\_\+data}
 \end{DoxyCompactItemize}
 
 
@@ -70,7 +73,7 @@ Compressed Sparse Row matrix.
 
 Data format same as of scipy.\+sparse.\+csr\+\_\+matrix. Is the standard \mbox{\hyperlink{struct_c_s_r}{C\+SR}} representation where the column indices for row {\ttfamily i} are stored in {\ttfamily indices\mbox{[}indptr\mbox{[}i\mbox{]}\+:indptr\mbox{[}i+1\mbox{]}\mbox{]}} and their corresponding values are stored in {\ttfamily data\mbox{[}indptr\mbox{[}i\mbox{]}\+:indptr\mbox{[}i+1\mbox{]}\mbox{]}}. 
 
-Definition at line 54 of file csr\+\_\+matrix.\+hpp.
+Definition at line 32 of file csr\+\_\+matrix.\+hpp.
 
 
 
@@ -101,13 +104,13 @@ Saves matrix in a native endian (little endian mostly) binary format.
 
 First forward write matrix shape and then each vector with it\textquotesingle{}s forward size. 
 
-Definition at line 95 of file csr\+\_\+matrix.\+cpp.
+Definition at line 97 of file csr\+\_\+matrix.\+cpp.
 
-\mbox{\Hypertarget{struct_c_s_r_a8cb5a157f3652d090bf11cbec164b978}\label{struct_c_s_r_a8cb5a157f3652d090bf11cbec164b978}} 
+\mbox{\Hypertarget{struct_c_s_r_a251d5dabc81bdd1093171bf76839bc41}\label{struct_c_s_r_a251d5dabc81bdd1093171bf76839bc41}} 
 \index{CSR@{CSR}!slice@{slice}}
 \index{slice@{slice}!CSR@{CSR}}
 \doxysubsubsection{\texorpdfstring{slice()}{slice()}}
-{\footnotesize\ttfamily auto C\+S\+R\+::slice (\begin{DoxyParamCaption}\item[{const int $\ast$}]{ixs,  }\item[{size\+\_\+t}]{size }\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{struct_dense}{Dense}} $\ast$}
+{\footnotesize\ttfamily auto C\+S\+R\+::slice (\begin{DoxyParamCaption}\item[{const int $\ast$}]{ixs,  }\item[{size\+\_\+t}]{size }\end{DoxyParamCaption}) -\/$>$ float $\ast$}
 
 
 
@@ -118,9 +121,12 @@ It splits {\ttfamily ixs} on chunks and each chunk is fed to a separate thread
 {\em ixs} & List of ixs to slice on, must not be out of range \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pointer to a sliced Dense matrix contiguous array 
+\end{DoxyReturn}
 
 
-Definition at line 135 of file csr\+\_\+matrix.\+cpp.
+Definition at line 139 of file csr\+\_\+matrix.\+cpp.
 
 
 

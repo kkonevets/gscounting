@@ -134,7 +134,7 @@ TEST(CSRCheck, Slice) {
   std::array<int, 3> ixs{0, 2, -3};
   m.slice(ixs.data(), ixs.size());
   std::vector<float> res{1, 0, 0, 4, 5, 0, 1, 0, 0};
-  ASSERT_EQ(m._slice_data, res);
+  ASSERT_EQ(m.slice_data, res);
 }
 
 TEST(CSRCheck, SaveLoad) {
@@ -163,7 +163,7 @@ TEST(CSRCheck, DISABLED_Performance) {
 TEST(C_API, CSRMatrix) {
   auto fname = pjoin("m.bin");
   LoadArgs load_args = {fname.c_str(), nullptr, 0, 0};
-  CSRMatrixLoadFromFile(&load_args);
+  ASSERT_EQ(CSRMatrixLoadFromFile(&load_args), 0);
 
   EXPECT_EQ(load_args.nrows_out, 3);
   EXPECT_EQ(load_args.ncols_out, 3);
@@ -171,14 +171,14 @@ TEST(C_API, CSRMatrix) {
   std::array<int, 3> ixs{0, 2, -3};
   SliceArgs args = {load_args.handle_out, ixs.data(), ixs.size(), nullptr};
 
-  DenseMatrixSliceCSRMatrix(&args);
+  ASSERT_EQ(DenseMatrixSliceCSRMatrix(&args), 0);
 
   std::vector<float> res{1, 0, 0, 4, 5, 0, 1, 0, 0};
   for (size_t i = 0; i < res.size(); ++i) {
     EXPECT_EQ(res[i], args.data_out[i]);
   }
 
-  CSRMatrixFree(load_args.handle_out);
+  ASSERT_EQ(CSRMatrixFree(load_args.handle_out), 0);
 }
 
 int main(int argc, char **argv) {

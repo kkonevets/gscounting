@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['sliceargs_52',['SliceArgs',['../struct_slice_args.html',1,'SliceArgs'],['../classgscounting_1_1core_1_1_slice_args.html',1,'gscounting.core.SliceArgs']]]
+  ['loadargs_50',['LoadArgs',['../struct_load_args.html',1,'LoadArgs'],['../classgscounting_1_1core_1_1_load_args.html',1,'gscounting.core.LoadArgs']]]
 ];

@@ -39,7 +39,7 @@ struct CSR {
   size_t _nrows;
   size_t _ncols;
 
-  vec_f _slice_data;
+  vec_f slice_data;
 
   explicit CSR(vec_f &&data, vec_u &&indices, vec_u &&indptr, size_t nrows,
                size_t ncols);
@@ -69,6 +69,7 @@ struct CSR {
    *  Performs parallel slicing on indexes.
    *  It splits `ixs` on chunks and each chunk is fed to a separate thread
    *  @param ixs List of ixs to slice on, must not be out of range
+   *  @return pointer to a sliced Dense matrix contiguous array
    */
   auto slice(const int *ixs, size_t size) -> float *;
 

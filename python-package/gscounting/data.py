@@ -28,7 +28,7 @@ class CSRMatrix:
     def __init__(self, fname):
         args = LoadArgs(c_str(os.fspath(fname)), )
         _check_call(_LIB.CSRMatrixLoadFromFile(ctypes.byref(args)))
-        self.handle = args.handle_out
+        self.handle = ctypes.c_void_p(args.handle_out)
         self._shape = (args.nrows_out, args.ncols_out)
 
     @property

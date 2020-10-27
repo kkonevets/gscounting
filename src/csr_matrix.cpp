@@ -137,11 +137,11 @@ auto CSR::random(size_t nrows, size_t ncols, float prob) -> CSR {
 }
 
 auto CSR::slice(const int *ixs, size_t size) -> float * {
-  auto prev_size = _slice_data.size();
+  auto prev_size = slice_data.size();
   auto new_size = size * _ncols;
-  _slice_data.resize(new_size, 0);
+  slice_data.resize(new_size, 0);
 
-  auto begin = _slice_data.begin();
+  auto begin = slice_data.begin();
   auto end = begin + std::min(prev_size, new_size);
   std::fill(begin, end, 0);
 
@@ -159,12 +159,12 @@ auto CSR::slice(const int *ixs, size_t size) -> float * {
       }
       auto _i = i * _ncols;
       for (size_t j = _indptr[ix]; j < _indptr[ix + 1]; ++j) {
-        _slice_data[_i + _indices[j]] = _data[j];
+        slice_data[_i + _indices[j]] = _data[j];
       }
     }
   };
 
   parallel_for(tbb::blocked_range<size_t>(0, size), worker);
 
-  return _slice_data.data();
+  return slice_data.data();
 }

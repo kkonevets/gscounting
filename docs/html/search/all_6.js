@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['handle_5fout_24',['handle_out',['../struct_slice_args.html#a6543ecf0150db2e3a81116af64f0135d',1,'SliceArgs']]]
+  ['gscountingerror_18',['GSCountingError',['../classgscounting_1_1core_1_1_g_s_counting_error.html',1,'gscounting::core']]],
+  ['gscountingtlibrarynotfound_19',['GSCountingtLibraryNotFound',['../classgscounting_1_1libpath_1_1_g_s_countingt_library_not_found.html',1,'gscounting::libpath']]],
+  ['gscounting_20_28graphsage_20counting_29_20',['gscounting (GraphSage Counting)',['../index.html',1,'']]]
 ];
