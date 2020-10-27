@@ -169,7 +169,7 @@ TEST(C_API, CSRMatrix) {
   EXPECT_EQ(load_args.ncols_out, 3);
 
   std::array<int, 3> ixs{0, 2, -3};
-  SliceArgs args = {load_args.handle, ixs.data(), ixs.size(), nullptr};
+  SliceArgs args = {load_args.handle_out, ixs.data(), ixs.size(), nullptr};
 
   DenseMatrixSliceCSRMatrix(&args);
 
@@ -178,7 +178,7 @@ TEST(C_API, CSRMatrix) {
     EXPECT_EQ(res[i], args.data_out[i]);
   }
 
-  CSRMatrixFree(load_args.handle);
+  CSRMatrixFree(load_args.handle_out);
 }
 
 int main(int argc, char **argv) {

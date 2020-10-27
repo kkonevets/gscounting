@@ -20,7 +20,7 @@ class SliceArgs(ctypes.Structure):
 class LoadArgs(ctypes.Structure):
     _fields_ = [
         ('fname', ctypes.c_char_p),
-        ('handle', ctypes.c_void_p),
+        ('handle_out', ctypes.c_void_p),
         ('nrows_out', ctypes.c_uint64),
         ('ncols_out', ctypes.c_uint64),
     ]

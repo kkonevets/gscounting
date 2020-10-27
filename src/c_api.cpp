@@ -9,7 +9,7 @@
 GSC_DLL auto CSRMatrixLoadFromFile(LoadArgs *args) -> int {
   API_BEGIN();
   auto handle = new std::shared_ptr<CSR>(CSR::load(args->fname));
-  args->handle = handle;
+  args->handle_out = handle;
   auto m = handle->get();
   args->nrows_out = m->_nrows;
   args->ncols_out = m->_ncols;

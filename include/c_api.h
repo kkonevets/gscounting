@@ -42,7 +42,7 @@ typedef struct LoadArgs {
   /// name of file to load
   const char *fname;
   /// handle to CSR matrix
-  CSRMatrixHandle handle;
+  CSRMatrixHandle handle_out;
   /// number of rows in Dense matrix
   uint64_t nrows_out;
   /// number of columns in Dense matrix
