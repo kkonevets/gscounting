@@ -6,10 +6,13 @@
 #include <iostream>
 #include <memory>
 
-GSC_DLL auto CSRMatrixLoadFromFile(const char *fname, CSRMatrixHandle *out)
-    -> int {
+GSC_DLL auto CSRMatrixLoadFromFile(LoadArgs *args) -> int {
   API_BEGIN();
-  *out = new std::shared_ptr<CSR>(CSR::load(fname));
+  auto handle = new std::shared_ptr<CSR>(CSR::load(args->fname));
+  args->handle = handle;
+  auto m = handle->get();
+  args->nrows_out = m->_nrows;
+  args->ncols_out = m->_ncols;
   API_END();
 }
 
@@ -23,13 +26,12 @@ GSC_DLL auto CSRMatrixSaveBinary(CSRMatrixHandle handle, const char *fname)
 }
 
 GSC_DLL auto DenseMatrixSliceCSRMatrix(SliceArgs *args) -> int {
-  CSRMatrixHandle handle = args->csr_handle;
+  CSRMatrixHandle handle = args->handle;
   API_BEGIN();
   CHECK_HANDLE();
   CSR *m = static_cast<std::shared_ptr<CSR> *>(handle)->get();
   auto dptr = m->slice(args->idxset, static_cast<std::size_t>(args->len));
   args->data_out = dptr;
-  args->ncols_out = m->_ncols;
   API_END();
 }
 

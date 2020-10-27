@@ -29,24 +29,32 @@ typedef void *DenseMatrixHandle;
 /// Represents set of arguments to call `DenseMatrixSliceCSRMatrix()`
 typedef struct SliceArgs {
   /// handle to CSR matrix
-  CSRMatrixHandle csr_handle;
+  CSRMatrixHandle handle;
   /// indices to slice with
   const int *idxset;
   /// length of `idxset`
   uint64_t len;
   /// poiner to a contiguous data array of Dense matrix
   float *data_out;
+} SliceArgs;
+
+typedef struct LoadArgs {
+  /// name of file to load
+  const char *fname;
+  /// handle to CSR matrix
+  CSRMatrixHandle handle;
+  /// number of rows in Dense matrix
+  uint64_t nrows_out;
   /// number of columns in Dense matrix
   uint64_t ncols_out;
-} SliceArgs;
+} LoadArgs;
 
 /*!
  * \brief load a CSR matrix
- * \param fname the name of the file
- * \param out a loaded CSR matrix
+ * \param args pointer to LoadArgs
  * \return 0 when success, -1 when failure happens
  */
-GSC_DLL int CSRMatrixLoadFromFile(const char *fname, CSRMatrixHandle *out);
+GSC_DLL int CSRMatrixLoadFromFile(LoadArgs *args);
 
 /*!
  * \brief save a CSR matrix into binary file

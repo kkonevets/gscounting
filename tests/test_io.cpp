@@ -161,11 +161,15 @@ TEST(CSRCheck, DISABLED_Performance) {
 }
 
 TEST(C_API, CSRMatrix) {
-  CSRMatrixHandle csr_handle;
-  CSRMatrixLoadFromFile(pjoin("m.bin").c_str(), &csr_handle);
+  auto fname = pjoin("m.bin");
+  LoadArgs load_args = {fname.c_str(), nullptr, 0, 0};
+  CSRMatrixLoadFromFile(&load_args);
+
+  EXPECT_EQ(load_args.nrows_out, 3);
+  EXPECT_EQ(load_args.ncols_out, 3);
 
   std::array<int, 3> ixs{0, 2, -3};
-  SliceArgs args = {csr_handle, ixs.data(), ixs.size(), nullptr, 0};
+  SliceArgs args = {load_args.handle, ixs.data(), ixs.size(), nullptr};
 
   DenseMatrixSliceCSRMatrix(&args);
 
@@ -173,9 +177,8 @@ TEST(C_API, CSRMatrix) {
   for (size_t i = 0; i < res.size(); ++i) {
     EXPECT_EQ(res[i], args.data_out[i]);
   }
-  EXPECT_EQ(args.ncols_out, 3);
 
-  CSRMatrixFree(csr_handle);
+  CSRMatrixFree(load_args.handle);
 }
 
 int main(int argc, char **argv) {

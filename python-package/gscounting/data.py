@@ -1,7 +1,7 @@
 import ctypes
 import os
 
-from core import _LIB, _check_call, c_str, c_array, ctypes2numpy, SliceArgs
+from core import _LIB, _check_call, c_str, c_array, ctypes2numpy, SliceArgs, LoadArgs
 
 
 class DenseMatrix:
@@ -26,10 +26,14 @@ class DenseMatrix:
 
 class CSRMatrix:
     def __init__(self, fname):
-        self.handle = ctypes.c_void_p()
-        _check_call(
-            _LIB.CSRMatrixLoadFromFile(c_str(os.fspath(fname)),
-                                       ctypes.byref(self.handle)))
+        args = LoadArgs(c_str(os.fspath(fname)), )
+        _check_call(_LIB.CSRMatrixLoadFromFile(ctypes.byref(args)))
+        self.handle = args.handle
+        self._shape = (args.nrows_out, args.ncols_out)
+
+    @property
+    def shape(self):
+        return self._shape
 
     def __getitem__(self, ixs):
         args = SliceArgs(
@@ -40,7 +44,7 @@ class CSRMatrix:
 
         _check_call(_LIB.DenseMatrixSliceCSRMatrix(ctypes.byref(args)))
 
-        return DenseMatrix(args.data_out, (len(ixs), args.ncols_out))
+        return DenseMatrix(args.data_out, (len(ixs), self.shape[1]))
 
     def __del__(self):
         if hasattr(self, "handle") and self.handle:

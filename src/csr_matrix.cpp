@@ -76,7 +76,9 @@ void CSR::_write_vector(std::ostream &os, const std::vector<T> &v) {
 auto CSR::load(const std::string &fname) -> CSR * {
   std::ifstream is(fname);
   if (!is) {
-    throw std::runtime_error(fname);
+    std::ostringstream ss;
+    ss << "Could not load " << fname;
+    throw std::runtime_error(ss.str());
   }
 
   std::uint32_t nrows(0);
@@ -95,7 +97,9 @@ auto CSR::load(const std::string &fname) -> CSR * {
 void CSR::save(const std::string &fname) {
   std::ofstream os(fname, std::ios::binary);
   if (!os) {
-    throw std::runtime_error(fname);
+    std::ostringstream ss;
+    ss << "Could not save " << fname;
+    throw std::runtime_error(ss.str());
   }
 
   // forward write matrix shape

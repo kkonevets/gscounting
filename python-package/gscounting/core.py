@@ -10,10 +10,18 @@ class GSCountingError(ValueError):
 
 class SliceArgs(ctypes.Structure):
     _fields_ = [
-        ('csr_handle', ctypes.c_void_p),
+        ('handle', ctypes.c_void_p),
         ('idxset', ctypes.POINTER(ctypes.c_int)),
         ('len', ctypes.c_uint64),
         ('data_out', ctypes.POINTER(ctypes.c_float)),
+    ]
+
+
+class LoadArgs(ctypes.Structure):
+    _fields_ = [
+        ('fname', ctypes.c_char_p),
+        ('handle', ctypes.c_void_p),
+        ('nrows_out', ctypes.c_uint64),
         ('ncols_out', ctypes.c_uint64),
     ]
 
