@@ -147,7 +147,7 @@ TEST(CSRCheck, SaveLoad) {
 }
 
 TEST(CSRCheck, DISABLED_Performance) {
-  size_t nrows = 1600000;
+  size_t nrows = 100000;
   // auto m(CSR::random(nrows, 1000, 0.5));
 
   std::string fname(pjoin("m_big.bin"));
@@ -159,7 +159,7 @@ TEST(CSRCheck, DISABLED_Performance) {
     ixs.push_back(i);
   }
 
-  for (auto i = 0; i < 100; i++) {
+  for (auto i = 0; i < 1000; i++) {
     m->slice(ixs.data(), ixs.size());
   }
 }
