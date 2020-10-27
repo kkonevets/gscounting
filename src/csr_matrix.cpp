@@ -141,22 +141,26 @@ auto CSR::slice(const int *ixs, size_t size) -> float * {
   auto end = begin + std::min(prev_size, new_size);
   std::fill(begin, end, 0);
 
-  for (size_t i = 0; i < size; ++i) {
-    auto ixi{ixs[i]};
-    if (ixi < 0) {
-      ixi += _nrows;
+  auto worker = [&](const tbb::blocked_range<size_t> &r) {
+    for (auto i = r.begin(); i != r.end(); ++i) {
+      auto ixi{ixs[i]};
+      if (ixi < 0) {
+        ixi += _nrows;
+      }
+      size_t ix = static_cast<size_t>(ixi);
+      if (ix >= _nrows) {
+        std::ostringstream ss;
+        ss << "Index " << ix << " is out of range (0, " << _nrows << ")";
+        throw std::runtime_error(ss.str());
+      }
+      auto _i = i * _ncols;
+      for (size_t j = _indptr[ix]; j < _indptr[ix + 1]; ++j) {
+        _slice_data[_i + _indices[j]] = _data[j];
+      }
     }
-    size_t ix = static_cast<size_t>(ixi);
-    if (ix >= _nrows) {
-      std::ostringstream ss;
-      ss << "Index " << ix << " is out of range (0, " << _nrows << ")";
-      throw std::runtime_error(ss.str());
-    }
-    auto _i = i * _ncols;
-    for (size_t j = _indptr[ix]; j < _indptr[ix + 1]; ++j) {
-      _slice_data[_i + _indices[j]] = _data[j];
-    }
-  }
+  };
+
+  parallel_for(tbb::blocked_range<size_t>(0, size), worker);
 
   return _slice_data.data();
 }

@@ -8,6 +8,9 @@
 #ifndef INCLUDE_CSR_MATRIX_HPP_
 #define INCLUDE_CSR_MATRIX_HPP_
 
+#define TBB_SUPPRESS_DEPRECATED_MESSAGES 1
+
+#include "tbb/tbb.h"
 #include "tools.hpp"
 
 #include <cassert>
