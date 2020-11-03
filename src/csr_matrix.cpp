@@ -10,9 +10,11 @@
 #include <cstddef>
 #include <ctime>
 #include <filesystem>
+#include <fstream>
 #include <iomanip>
 #include <iostream>
 #include <random>
+#include <sstream>
 #include <stdexcept>
 #include <string>
 #include <utility>

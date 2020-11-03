@@ -19,7 +19,8 @@ add_compile_options(-Wall -Wextra -pedantic)
 include_directories(include /usr/local/include)
 link_directories(/usr/local/lib)
 
-file(GLOB SOURCES 
+file(GLOB SOURCES
+  "src/tools.cpp"  
   "src/csr_matrix.cpp"
   "src/c_api.cpp"
     )

@@ -17,6 +17,9 @@
 
 namespace fs = std::filesystem;
 
+using edge_type = EdgeItem<std::uint32_t>;
+using adj_type = AdjItem<std::uint32_t>;
+
 constexpr size_t EDGE_LIST_LENGTH{1000};
 
 fs::path pjoin(std::string fname) { return fs::path("./tests/data/") / fname; }
@@ -74,7 +77,8 @@ TEST(IteratorTest, Adjacency) {
 TEST(ExternalSorterTest, GenerateEdges) {
   std::random_device rd;
   std::mt19937 rng(rd());
-  std::uniform_int_distribution<int> uni(0, 1000000); // guaranteed unbiased
+  std::uniform_int_distribution<std::uint32_t> uni(
+      0, 1000000); // guaranteed unbiased
 
   std::ofstream os(pjoin("edgelist_big.bin"), std::ios::binary);
   ASSERT_TRUE(os);
