@@ -73,7 +73,7 @@ Compressed Sparse Row matrix.
 
 Data format same as of scipy.\+sparse.\+csr\+\_\+matrix. Is the standard \mbox{\hyperlink{struct_c_s_r}{C\+SR}} representation where the column indices for row {\ttfamily i} are stored in {\ttfamily indices\mbox{[}indptr\mbox{[}i\mbox{]}\+:indptr\mbox{[}i+1\mbox{]}\mbox{]}} and their corresponding values are stored in {\ttfamily data\mbox{[}indptr\mbox{[}i\mbox{]}\+:indptr\mbox{[}i+1\mbox{]}\mbox{]}}. 
 
-Definition at line 32 of file csr\+\_\+matrix.\+hpp.
+Definition at line 22 of file csr\+\_\+matrix.\+hpp.
 
 
 
@@ -90,7 +90,7 @@ Load matrix from a binary format.
 
 First read matrix shape and then each vector with it\textquotesingle{}s forward size. 
 
-Definition at line 76 of file csr\+\_\+matrix.\+cpp.
+Definition at line 82 of file csr\+\_\+matrix.\+cpp.
 
 \mbox{\Hypertarget{struct_c_s_r_a3fc79432e775448fdfd28cd45161c473}\label{struct_c_s_r_a3fc79432e775448fdfd28cd45161c473}} 
 \index{CSR@{CSR}!save@{save}}
@@ -104,7 +104,7 @@ Saves matrix in a native endian (little endian mostly) binary format.
 
 First forward write matrix shape and then each vector with it\textquotesingle{}s forward size. 
 
-Definition at line 97 of file csr\+\_\+matrix.\+cpp.
+Definition at line 103 of file csr\+\_\+matrix.\+cpp.
 
 \mbox{\Hypertarget{struct_c_s_r_a251d5dabc81bdd1093171bf76839bc41}\label{struct_c_s_r_a251d5dabc81bdd1093171bf76839bc41}} 
 \index{CSR@{CSR}!slice@{slice}}
@@ -126,7 +126,7 @@ pointer to a sliced Dense matrix contiguous array
 \end{DoxyReturn}
 
 
-Definition at line 139 of file csr\+\_\+matrix.\+cpp.
+Definition at line 145 of file csr\+\_\+matrix.\+cpp.
 
 
 

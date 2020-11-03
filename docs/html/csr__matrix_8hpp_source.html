@@ -76,63 +76,52 @@ $(function() {
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef INCLUDE_CSR_MATRIX_HPP_</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define INCLUDE_CSR_MATRIX_HPP_</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#define TBB_SUPPRESS_DEPRECATED_MESSAGES 1</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;tbb/tbb.h&quot;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="tools_8hpp.html">tools.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;cassert&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;random&gt;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;stdexcept&gt;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="struct_c_s_r.html">   32</a></span>&#160;<span class="keyword">struct </span><a class="code" href="struct_c_s_r.html">CSR</a> {</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <span class="keyword">using</span> vec_f = std::vector&lt;float&gt;;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keyword">using</span> vec_u = std::vector&lt;std::uint32_t&gt;;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  vec_f _data;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  vec_u _indices;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  vec_u _indptr;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keywordtype">size_t</span> _nrows;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keywordtype">size_t</span> _ncols;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  vec_f slice_data;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="struct_c_s_r.html">CSR</a>(vec_f &amp;&amp;data, vec_u &amp;&amp;indices, vec_u &amp;&amp;indptr, <span class="keywordtype">size_t</span> nrows,</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;               <span class="keywordtype">size_t</span> ncols);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keyword">static</span> <span class="keyword">auto</span> <a class="code" href="struct_c_s_r.html#aa4d8e49f25105dc4a5ace398f5e95c98">_read_vector</a>(std::istream &amp;is) -&gt; std::vector&lt;T&gt;;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="struct_c_s_r.html#aee41bae1dbdd901990fbc432ef4caf9c">_write_vector</a>(std::ostream &amp;os, <span class="keyword">const</span> std::vector&lt;T&gt; &amp;v);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keyword">static</span> <span class="keyword">auto</span> <a class="code" href="struct_c_s_r.html#af6cba77fc889ed607fcf207f9439a2dc">load</a>(<span class="keyword">const</span> std::string &amp;fname) -&gt; <a class="code" href="struct_c_s_r.html">CSR</a> *;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="struct_c_s_r.html#a3fc79432e775448fdfd28cd45161c473">save</a>(<span class="keyword">const</span> std::string &amp;fname);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="keyword">static</span> <span class="keyword">auto</span> <a class="code" href="struct_c_s_r.html#a72eba52f8004ecf5927bf3d14f9d9600">random</a>(<span class="keywordtype">size_t</span> nrows, <span class="keywordtype">size_t</span> ncols, <span class="keywordtype">float</span> prob) -&gt; <a class="code" href="struct_c_s_r.html">CSR</a>;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keyword">auto</span> <a class="code" href="struct_c_s_r.html#a251d5dabc81bdd1093171bf76839bc41">slice</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> *ixs, <span class="keywordtype">size_t</span> size) -&gt; <span class="keywordtype">float</span> *;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <span class="keyword">auto</span> operator==(<span class="keyword">const</span> <a class="code" href="struct_c_s_r.html">CSR</a> &amp;o) <span class="keyword">const</span> -&gt; <span class="keywordtype">bool</span> {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">return</span> _ncols == o._ncols &amp;&amp; _nrows == o._nrows &amp;&amp; _data == o._data &amp;&amp;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;           _indices == o._indices &amp;&amp; _indptr == o._indptr;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  }</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;};</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#endif // INCLUDE_CSR_MATRIX_HPP_</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="struct_c_s_r.html">   22</a></span>&#160;<span class="keyword">struct </span><a class="code" href="struct_c_s_r.html">CSR</a> {</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keyword">using</span> vec_f = std::vector&lt;float&gt;;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <span class="keyword">using</span> vec_u = std::vector&lt;std::uint32_t&gt;;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  vec_f _data;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  vec_u _indices;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  vec_u _indptr;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="keywordtype">size_t</span> _nrows;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="keywordtype">size_t</span> _ncols;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  vec_f slice_data;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="struct_c_s_r.html">CSR</a>(vec_f &amp;&amp;data, vec_u &amp;&amp;indices, vec_u &amp;&amp;indptr, <span class="keywordtype">size_t</span> nrows,</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;               <span class="keywordtype">size_t</span> ncols);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keyword">static</span> <span class="keyword">auto</span> <a class="code" href="struct_c_s_r.html#aa4d8e49f25105dc4a5ace398f5e95c98">_read_vector</a>(std::istream &amp;is) -&gt; std::vector&lt;T&gt;;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="struct_c_s_r.html#aee41bae1dbdd901990fbc432ef4caf9c">_write_vector</a>(std::ostream &amp;os, <span class="keyword">const</span> std::vector&lt;T&gt; &amp;v);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keyword">static</span> <span class="keyword">auto</span> <a class="code" href="struct_c_s_r.html#af6cba77fc889ed607fcf207f9439a2dc">load</a>(<span class="keyword">const</span> std::string &amp;fname) -&gt; <a class="code" href="struct_c_s_r.html">CSR</a> *;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="struct_c_s_r.html#a3fc79432e775448fdfd28cd45161c473">save</a>(<span class="keyword">const</span> std::string &amp;fname);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keyword">static</span> <span class="keyword">auto</span> <a class="code" href="struct_c_s_r.html#a72eba52f8004ecf5927bf3d14f9d9600">random</a>(<span class="keywordtype">size_t</span> nrows, <span class="keywordtype">size_t</span> ncols, <span class="keywordtype">float</span> prob) -&gt; <a class="code" href="struct_c_s_r.html">CSR</a>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keyword">auto</span> <a class="code" href="struct_c_s_r.html#a251d5dabc81bdd1093171bf76839bc41">slice</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> *ixs, <span class="keywordtype">size_t</span> size) -&gt; <span class="keywordtype">float</span> *;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="keyword">auto</span> operator==(<span class="keyword">const</span> <a class="code" href="struct_c_s_r.html">CSR</a> &amp;o) <span class="keyword">const</span> -&gt; <span class="keywordtype">bool</span> {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">return</span> _ncols == o._ncols &amp;&amp; _nrows == o._nrows &amp;&amp; _data == o._data &amp;&amp;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;           _indices == o._indices &amp;&amp; _indptr == o._indptr;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  }</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;};</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">#endif // INCLUDE_CSR_MATRIX_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="atools_8hpp_html"><div class="ttname"><a href="tools_8hpp.html">tools.hpp</a></div><div class="ttdoc">Tools for efficient reading/writing of a graph.</div></div>
-<div class="ttc" id="astruct_c_s_r_html_aa4d8e49f25105dc4a5ace398f5e95c98"><div class="ttname"><a href="struct_c_s_r.html#aa4d8e49f25105dc4a5ace398f5e95c98">CSR::_read_vector</a></div><div class="ttdeci">static auto _read_vector(std::istream &amp;is) -&gt; std::vector&lt; T &gt;</div><div class="ttdoc">first read vector size and then vector data</div><div class="ttdef"><b>Definition:</b> <a href="csr__matrix_8cpp_source.html#l00059">csr_matrix.cpp:59</a></div></div>
-<div class="ttc" id="astruct_c_s_r_html"><div class="ttname"><a href="struct_c_s_r.html">CSR</a></div><div class="ttdoc">Compressed Sparse Row matrix.</div><div class="ttdef"><b>Definition:</b> <a href="csr__matrix_8hpp_source.html#l00032">csr_matrix.hpp:32</a></div></div>
-<div class="ttc" id="astruct_c_s_r_html_a251d5dabc81bdd1093171bf76839bc41"><div class="ttname"><a href="struct_c_s_r.html#a251d5dabc81bdd1093171bf76839bc41">CSR::slice</a></div><div class="ttdeci">auto slice(const int *ixs, size_t size) -&gt; float *</div><div class="ttdoc">Performs parallel slicing on indexes.</div><div class="ttdef"><b>Definition:</b> <a href="csr__matrix_8cpp_source.html#l00139">csr_matrix.cpp:139</a></div></div>
-<div class="ttc" id="astruct_c_s_r_html_a72eba52f8004ecf5927bf3d14f9d9600"><div class="ttname"><a href="struct_c_s_r.html#a72eba52f8004ecf5927bf3d14f9d9600">CSR::random</a></div><div class="ttdeci">static auto random(size_t nrows, size_t ncols, float prob) -&gt; CSR</div><div class="ttdoc">Generate random csr matrix with probability of element being zero equal to prob</div><div class="ttdef"><b>Definition:</b> <a href="csr__matrix_8cpp_source.html#l00114">csr_matrix.cpp:114</a></div></div>
-<div class="ttc" id="astruct_c_s_r_html_a3fc79432e775448fdfd28cd45161c473"><div class="ttname"><a href="struct_c_s_r.html#a3fc79432e775448fdfd28cd45161c473">CSR::save</a></div><div class="ttdeci">void save(const std::string &amp;fname)</div><div class="ttdoc">Saves matrix in a native endian (little endian mostly) binary format.</div><div class="ttdef"><b>Definition:</b> <a href="csr__matrix_8cpp_source.html#l00097">csr_matrix.cpp:97</a></div></div>
-<div class="ttc" id="astruct_c_s_r_html_af6cba77fc889ed607fcf207f9439a2dc"><div class="ttname"><a href="struct_c_s_r.html#af6cba77fc889ed607fcf207f9439a2dc">CSR::load</a></div><div class="ttdeci">static auto load(const std::string &amp;fname) -&gt; CSR *</div><div class="ttdoc">Load matrix from a binary format.</div><div class="ttdef"><b>Definition:</b> <a href="csr__matrix_8cpp_source.html#l00076">csr_matrix.cpp:76</a></div></div>
-<div class="ttc" id="astruct_c_s_r_html_aee41bae1dbdd901990fbc432ef4caf9c"><div class="ttname"><a href="struct_c_s_r.html#aee41bae1dbdd901990fbc432ef4caf9c">CSR::_write_vector</a></div><div class="ttdeci">static void _write_vector(std::ostream &amp;os, const std::vector&lt; T &gt; &amp;v)</div><div class="ttdoc">first forward write vector size and then vector data</div><div class="ttdef"><b>Definition:</b> <a href="csr__matrix_8cpp_source.html#l00070">csr_matrix.cpp:70</a></div></div>
+<div class="ttc" id="astruct_c_s_r_html_aa4d8e49f25105dc4a5ace398f5e95c98"><div class="ttname"><a href="struct_c_s_r.html#aa4d8e49f25105dc4a5ace398f5e95c98">CSR::_read_vector</a></div><div class="ttdeci">static auto _read_vector(std::istream &amp;is) -&gt; std::vector&lt; T &gt;</div><div class="ttdoc">first read vector size and then vector data</div><div class="ttdef"><b>Definition:</b> <a href="csr__matrix_8cpp_source.html#l00065">csr_matrix.cpp:65</a></div></div>
+<div class="ttc" id="astruct_c_s_r_html"><div class="ttname"><a href="struct_c_s_r.html">CSR</a></div><div class="ttdoc">Compressed Sparse Row matrix.</div><div class="ttdef"><b>Definition:</b> <a href="csr__matrix_8hpp_source.html#l00022">csr_matrix.hpp:22</a></div></div>
+<div class="ttc" id="astruct_c_s_r_html_a251d5dabc81bdd1093171bf76839bc41"><div class="ttname"><a href="struct_c_s_r.html#a251d5dabc81bdd1093171bf76839bc41">CSR::slice</a></div><div class="ttdeci">auto slice(const int *ixs, size_t size) -&gt; float *</div><div class="ttdoc">Performs parallel slicing on indexes.</div><div class="ttdef"><b>Definition:</b> <a href="csr__matrix_8cpp_source.html#l00145">csr_matrix.cpp:145</a></div></div>
+<div class="ttc" id="astruct_c_s_r_html_a72eba52f8004ecf5927bf3d14f9d9600"><div class="ttname"><a href="struct_c_s_r.html#a72eba52f8004ecf5927bf3d14f9d9600">CSR::random</a></div><div class="ttdeci">static auto random(size_t nrows, size_t ncols, float prob) -&gt; CSR</div><div class="ttdoc">Generate random csr matrix with probability of element being zero equal to prob</div><div class="ttdef"><b>Definition:</b> <a href="csr__matrix_8cpp_source.html#l00120">csr_matrix.cpp:120</a></div></div>
+<div class="ttc" id="astruct_c_s_r_html_a3fc79432e775448fdfd28cd45161c473"><div class="ttname"><a href="struct_c_s_r.html#a3fc79432e775448fdfd28cd45161c473">CSR::save</a></div><div class="ttdeci">void save(const std::string &amp;fname)</div><div class="ttdoc">Saves matrix in a native endian (little endian mostly) binary format.</div><div class="ttdef"><b>Definition:</b> <a href="csr__matrix_8cpp_source.html#l00103">csr_matrix.cpp:103</a></div></div>
+<div class="ttc" id="astruct_c_s_r_html_af6cba77fc889ed607fcf207f9439a2dc"><div class="ttname"><a href="struct_c_s_r.html#af6cba77fc889ed607fcf207f9439a2dc">CSR::load</a></div><div class="ttdeci">static auto load(const std::string &amp;fname) -&gt; CSR *</div><div class="ttdoc">Load matrix from a binary format.</div><div class="ttdef"><b>Definition:</b> <a href="csr__matrix_8cpp_source.html#l00082">csr_matrix.cpp:82</a></div></div>
+<div class="ttc" id="astruct_c_s_r_html_aee41bae1dbdd901990fbc432ef4caf9c"><div class="ttname"><a href="struct_c_s_r.html#aee41bae1dbdd901990fbc432ef4caf9c">CSR::_write_vector</a></div><div class="ttdeci">static void _write_vector(std::ostream &amp;os, const std::vector&lt; T &gt; &amp;v)</div><div class="ttdoc">first forward write vector size and then vector data</div><div class="ttdef"><b>Definition:</b> <a href="csr__matrix_8cpp_source.html#l00076">csr_matrix.cpp:76</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20

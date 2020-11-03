@@ -5,16 +5,6 @@
 Tools for efficient reading/writing of a graph.  
 
 
-{\ttfamily \#include $<$algorithm$>$}\newline
-{\ttfamily \#include $<$cassert$>$}\newline
-{\ttfamily \#include $<$fstream$>$}\newline
-{\ttfamily \#include $<$iostream$>$}\newline
-{\ttfamily \#include $<$istream$>$}\newline
-{\ttfamily \#include $<$iterator$>$}\newline
-{\ttfamily \#include $<$memory$>$}\newline
-{\ttfamily \#include $<$sstream$>$}\newline
-{\ttfamily \#include $<$string$>$}\newline
-{\ttfamily \#include $<$utility$>$}\newline
 {\ttfamily \#include $<$vector$>$}\newline
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
@@ -23,32 +13,8 @@ struct \mbox{\hyperlink{struct_edge_item}{Edge\+Item$<$ T $>$}}
 \begin{DoxyCompactList}\small\item\em Structure representing a directed edge \char`\"{}first-\/$>$second\char`\"{} of a graph. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{struct_adj_item}{Adj\+Item$<$ T $>$}}
 \begin{DoxyCompactList}\small\item\em structure representing a record in adjacency list \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Typedefs}
-\begin{DoxyCompactItemize}
-\item 
-\mbox{\Hypertarget{tools_8hpp_a566e713cd0df840ef1bf9c37c5d912c7}\label{tools_8hpp_a566e713cd0df840ef1bf9c37c5d912c7}} 
-using {\bfseries edge\+\_\+type} = \mbox{\hyperlink{struct_edge_item}{Edge\+Item}}$<$ std\+::uint32\+\_\+t $>$
-\item 
-\mbox{\Hypertarget{tools_8hpp_af2ba1e4080eba3c21877a86cfeb6aa80}\label{tools_8hpp_af2ba1e4080eba3c21877a86cfeb6aa80}} 
-using {\bfseries adj\+\_\+type} = \mbox{\hyperlink{struct_adj_item}{Adj\+Item}}$<$ std\+::uint32\+\_\+t $>$
-\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
-\item 
-\mbox{\Hypertarget{tools_8hpp_a7881283d05d0731d4058434f1ed1535d}\label{tools_8hpp_a7881283d05d0731d4058434f1ed1535d}} 
-{\footnotesize template$<$class T $>$ }\\auto {\bfseries std\+::operator$>$$>$} (std\+::istream \&is, \mbox{\hyperlink{struct_edge_item}{Edge\+Item}}$<$ T $>$ \&edge) -\/$>$ std\+::istream \&
-\item 
-\mbox{\Hypertarget{tools_8hpp_ae907085a161df6cf546b24292bcc482c}\label{tools_8hpp_ae907085a161df6cf546b24292bcc482c}} 
-{\footnotesize template$<$class T $>$ }\\auto {\bfseries std\+::operator$<$$<$} (std\+::ostream \&os, \mbox{\hyperlink{struct_edge_item}{Edge\+Item}}$<$ T $>$ \&edge) -\/$>$ std\+::ostream \&
-\item 
-\mbox{\Hypertarget{tools_8hpp_aacb7fa46279b0974b01957501f5adf73}\label{tools_8hpp_aacb7fa46279b0974b01957501f5adf73}} 
-{\footnotesize template$<$class T $>$ }\\auto {\bfseries std\+::operator$<$$<$} (std\+::ostream \&os, const \mbox{\hyperlink{struct_edge_item}{Edge\+Item}}$<$ T $>$ \&edge) -\/$>$ std\+::ostream \&
-\item 
-\mbox{\Hypertarget{tools_8hpp_ae2e598ebc04ccd66f8ed2295241ff767}\label{tools_8hpp_ae2e598ebc04ccd66f8ed2295241ff767}} 
-{\footnotesize template$<$class T $>$ }\\auto {\bfseries std\+::operator$>$$>$} (std\+::istream \&is, \mbox{\hyperlink{struct_adj_item}{Adj\+Item}}$<$ T $>$ \&row) -\/$>$ std\+::istream \&
-\item 
-\mbox{\Hypertarget{tools_8hpp_a0d8903d2ceb64363997bfde75b204a6e}\label{tools_8hpp_a0d8903d2ceb64363997bfde75b204a6e}} 
-{\footnotesize template$<$class T $>$ }\\auto {\bfseries std\+::operator$<$$<$} (std\+::ostream \&os, \mbox{\hyperlink{struct_adj_item}{Adj\+Item}}$<$ T $>$ \&row) -\/$>$ std\+::ostream \&
 \item 
 {\footnotesize template$<$class T $>$ }\\auto \mbox{\hyperlink{tools_8hpp_ae6b1c134b0e59b73058b808dec2b4719}{read\+\_\+vec}} (const std\+::string \&fname) -\/$>$ std\+::vector$<$ T $>$
 \begin{DoxyCompactList}\small\item\em Read a vector from disk. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -65,7 +31,7 @@ Tools for efficient reading/writing of a graph.
 \index{read\_vec@{read\_vec}!tools.hpp@{tools.hpp}}
 \doxysubsubsection{\texorpdfstring{read\_vec()}{read\_vec()}}
 {\footnotesize\ttfamily template$<$class T $>$ \\
-auto read\+\_\+vec (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{fname }\end{DoxyParamCaption}) -\/$>$ std\+::vector$<$T$>$ }
+auto read\+\_\+vec (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{fname }\end{DoxyParamCaption}) -\/$>$  std\+::vector$<$ T $>$}
 
 
 
@@ -73,7 +39,7 @@ Read a vector from disk.
 
 Loads vector$<$\+T$>$ from binary file 
 \begin{DoxyParams}{Parameters}
-{\em fname} & File name to load \\
+{\em fname} & File name to loadp \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -81,5 +47,5 @@ Vector$<$\+T$>$
 \end{DoxyReturn}
 
 
-Definition at line 149 of file tools.\+hpp.
+Definition at line 92 of file tools.\+cpp.
 

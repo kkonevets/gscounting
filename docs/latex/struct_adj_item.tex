@@ -24,7 +24,7 @@ auto {\bfseries encode} (std\+::ostream \&os) const -\/$>$ bool
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{struct_adj_item_a0c7dccbf45eea69daa29a410d25f5580}\label{struct_adj_item_a0c7dccbf45eea69daa29a410d25f5580}} 
+\mbox{\Hypertarget{struct_adj_item_a56d035e443bdc86badd398ee2a45a717}\label{struct_adj_item_a56d035e443bdc86badd398ee2a45a717}} 
 static auto {\bfseries decode} (std\+::istream \&is, \mbox{\hyperlink{struct_adj_item}{Adj\+Item}}$<$ T $>$ \&row) -\/$>$ bool
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
@@ -35,6 +35,15 @@ T {\bfseries source} \{\}
 \item 
 \mbox{\Hypertarget{struct_adj_item_acac240d2d66950b0db578f602d549f9c}\label{struct_adj_item_acac240d2d66950b0db578f602d549f9c}} 
 std\+::vector$<$ T $>$ {\bfseries targets}
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_adj_item_ad4f411857b98a027d435d005c1775101}\label{struct_adj_item_ad4f411857b98a027d435d005c1775101}} 
+auto {\bfseries operator$>$$>$} (std\+::istream \&is, \mbox{\hyperlink{struct_adj_item}{Adj\+Item}}$<$ T $>$ \&row) -\/$>$ std\+::istream \&
+\item 
+\mbox{\Hypertarget{struct_adj_item_a92a22107029c1b3b9a3e20af13fae8ee}\label{struct_adj_item_a92a22107029c1b3b9a3e20af13fae8ee}} 
+auto {\bfseries operator$<$$<$} (std\+::ostream \&os, const \mbox{\hyperlink{struct_adj_item}{Adj\+Item}}$<$ T $>$ \&row) -\/$>$ std\+::ostream \&
 \end{DoxyCompactItemize}
 
 
@@ -53,10 +62,11 @@ structure representing a record in adjacency list
 \end{DoxyParams}
 
 
-Definition at line 62 of file tools.\+hpp.
+Definition at line 39 of file tools.\+hpp.
 
 
 
-The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-include/\mbox{\hyperlink{tools_8hpp}{tools.\+hpp}}\end{DoxyCompactItemize}
+include/\mbox{\hyperlink{tools_8hpp}{tools.\+hpp}}\item 
+src/tools.\+cpp\end{DoxyCompactItemize}

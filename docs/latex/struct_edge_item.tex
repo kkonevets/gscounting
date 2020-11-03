@@ -9,6 +9,12 @@ Structure representing a directed edge \char`\"{}first-\/$>$second\char`\"{} of 
 
 {\ttfamily \#include $<$tools.\+hpp$>$}
 
+Inheritance diagram for Edge\+Item$<$ T $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{struct_edge_item}
+\end{center}
+\end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -21,8 +27,17 @@ auto {\bfseries encode} (std\+::ostream \&os) const -\/$>$ bool
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{struct_edge_item_aca9eeae697990715d0716b0c82f741fc}\label{struct_edge_item_aca9eeae697990715d0716b0c82f741fc}} 
+\mbox{\Hypertarget{struct_edge_item_a6752c3a6a864c2410a4beaef38363d2a}\label{struct_edge_item_a6752c3a6a864c2410a4beaef38363d2a}} 
 static auto {\bfseries decode} (std\+::istream \&is, \mbox{\hyperlink{struct_edge_item}{Edge\+Item}}$<$ T $>$ \&edge) -\/$>$ bool
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_edge_item_a8c1894b0196f35d2b695a0fc872ec5bf}\label{struct_edge_item_a8c1894b0196f35d2b695a0fc872ec5bf}} 
+auto {\bfseries operator$>$$>$} (std\+::istream \&is, \mbox{\hyperlink{struct_edge_item}{Edge\+Item}}$<$ T $>$ \&edge) -\/$>$ std\+::istream \&
+\item 
+\mbox{\Hypertarget{struct_edge_item_aefbea73a746f4bf3fc2f301c81d2aa3c}\label{struct_edge_item_aefbea73a746f4bf3fc2f301c81d2aa3c}} 
+auto {\bfseries operator$<$$<$} (std\+::ostream \&os, const \mbox{\hyperlink{struct_edge_item}{Edge\+Item}}$<$ T $>$ \&edge) -\/$>$ std\+::ostream \&
 \end{DoxyCompactItemize}
 
 
@@ -41,10 +56,11 @@ Structure representing a directed edge \char`\"{}first-\/$>$second\char`\"{} of 
 \end{DoxyParams}
 
 
-Definition at line 39 of file tools.\+hpp.
+Definition at line 19 of file tools.\+hpp.
 
 
 
-The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-include/\mbox{\hyperlink{tools_8hpp}{tools.\+hpp}}\end{DoxyCompactItemize}
+include/\mbox{\hyperlink{tools_8hpp}{tools.\+hpp}}\item 
+src/tools.\+cpp\end{DoxyCompactItemize}
