@@ -68,7 +68,7 @@ else (HIDE_CXX_SYMBOLS)
     EXCLUDE_FROM_ALL)
 
   file(GLOB TEST_SOURCES
-    "tests/test_io.cpp"
+    "src/tests/test_io.cpp"
     )
 
   add_executable(test ${TEST_SOURCES})

@@ -14,4 +14,4 @@ Makefile
 *.pyc
 *.sublime*
 MANIFEST
-tests/data/*.bin
+src/tests/data/*.bin
