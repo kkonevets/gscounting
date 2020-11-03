@@ -1,4 +1,8 @@
+#define TBB_SUPPRESS_DEPRECATED_MESSAGES 1
+
 #include "csr_matrix.hpp"
+#include "tbb/tbb.h"
+#include "tools.hpp"
 
 #include <algorithm>
 #include <cassert>
