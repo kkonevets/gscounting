@@ -22,7 +22,9 @@ using adj_type = AdjItem<std::uint32_t>;
 
 constexpr size_t EDGE_LIST_LENGTH{1000};
 
-fs::path pjoin(std::string fname) { return fs::path("./tests/data/") / fname; }
+fs::path pjoin(std::string fname) {
+  return fs::path("./src/tests/data/") / fname;
+}
 
 TEST(IteratorTest, Edge) {
   std::vector<edge_type> edges;
