@@ -9,6 +9,7 @@
 #define INCLUDE_CSR_MATRIX_HPP_
 
 #include <vector>
+#include <iostream>
 
 /** @struct CSR
  *
